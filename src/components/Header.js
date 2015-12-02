@@ -1,38 +1,21 @@
-import React from 'react'
-import { Link, History } from 'react-router';
-import SearchBar from './SearchBar';
+import React from 'react';
+import Icon from './Icon';
 
 var Header = React.createClass({
 
-	mixins: [History],
-
-	render: function() {
-		
+	render() {
+		var title = this.props.appState.get('title');
 		return (
-			<header className='flex-row'>
-				<Link className='nav-button fa icon-setmine click center' to='/' onlyActiveOnIndex={true} />
-				<Link className='nav-button click flex flex-container' to='/user' activeClassName='active'>
-					<div className='center'>Home</div>
-				</Link>
-				<Link className='nav-button click flex flex-container' to='/sets' activeClassName='active'>
-					<div className='center'>Sets</div>
-				</Link>
-				<Link className='nav-button click flex flex-container' to='/events' activeClassName='active'>
-					<div className='center'>Events</div>
-				</Link>
-				<Link className='nav-button click flex flex-container' to='/artists' activeClassName='active'>
-					<div className='center'>Artists</div>
-				</Link>
-				{/*<Link className='nav-button click flex flex-container' to='/blog' activeClassName='active'>
-					<div className='center'>Blog</div>
-				</Link>*/}
-				<div className='buffer-4x'/>
-				<div className='search-bar flex-row flex-3x'>
-					<SearchBar push={this.props.push} appState={this.props.appState}/>
+			<div className='flex-row'>
+				<div className='logo'>Setpay</div>
+				<div className='title flex-row'>
+					<Icon style>people</Icon>
+					<p>{title}</p>
 				</div>
-			</header>
+			</div>
 		);
 	}
+
 });
 
 module.exports = Header;

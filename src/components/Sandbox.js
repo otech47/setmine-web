@@ -1,34 +1,15 @@
 import React from 'react';
 import R from 'ramda';
-import constants from '../constants/constants';
-
-import LoginOverlay from './LoginOverlay';
+import Icon from './Icon';
 
 var Sandbox = React.createClass({
-
-	getDefaultProps: function() {
-		return {
-			appState: {}
-		};
-	},
-
-	componentDidMount: function() {
-		this.checkFavorites();
-	},
-
-	checkFavorites() {
-		var favorites = this.props.appState.get('user').favorite_set_ids;
-		var test = R.toString(3684);
-		console.log(favorites);
-		console.log(R.contains(test, favorites));
-	},
 	
 	render: function() {
 		var push = this.props.push;
 		var appState = this.props.appState;
 
 		return (
-			<div className='sandbox view'>
+			<div className='sandbox'>
 				<p className='center'>
 					>tfw new website
 					<br/>

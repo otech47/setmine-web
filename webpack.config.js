@@ -11,15 +11,14 @@ module.exports = {
   output: {
     path: buildPath,
     filename: '[name]-bundle.js',
-    pathinfo: true,
-    historyApiFallback: true
+    pathinfo: true
   },
   resolve: {
     extensions: ['', '.jsx', '.es6', '.js', '.scss'],
     moduleDirectories: ['node_modules']
   },
   plugins: [new HtmlWebpackPlugin({
-    template: 'src/index-dev.html',
+    template: 'src/index.html',
     inject: 'body'
   })],
   devtool: 'source-map',

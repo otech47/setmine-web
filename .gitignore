@@ -2,3 +2,5 @@
 node_modules/
 public/js/build/index.js
 npm-debug.log
+
+public/css/fonts.less
