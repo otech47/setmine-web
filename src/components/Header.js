@@ -1,4 +1,5 @@
 import React from 'react';
+import {colors} from '../constants/constants';
 import Icon from './Icon';
 
 var Header = React.createClass({
@@ -9,7 +10,7 @@ var Header = React.createClass({
 			<div className='flex-row'>
 				<div className='logo'>Setpay</div>
 				<div className='title flex-row'>
-					<Icon style>people</Icon>
+					<Icon style={{color: colors.lightGray}}>people</Icon>
 					<p>{title}</p>
 				</div>
 			</div>
