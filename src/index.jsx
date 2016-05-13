@@ -1,13 +1,19 @@
-import {render} from 'react-dom';
+import React from 'react';
+import { render } from 'react-dom';
 import routes from './routes';
+import { Provider } from 'react-redux';
+import configureStore from './store';
 
 // styling
 import './styles/index.less';
 
-const bodyMount = document.getElementById('body-mount-point');
+const store = configureStore();
+const rootEl = document.getElementById('root');
 
 render(
-	routes	
-, bodyMount);
+    <Provider store={store}>
+        {routes}
+    </Provider>
+, rootEl);
 
 mixpanel.track("Page Load");

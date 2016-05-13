@@ -10,6 +10,9 @@ import {getFavorites} from '../services/favoriteSet';
 import detectMobileService from '../services/detectMobileService';
 import {trackSetPlay} from '../services/mixpanelService';
 
+import { connect } from 'react-redux';
+import { changeCurrentPage } from '../actions/environment';
+
 // fix mobile touch events not registering
 InjectTapEventPlugin();
 
@@ -44,7 +47,7 @@ const push = data => pushFn({
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-export default class App extends Base {
+class App extends Base {
     static contextTypes = {
         router: PropTypes.object
     }
@@ -113,11 +116,13 @@ export default class App extends Base {
     render() {
         let appState = this.state.appState;
         let playerHidden = appState.get('playerHidden');
-        let currentPage = appState.get('currentPage');
+        // let currentPage = appState.get('currentPage');
         let snackbar = appState.get('snackbar');
         let showLogin = appState.get('showLogin');
         let showNavbar = appState.get('showNavbar');
         let pageWidth = ((window.innerWidth - 64) / window.innerWidth) * 100 + '%';
+
+        const { currentPage } = this.props;
 
         return (
             <Loader loaded={appState.get('loaded')}>
@@ -138,3 +143,14 @@ export default class App extends Base {
         );
     }
 }
+
+function mapStateToProps(state) {
+    const { environment } = state;
+    const { currentPage } = environment;
+
+    return {
+        currentPage
+    };
+}
+
+export default connect(mapStateToProps)(App);
