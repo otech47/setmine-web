@@ -23,6 +23,7 @@ import Player from './Player';
 import Notifications from './Notifications';
 import LoginOverlay from './LoginOverlay';
 import Loader from './Loader';
+import DevTools from '../containers/DevTools';
 
 const tags = [
     {property: "description", content: "Setmine is a music app dedicated to live events! Relive past music festivals: Ultra, Coachella + more! Find upcoming shows + buy tix + listen to DJs' sets"},
@@ -119,16 +120,21 @@ class App extends Base {
         // let currentPage = appState.get('currentPage');
         let snackbar = appState.get('snackbar');
         let showLogin = appState.get('showLogin');
-        let showNavbar = appState.get('showNavbar');
-        let pageWidth = ((window.innerWidth - 64) / window.innerWidth) * 100 + '%';
+        // let showNavbar = appState.get('showNavbar');
+        // let pageWidth = ((window.innerWidth - 64) / window.innerWidth) * 100 + '%';
 
-        const { currentPage } = this.props;
+        const { currentPage, showNavbar, loaded } = this.props;
 
         return (
             <Loader loaded={appState.get('loaded')}>
                 <div id='App' className='flex-column'>
+                    <DevTools />
                     <DocMeta tags={tags} />
-                    <Header currentPage={currentPage} showLogin={showLogin} location={this.props.location}/>
+                    <Header 
+                        currentPage={currentPage}
+                        showLogin={showLogin}
+                        location={this.props.location}
+                    />
                     {showNavbar && <NavBar />}
                     {
                         React.cloneElement(this.props.children, {
@@ -146,10 +152,9 @@ class App extends Base {
 
 function mapStateToProps(state) {
     const { environment } = state;
-    const { currentPage } = environment;
 
     return {
-        currentPage
+        ...environment
     };
 }
 

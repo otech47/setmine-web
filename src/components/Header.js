@@ -70,8 +70,6 @@ export default class Header extends Base {
 
         const style = this.state.switchHeader ? scrollStyle : null;
 
-        console.log(this.context.loginStatus)
-
         return (
             <div className={headerType} style={style}>
                 <Link to='/' className='icon-setmine' />

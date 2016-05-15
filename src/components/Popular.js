@@ -1,49 +1,61 @@
 import React from 'react';
 import Base from './Base';
-import Loader from 'react-loader';
+import Loader from './Loader';
 import api from '../services/api';
 import SetContainer from './SetContainer';
 import Spinner from './Spinner';
 import R from 'ramda';
 
-export default class Popular extends Base {
+import { connect } from 'react-redux';
+import { fetchPopularSets, resetSets } from '../actions/sets';
+
+class Popular extends Base {
 	constructor(props) {
 		super(props);
 		this.autoBind('getPopularSets', 'onScroll');
-		this.state = {
-			loaded: false,
-			sets: [],
-			page: 1
-		};
 	}
 	componentWillMount() {
-		this.getPopularSets();
+		this.getPopularSets(this.props.page);
 	}
 	componentDidMount() {
-		mixpanel && mixpanel.track("Popular Sets Page Open");
+		// mixpanel && mixpanel.track("Popular Sets Page Open");
 	}
-	getPopularSets(page=this.state.page) {
-		api.get(`sets/popular?limit=48&page=${page}`).then(res => {
-			// merge new sets to existing
-			let sets = this.state.sets.concat(res.sets_popular);
-			sets = R.uniq(sets);
+	componentWillUnmount() {
+		this.props.dispatch(resetSets());
+	}
+	getPopularSets(page) {
+		const { dispatch } = this.props;
+		dispatch(fetchPopularSets(page));
+		// api.get(`sets/popular?limit=48&page=${page}`).then(res => {
+		// 	// merge new sets to existing
+		// 	let sets = this.state.sets.concat(res.sets_popular);
+		// 	sets = R.uniq(sets);
 			
-			this.setState({
-				loaded: true,
-				sets: sets,
-				page: page + 1
-			});
-		});
+		// 	this.setState({
+		// 		loaded: true,
+		// 		sets: sets,
+		// 		page: page + 1
+		// 	});
+		// });
 	}
 	onScroll() {
-		this.getPopularSets(this.state.page);
+		this.getPopularSets(this.props.page);
 	}
 	render() {
 		return (
-			<Loader loaded={this.state.loaded}>
-				<SetContainer sets={this.state.sets} onScroll={this.onScroll} />
+			<Loader loaded={this.props.loaded}>
+				<SetContainer sets={this.props.sets} onScroll={this.onScroll} />
 				<Spinner />
 			</Loader>
 		);
 	}
 }
+
+function mapStateToProps(state) {
+	const { sets } = state;
+	return {
+		...sets
+	}
+}
+
+export default connect(mapStateToProps)(Popular)

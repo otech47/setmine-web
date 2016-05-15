@@ -1,1 +1,8 @@
 export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
+export const CHANGE_IS_MOBILE = 'CHANGE_IS_MOBILE';
+
+export const RECEIVE_SETS = 'RECEIVE_SETS';
+export const RESET_SETS = 'RESET_SETS';
+
+export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
+export const TOGGLE_LOADER = 'TOGGLE_LOADER';

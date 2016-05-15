@@ -1,49 +1,57 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Base from './Base';
-import Loader from 'react-loader';
+import Loader from './Loader';
 import api from '../services/api';
 import SetContainer from './SetContainer';
 import Spinner from './Spinner';
-import R from 'ramda';
 
-export default class Recent extends Base {
-	constructor(props) {
-		super(props);
-		this.autoBind('getRecentSets', 'onScroll');
-		this.state = {
-			loaded: false,
-			sets: [],
-			page: 1
-		};
-	}
-	componentWillMount() {
-		this.getRecentSets();
-	}
-	componentDidMount() {
-		mixpanel && mixpanel.track("Sets Page Open");
-	}
-	getRecentSets(page=this.state.page) {
-		api.get(`sets/recent?limit=48&page=${page}`).then(payload => {
-			// merge sets to existing sets
-			let sets = this.state.sets.concat(payload.sets_recent);
-			sets = R.uniq(sets);
+import { connect } from 'react-redux';
+import { fetchRecentSets, resetSets } from '../actions/sets';
 
-			this.setState({
-				loaded: true,
-				sets: sets,
-				page: page + 1
-			});
-		});
-	}
-	onScroll() {
-		this.getRecentSets(this.state.page);
-	}
-	render() {
-		return (
-			<Loader loaded={this.state.loaded}>
-				<SetContainer sets={this.state.sets} onScroll={this.onScroll}/>
-				<Spinner />
-			</Loader>
-		);
-	}
+const {array, bool, number} = PropTypes;
+
+class Recent extends Base {
+    static propTypes = {
+        sets: array,
+        loaded: bool,
+        page: number
+    }
+    constructor(props) {
+        super(props);
+        this.autoBind('getRecentSets', 'onScroll');
+    }
+    componentWillMount() {
+        this.getRecentSets(this.props.page);
+    }
+    componentDidMount() {
+        // mixpanel && mixpanel.track("Sets Page Open");
+    }
+    componentWillUnmount() {
+        this.props.dispatch(resetSets());
+    }
+    getRecentSets(page) {
+        const { dispatch } = this.props;
+        dispatch(fetchRecentSets(page));
+    }
+    onScroll() {
+        this.getRecentSets(this.props.page);
+    }
+    render() {
+        const { sets, loaded } = this.props;
+        return (
+            <Loader loaded={loaded}>
+                <SetContainer sets={sets} onScroll={this.onScroll}/>
+                <Spinner />
+            </Loader>
+        );
+    }
 }
+
+function mapStateToProps(state) {
+    const { sets } = state;
+    return {
+        ...sets
+    }
+}
+
+export default connect(mapStateToProps)(Recent);

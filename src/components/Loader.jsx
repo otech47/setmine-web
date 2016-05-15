@@ -1,13 +1,12 @@
-import React, {PropTypes} from 'react';
-import Base from './Base';
+import React, {Component, PropTypes} from 'react';
 import Spinner from './Spinner';
 
-const {bool, node} = PropTypes;
+const {bool, any} = PropTypes;
 
-export default class Loader extends Base {
+export default class Loader extends Component {
     static propTypes = {
         loaded: bool.isRequired,
-        children: node
+        children: any.isRequired
     }
     constructor(props, context) {
         super(props, context);
@@ -28,7 +27,11 @@ export default class Loader extends Base {
                 </div>
             );
         } else {
-            return children;
+            return (
+                <div className='loaded-content'>
+                    {children}
+                </div>
+            );
         }
     }
 }
