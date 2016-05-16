@@ -5,12 +5,11 @@ import api from '../services/api';
 import SetContainer from './SetContainer';
 import Spinner from './Spinner';
 
-import { connect } from 'react-redux';
 import { fetchRecentSets, resetSets } from '../actions/sets';
 
 const {array, bool, number} = PropTypes;
 
-class Recent extends Base {
+export default class Recent extends Base {
     static propTypes = {
         sets: array,
         loaded: bool,
@@ -46,12 +45,3 @@ class Recent extends Base {
         );
     }
 }
-
-function mapStateToProps(state) {
-    const { sets } = state;
-    return {
-        ...sets
-    }
-}
-
-export default connect(mapStateToProps)(Recent);

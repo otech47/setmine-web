@@ -6,7 +6,7 @@ import sets from './sets';
 const rootReducer = combineReducers({
     auth,
     environment,
-    sets
+    sets 
 });
 
 export default rootReducer;

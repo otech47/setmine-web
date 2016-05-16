@@ -4,15 +4,20 @@ import Link from 'react-router/lib/Link';
 import Base from './Base';
 import Nav from './Nav';
 import Ink from 'react-ink';
+import { connect } from 'react-redux';
+import { changeCurrentPage } from '../actions/environment';
 
-export default class SetsPage extends Base {
+class SetsPage extends Base {
 	constructor(props) {
 		super(props);
 	}
 	componentWillMount() {
-		this.context.push({ currentPage: 'Sets' });;
+		// this.context.push({ currentPage: 'Sets' });
+		this.props.dispatch(changeCurrentPage('Sets'));
 	}
 	render() {
+		const { dispatch, sets } = this.props;
+		console.log(sets);
 		return (
 			<div className='view'>
 				<Nav>
@@ -35,7 +40,8 @@ export default class SetsPage extends Base {
 				</Nav>
 				{
 					React.cloneElement(this.props.children, {
-						appState: this.props.appState
+						dispatch,
+						...sets
 					})
 				}
 			</div>
@@ -46,3 +52,12 @@ export default class SetsPage extends Base {
 SetsPage.contextTypes = {
 	push: PropTypes.func
 };
+
+function mapStateToProps(state) {
+	const { sets } = state;
+	return {
+		sets
+	}
+}
+
+export default connect(mapStateToProps)(SetsPage);

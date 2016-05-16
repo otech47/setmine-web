@@ -16,7 +16,7 @@ export default function sets(state = initialState, action) {
             })
 
         case types.RESET_SETS:
-            return initialState
+            return initialState;
             
         default:
             return state;

@@ -4,7 +4,7 @@ const initialState = {
     currentPage: 'Setmine Redux',
     isMobile: false,
     showNavbar: true,
-    loaded: false
+    loaded: true
 };
 
 export default function environment(state = initialState, action) {

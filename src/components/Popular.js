@@ -6,10 +6,9 @@ import SetContainer from './SetContainer';
 import Spinner from './Spinner';
 import R from 'ramda';
 
-import { connect } from 'react-redux';
 import { fetchPopularSets, resetSets } from '../actions/sets';
 
-class Popular extends Base {
+export default class Popular extends Base {
 	constructor(props) {
 		super(props);
 		this.autoBind('getPopularSets', 'onScroll');
@@ -50,12 +49,3 @@ class Popular extends Base {
 		);
 	}
 }
-
-function mapStateToProps(state) {
-	const { sets } = state;
-	return {
-		...sets
-	}
-}
-
-export default connect(mapStateToProps)(Popular)

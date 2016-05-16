@@ -11,7 +11,7 @@ import detectMobileService from '../services/detectMobileService';
 import {trackSetPlay} from '../services/mixpanelService';
 
 import { connect } from 'react-redux';
-import { changeCurrentPage } from '../actions/environment';
+import { changeCurrentPage, initEnvironment } from '../actions/environment';
 
 // fix mobile touch events not registering
 InjectTapEventPlugin();
@@ -76,16 +76,18 @@ class App extends Base {
     componentWillMount() {
         const {appState} = this.state;
         const {router} = this.context;
+        const { dispatch } = this.props;
         // initialize global appState and push fn
         this.initializeApp();
 
         // detect if user is on mobile web
-        detectMobileService.detectMobileBrowser();
+        // detectMobileService.detectMobileBrowser();
+        dispatch(initEnvironment());
 
         // temporary workaround
-        if(!isProduction) {
-            push({ loaded: true });
-        }
+        // if(!isProduction) {
+        //     push({ loaded: true });
+        // }
 
         // initialize Facebook SDK & check if user is logged in
         startFacebookSDK(push, router, this.props.location.pathname);
@@ -126,7 +128,7 @@ class App extends Base {
         const { currentPage, showNavbar, loaded } = this.props;
 
         return (
-            <Loader loaded={appState.get('loaded')}>
+            <Loader loaded={loaded}>
                 <div id='App' className='flex-column'>
                     <DevTools />
                     <DocMeta tags={tags} />
