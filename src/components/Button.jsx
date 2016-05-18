@@ -5,7 +5,7 @@ import Icon from './Icon';
 
 const {func, string, bool, object} = PropTypes;
 
-export default function Button({onClick, className, children, outline, icon, solid}, {router, push}) {
+export default function Button({onClick, className, children, outline, icon, solid}, {router, push, dispatch}) {
     const buttonClass = classNames('Button', className, {
         solid: solid,
         outline: outline
@@ -32,5 +32,6 @@ Button.PropTypes = {
 
 Button.contextTypes = {
     router: object,
-    push: func
+    push: func,
+    dispatch: func
 };

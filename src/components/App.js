@@ -48,18 +48,21 @@ const push = data => pushFn({
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const { func, object, bool, array } = PropTypes;
+
 class App extends Base {
     static contextTypes = {
-        router: PropTypes.object
+        router: object
     }
     static childContextTypes = {
-        push: PropTypes.func,
-        user: PropTypes.object,
-        loginStatus: PropTypes.bool,
-        favoriteSetIds: PropTypes.array
+        push: func,
+        user: object,
+        loginStatus: bool,
+        favoriteSetIds: array,
+        dispatch: func
     }
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.autoBind('initializeApp');
         this.state = {
             appState: initialAppState
@@ -70,7 +73,8 @@ class App extends Base {
             push: push,
             user: this.state.appState.get('user'),
             loginStatus: this.state.appState.get('loginStatus'),
-            favoriteSetIds: this.state.appState.get('favoriteSetIds')
+            favoriteSetIds: this.state.appState.get('favoriteSetIds'),
+            dispatch: this.props.dispatch
         }
     }
     componentWillMount() {
@@ -102,15 +106,15 @@ class App extends Base {
             trackSetPlay(currentSet);
         }
     }
-    shouldComponentUpdate(nextProps, nextState) {
-        if(nextState.appState.get('playerHidden') === false) {
-            return true;
-        }
-        if(nextState.appState.get('loginStatus')) {
-            return true;
-        }
-        return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if(nextState.appState.get('playerHidden') === false) {
+    //         return true;
+    //     }
+    //     if(nextState.appState.get('loginStatus')) {
+    //         return true;
+    //     }
+    //     return true;
+    // }
     initializeApp() {
         evtHandler.floodGate.subscribe(newState => {
             this.setState({ appState: newState });
@@ -129,7 +133,7 @@ class App extends Base {
 
         return (
             <Loader loaded={loaded}>
-                <div id='App' className='flex-column'>
+                <div sclassName='flex-column'>
                     <DevTools />
                     <DocMeta tags={tags} />
                     <Header 

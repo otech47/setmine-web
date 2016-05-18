@@ -15,6 +15,7 @@ function changeIsMobile(isMobile) {
     }
 }
 
+// TODO test this
 function detectMobileBrowser() {
     // console.log(window.location.pathname);
     if(isiOS()) {

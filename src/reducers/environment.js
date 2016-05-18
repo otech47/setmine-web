@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
     currentPage: 'Setmine Redux',
     isMobile: false,
-    showNavbar: true,
+    showNavbar: false,
     loaded: true
 };
 
