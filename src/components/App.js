@@ -156,9 +156,7 @@ class App extends Base {
     }
 }
 
-function mapStateToProps(state) {
-    const { environment } = state;
-
+function mapStateToProps({environment}) {
     return {
         ...environment
     };

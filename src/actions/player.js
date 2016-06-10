@@ -21,6 +21,36 @@ soundmanager.setup({
     }
 });
 
-export function changeTrack(track, time) {
-    
+export function changePlayingSet(setId) {
+    return {
+        type: types.CHANGE_PLAYING_SET,
+        setId
+    }
+}
+
+export function changeTime(time) {
+    return {
+        type: types.CHANGE_TIME,
+        time
+    }
+}
+
+function fetchSet(setId) {
+    return (dispatch, getState) => 
+        api.get(`sets/id/${setId}`)
+            .then(payload => {
+                const set = payload.sets_id;
+                const tracks = set.tracks;
+
+                // let setName = set.event.event;
+                // if(set.episode.episode && set.episode.episode.length > 0) {
+                //     setName += ` - ${set.episode.episode}`;
+                // }
+                dispatch(playSet(set, tracks));
+            })
+}
+
+export function playSet(set, tracks) {
+    return dispatch => 
+        // TODO
 }
