@@ -26,7 +26,7 @@ export default class MixDetail extends Base {
 		this.context.push({ currentPage: 'Mixes' });
 	}
 	getMix() {
-		// test id 69
+		// test id 2
 		api.get(`mixes/id/${this.props.params.mix}`).then(payload => {
 			let m = payload.mixes_id;
 			// this.context.push({ currentPage: m.event });

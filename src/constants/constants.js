@@ -28,4 +28,4 @@ export const colors = {
 	instagram: '#3f729b',
 	soundcloud: '#ff8800',
 	youtube: '#cd201f'
-}
+};

@@ -133,7 +133,7 @@ class App extends Base {
 
         return (
             <Loader loaded={loaded}>
-                <div sclassName='flex-column'>
+                <div className='flex-column'>
                     <DevTools />
                     <DocMeta tags={tags} />
                     <Header 
