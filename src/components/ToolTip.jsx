@@ -1,17 +1,13 @@
-import React, {PropTypes} from 'react';
-const {oneOf, object} = PropTypes;
+import React, { PropTypes } from 'react'
 
-const ToolTip = ({style, children}) => {
+export default function ToolTip ({ children, direction }) {
 	return (
-		<div className='tooltip' style={style}>
+		<div className='tooltip'>
 			<p>{children}</p>
 		</div>
-	);
+	)
 }
 
 ToolTip.propTypes = {
-	style: object,
-	direction: oneOf(['top', 'right', 'left', 'bottom'])
-};
-
-export default ToolTip;
+	direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom'])
+}

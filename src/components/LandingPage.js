@@ -1,58 +1,53 @@
-import React, {PropTypes} from 'react';
-import Base from './Base';
-import {Element, Events, animateScroll} from 'react-scroll';
-import Footer from './Footer';
-import Button from './Button';
-import Icon from './Icon';
-import {IOS_URL, ANDROID_URL} from '../constants/constants';
+import React, { PropTypes } from 'react'
+import Base from './Base'
+import { Element, Events, animateScroll } from 'react-scroll'
+import Footer from './Footer'
+import Button from './Button'
+import Icon from './Icon'
+import { IOS_URL, ANDROID_URL } from '../constants/constants'
+import { changeCurrentPage } from '../actions/environment'
 
-const {object, func} = PropTypes;
-const scroll = animateScroll;
+const scroll = animateScroll
 
-import unlockImg from '../images/beacons.png';
-import calendarImg from '../images/calendar.png';
-import festivalImg from '../images/festivals.png';
+import unlockImg from '../images/beacons.png'
+import calendarImg from '../images/calendar.png'
+import festivalImg from '../images/festivals.png'
 
 export default class LandingPage extends Base {
     static contextTypes = {
-        router: object.isRequired,
-        push: func
+        router: PropTypes.object.isRequired
     }
     constructor(props) {
-        super(props);
-        this.autoBind('scrollTo', 'handleClick');
+        super(props)
+        this.autoBind('scrollTo', 'handleClick')
     }
     componentWillMount() {
-        this.context.push({
-            showNavbar: false,
-            currentPage: 'Setmine'
-        });
+        this.props.dispatch(changeCurrentPage('Setmine'))
     }
     componentDidMount() {
         Events.scrollEvent.register('begin', () => {
-            console.log('begin');
-        });
+            console.log('begin')
+        })
 
         Events.scrollEvent.register('end', () => {
-            console.log('end');
-        });
+            console.log('end')
+        })
 
-        scroll.scrollToTop();
+        scroll.scrollToTop()
     }
     componentWillUnmount() {
-        this.context.push({ showNavbar: true });
-        Events.scrollEvent.remove('begin');
-        Events.scrollEvent.remove('end');
+        Events.scrollEvent.remove('begin')
+        Events.scrollEvent.remove('end')
     }
     handleClick() {
         setTimeout(() => {
-            this.context.router.push('/sets');
-        }, 150);
+            this.context.router.push('/sets')
+        }, 150)
     }
     scrollTo() {
         scroll.scrollTo((window.innerHeight - 250), {
             duration: 450
-        });
+        })
     }
     render() {
         return (
@@ -105,6 +100,6 @@ export default class LandingPage extends Base {
                 <h5 className='landing-page__scroll-back' onClick={animateScroll.scrollToTop}>Back to Top</h5>
                 <Footer/>
             </div>
-        );
+        )
     }
 }

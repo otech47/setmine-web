@@ -1,8 +1,19 @@
-export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE';
-export const CHANGE_IS_MOBILE = 'CHANGE_IS_MOBILE';
-
-export const RECEIVE_SETS = 'RECEIVE_SETS';
-export const RESET_SETS = 'RESET_SETS';
-
-export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
-export const TOGGLE_LOADER = 'TOGGLE_LOADER';
+export const CHANGE_CURRENT_PAGE = 'CHANGE_CURRENT_PAGE'
+export const CHANGE_IS_MOBILE = 'CHANGE_IS_MOBILE'
+export const CHANGE_PLAYING = 'CHANGE_PLAYING'
+export const CHANGE_TRACK = 'CHANGE_TRACK'
+export const FETCH_SET = 'FETCH_SET'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
+export const RECEIVE_SET = 'RECEIVE_SET'
+export const RECEIVE_SETS = 'RECEIVE_SETS'
+export const RECEIVE_USER = 'RECEIVE_USER'
+export const RESET_SETS = 'RESET_SETS'
+export const SEARCH = 'SEARCH'
+export const TOGGLE_LOADER = 'TOGGLE_LOADER'
+export const TOGGLE_MODAL = 'TOGGLE_MODAL'
+export const SHOW_PLAYER = 'TOGGLE_PLAYER'
+export const UPDATE_CURRENT_TRACK = 'UPDATE_CURRENT_TRACK'
+export const UPDATE_SOUND = 'UPDATE_SOUND'
+export const UPDATE_TIME = 'UPDATE_TIME'

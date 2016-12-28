@@ -30,7 +30,7 @@ export default class Recent extends Base {
     }
     getRecentSets(page) {
         const { dispatch } = this.props;
-        dispatch(fetchRecentSets(page));
+        this.props.dispatch(fetchRecentSets(page));
     }
     onScroll() {
         this.getRecentSets(this.props.page);

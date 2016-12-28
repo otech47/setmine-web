@@ -1,19 +1,17 @@
-import React, {PropTypes} from 'react';
-import {Motion, spring, presets} from 'react-motion';
-import {login} from '../services/loginService';
-import Icon from './FaIcon';
-import Modal from './Modal';
-import Button from './Button';
+import React, { PropTypes } from 'react'
+import { Motion, spring, presets } from 'react-motion'
+import Icon from './Icon'
+import Modal from './Modal'
+import Button from './Button'
+import { connect } from 'react-redux'
+import { login } from '../actions/auth'
+import { toggleModal } from '../actions/environment'
 
 const margin = {
     marginRight: '2rem'
-};
+}
 
-export default function LoginOverlay({open, style}, {push, router}) {
-    const handleLogin = () => {
-        login(push, router);
-        push({ showLogin: false });
-    }
+function LoginOverlay({ cancel, login, open, style }) {
     return (
         <Modal open={open}>
             <div className='LoginOverlay flex-column'>
@@ -37,29 +35,41 @@ export default function LoginOverlay({open, style}, {push, router}) {
                         className='facebook'
                         solid
                         icon='social-facebook'
-                        onClick={handleLogin}
+                        onClick={login}
                     >
                         Sign Up With Facebook
                     </Button>
                     <Button 
-                        className='nope' 
+                        className='nope'
                         solid 
-                        onClick={() => push({ showLogin: false })}
+                        onClick={cancel}
                     >
                         No Thanks
                     </Button>
                 </footer>
             </div>
         </Modal>
-    );
+    )
 }
 
 LoginOverlay.contextTypes = {
-    push: PropTypes.func,
     router: PropTypes.object
-};
+}
 
 LoginOverlay.propTypes = {
     open: PropTypes.bool,
     close: PropTypes.func
-};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        login() {
+            dispatch(login())
+        },
+        cancel() {
+            dispatch(toggleModal())
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LoginOverlay)

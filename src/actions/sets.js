@@ -1,47 +1,32 @@
-import * as types from '../constants/actionTypes';
-import api from '../services/api';
-import _ from 'lodash';
+import * as types from '../constants/actionTypes'
+import api from '../services/api'
+import _ from 'lodash'
 
+// TODO move to component specific
 export function fetchPopularSets(page) {
-    return dispatch => (
-        api.get(route)
+    return (dispatch, getState) => {
+        api.get(`sets/popular?limit=12&page=${page}`)
             .then(payload => {
-                // let sets = this.state.sets.concat(payload.sets_recent);
-                let sets = payload.sets_popular;
-                sets = _.uniq(sets);
-                dispatch(receiveSets(sets));
+                const { sets } = getState()
+                let newSets = [].concat(sets.sets, payload.sets_popular)
+                dispatch(receiveSets(newSets, page))
             })
-    )
+    }
 }
 
 export function fetchRecentSets(page) {
-    return (dispatch, getState) =>
-        api.get(`sets/recent?limit=48&page=${page}`)
+    return (dispatch, getState) => {
+        api.get(`sets/recent?limit=12&page=${page}`)
             .then(payload => {
-                const { sets } = getState();
+                const { sets } = getState()
 
-                // append new sets to existing and remove duplicates
-                let newSets = _.concat(sets.sets, payload.sets_recent);
-                newSets = _.uniq(newSets);
-                page++;
+                let newSets = _.concat(sets.sets, payload.sets_recent)
+                newSets = _.uniq(newSets)
+                page++
 
-                dispatch(receiveSets(newSets, page));
+                dispatch(receiveSets(newSets, page))
             })
-}
-
-export function fetchPopularSets(page) {
-    return (dispatch, getState) =>
-        api.get(`sets/popular?limit=48&page=${page}`)
-            .then(payload => {
-                const { sets } = getState();
-
-                // append new sets to existing and remove duplicates
-                let newSets = _.concat(sets.sets, payload.sets_popular);
-                newSets = _.uniq(newSets);
-                page++;
-
-                dispatch(receiveSets(newSets, page));
-            })
+    }
 }
 
 function receiveSets(sets, page) {
@@ -58,4 +43,3 @@ export function resetSets() {
         type: types.RESET_SETS
     }
 }
-

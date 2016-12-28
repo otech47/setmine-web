@@ -1,4 +1,5 @@
-import R from 'ramda';
+import R from 'ramda'
+import _ from 'lodash'
 
 export function spliceArray(array, cutoff) {
 	if(array.length > cutoff) {
@@ -25,7 +26,8 @@ export function convertMillisecondsToMMSS(ms) {
 
 export function filterWithoutSets(array) {
 	const hasSets = set => {
-		return set.set_count != 0;
+		return set.set_count != 0
 	}
-	return R.filter(hasSets, array);
+	// return R.filter(hasSets, array)
+	return _.filter(array, hasSets)
 }

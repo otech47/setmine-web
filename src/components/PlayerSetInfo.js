@@ -1,18 +1,13 @@
-import React from 'react';
-import {millisecondsToMMSS} from '../services/convert';
+import React from 'react'
 
-const PlayerSetInfo = props => {
-	let appState = props.appState;
-	let currentSet = appState.get('currentSet');
-	let timeElapsed = appState.get('timeElapsed');
-	timeElapsed = millisecondsToMMSS(timeElapsed);
+export default function PlayerSetInfo(props) {
+    const currentSet = props.currentSet
+    const timeElapsed = props.timeElapsed
 
-	return (
-		<div id='PlayerSetInfo' className='flex-column flex-5x'>
-			<p>{`${currentSet.artist} - ${currentSet.setName}`}</p>
-			<p className='caption'>{`${timeElapsed} / ${currentSet.setLength}`}</p>
-		</div>
-	);
+    return (
+        <div className='PlayerSetInfo flex-column flex-fixed'>
+            <p>{`${currentSet.artist} - ${currentSet.setName}`}</p>
+            <p className='caption'>{`${timeElapsed} / ${currentSet.setLength}`}</p>
+        </div>
+    )
 }
-
-export default PlayerSetInfo;

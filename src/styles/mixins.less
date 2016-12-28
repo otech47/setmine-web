@@ -73,7 +73,7 @@
 .center {
 	margin:auto;
 }
-.click {
+.clickable {
 	cursor:pointer;
 	.transition(0.1s, ease-in, color);
 }
@@ -121,7 +121,7 @@
 // deprecated
 .hover(@color, @multiplier: 0.8) {
 	color: @color;
-	.transition(0.2s, ease-in, color);
+	.transition(100ms, ease-in, color);
 	&:hover {
 		color: @color*@multiplier;
 	}

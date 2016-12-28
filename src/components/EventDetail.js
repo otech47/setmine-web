@@ -1,18 +1,19 @@
-import React, {PropTypes} from 'react';
-import R from 'ramda';
-import api from '../services/api';
-import {DEFAULT_IMAGE} from '../constants/constants';
+import React, { PropTypes } from 'react'
+import api from '../services/api'
+import { DEFAULT_IMAGE } from '../constants/constants'
 
-import Base from './Base';
-import Loader from 'react-loader';
-import DetailHeader from './DetailHeader';
-import ArtistTileContainer from './ArtistTileContainer';
-import Tab from './Tab';
+import Base from './Base'
+import Loader from 'react-loader'
+import DetailHeader from './DetailHeader'
+import ArtistTileContainer from './ArtistTileContainer'
+import Tab from './Tab'
+
+import { changeCurrentPage } from '../actions/environment'
 
 export default class EventDetail extends Base {
     constructor(props) {
-        super(props);
-        this.autoBind('getEvent', 'openTicketLink', 'openMapLink');
+        super(props)
+        this.autoBind('fetchEvent', 'openTicketLink', 'openMapLink')
         this.state = {
             loaded: false,
             event: '',
@@ -22,17 +23,15 @@ export default class EventDetail extends Base {
             eventImage: DEFAULT_IMAGE,
             venue: '',
             address: ''
-        };
+        }
     }
     componentWillMount() {
-        this.getEvent();
-        this.context.push({ currentPage: 'Events' });
+        this.fetchEvent()
+        this.props.dispatch(changeCurrentPage('Events'))
     }
-
-    getEvent() {
+    fetchEvent() {
         api.get(`events/id/${this.props.params.event}`).then(payload => {
-            let e = payload.events_id;
-            // this.context.push({ currentPage: e.event });
+            const e = payload.events_id
             this.setState({
                 event: e.event,
                 date: e.formatted_date,
@@ -41,18 +40,18 @@ export default class EventDetail extends Base {
                 venue: e.venue.venue,
                 address: e.venue.address,
                 lineup: e.lineup
-            });
+            })
         }).then(() => {
-            this.setState({ loaded: true });
-        });
+            this.setState({ loaded: true })
+        })
     }
     openMapLink(e) {
-        e.stopPropagation();
-        window.open(`http://google.com/maps/place/${this.state.address}`);
+        e.stopPropagation()
+        window.open(`http://google.com/maps/place/${this.state.address}`)
     }
     openTicketLink(e) {
-        e.stopPropagation();
-        window.open(this.state.ticketLink);
+        e.stopPropagation()
+        window.open(this.state.ticketLink)
     }
     render() {
         return (
@@ -62,10 +61,9 @@ export default class EventDetail extends Base {
                         <h3>{this.state.event}</h3>
                         <p>{this.state.date}</p>
                         <p title='Open in Google Maps' className='link' onClick={this.openMapLink}>{this.state.venue}</p>
-                        {this.state.ticketLink ? 
-                            <p id='DetailButton' onClick={this.openTicketLink}>TICKETS</p>
-                            :
-                            null
+                        {this.state.ticketLink && (
+                            <p className='DetailButton' onClick={this.openTicketLink}>TICKETS</p>
+                            )
                         }
                     </DetailHeader>
                     <div className='tab'>
@@ -74,10 +72,6 @@ export default class EventDetail extends Base {
                     <ArtistTileContainer artists={this.state.lineup} />
                 </div>
             </Loader>
-        );
+        )
     }
 }
-
-EventDetail.contextTypes = {
-    push: PropTypes.func
-};

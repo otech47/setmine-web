@@ -1,35 +1,21 @@
-import React, {PropTypes} from 'react';
-import {changeTrack} from '../services/playerService';
-import {MMSSToMilliseconds} from '../services/convert';
-import Base from './Base';
+import React, { PropTypes } from 'react'
 
-export default class Track extends Base {
-	constructor(props) {
-		super(props);
-		this.autoBind('changeTrack');
-	}
-	changeTrack() {
-		let {appState, trackname, starttime} = this.props;
-		starttime = MMSSToMilliseconds(starttime);
-		changeTrack(appState, this.context.push, starttime, trackname);
-	}
-	render() {
-		const {trackname, starttime, style} = this.props;
-
-		return (
-			<p className='track' onClick={this.changeTrack} style={style}>
-				<span className='starttime'>{starttime}</span>
-				<span className='trackname'>{trackname}</span>
-			</p>
-		);
-	}
+export default function Track({ className, trackname, starttime, style, onClick }) {
+    return (
+        <p 
+            className={`Track ${className}`} 
+            onClick={() => onClick({ trackname, starttime })} 
+            style={style}
+        >
+            <span className='Track__starttime'>{starttime}</span>
+            <span className='Track__trackname'>{trackname}</span>
+        </p>
+    )
 }
 
-Track.contextTypes = {
-	push: PropTypes.func
-};
-
 Track.propTypes = {
-	starttime: PropTypes.string,
-	style: PropTypes.object
-};
+    starttime: PropTypes.string,
+    style: PropTypes.object,
+    className: PropTypes.string,
+    onClick: PropTypes.func
+}

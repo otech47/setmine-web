@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react';
-import ArtistTile from './ArtistTile';
-import InfiniteScrollify from './InfiniteScrollify';
+import React, { PropTypes } from 'react'
+import ArtistTile from './ArtistTile'
+import InfiniteScrollify from './InfiniteScrollify'
 
-const ArtistTileContainer = ({artists}) => (
+const ArtistTileContainer = ({ artists }) => (
 	<div className='artist-tile-container'>
 		{
 			artists.map((artist, index) => {
@@ -16,11 +16,11 @@ const ArtistTileContainer = ({artists}) => (
 			})
 		}
 	</div>
-);
+)
 
 ArtistTileContainer.propTypes = {
 	artists: PropTypes.array.isRequired,
 	onScroll: PropTypes.func
-};
+}
 
-export default InfiniteScrollify(ArtistTileContainer);
+export default InfiniteScrollify(ArtistTileContainer)

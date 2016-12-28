@@ -1,37 +1,31 @@
-import React, {Component, PropTypes} from 'react';
-import Spinner from './Spinner';
-
-const {bool, any} = PropTypes;
+import React, { Component, PropTypes } from 'react'
+import Spinner from './Spinner'
 
 export default class Loader extends Component {
     static propTypes = {
-        loaded: bool.isRequired,
-        children: any.isRequired
+        loaded: PropTypes.bool.isRequired,
+        children: PropTypes.any.isRequired
     }
-    constructor(props, context) {
-        super(props, context);
-    }
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
+    shouldComponentUpdate(nextProps, nextState) {
         if(nextProps.loaded) {
-            return true;
+            return true
         } else {
-            return false;
+            return false
         }
     }
     render() {
-        const {loaded, children} = this.props;
-        if(!loaded) {
+        if(!this.props.loaded) {
             return (
                 <div id='Loader'>
                     <Spinner />
                 </div>
-            );
+            )
         } else {
             return (
                 <div className='loaded-content'>
-                    {children}
+                    {this.props.children}
                 </div>
-            );
+            )
         }
     }
 }

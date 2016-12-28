@@ -1,77 +1,78 @@
-import React, { PropTypes } from 'react';
-import Link from 'react-router/lib/Link';
-import Base from './Base';
-import SearchBar from './SearchBar';
-import IconMenu from './IconMenu';
-import Icon from './FaIcon';
-import LoginOverlay from './LoginOverlay';
-import colors from '../constants/colors';
-import Ink from 'react-ink';
-import Button from './Button';
-import {logout} from '../services/loginService';
+import React, { PropTypes } from 'react'
+import Link from 'react-router/lib/Link'
+import Base from './Base'
+import SearchBar from './SearchBar'
+import IconMenu from './IconMenu'
+import Icon from './Icon'
+import LoginOverlay from './LoginOverlay'
+import colors from '../constants/colors'
+import Ink from 'react-ink'
+import Button from './Button'
+import { logout } from '../actions/auth'
+import { toggleModal } from '../actions/environment'
 
 const scrollStyle = {
     backgroundColor: colors.white,
     color: colors.darkGray,
     boxShadow: '0 3px 6px rgba(49, 53, 66, 0.16), 0 3px 6px rgba(49, 53, 66, 0.23)'
-};
+}
 
 export default class Header extends Base {
     constructor(props) {
-        super(props);
+        super(props)
         this.autoBind(
             'handleLogout',
             'handleScroll',
             'login'
-        );
+        )
         this.state = {
             switchHeader: false
         }
     }
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.location.pathname !== '/') {
-            window.removeEventListener('scroll', this.handleScroll, false);
-            return;
+            window.removeEventListener('scroll', this.handleScroll, false)
+            return
         }
 
         if(this.landingPageActive()) {
-            window.addEventListener('scroll', this.handleScroll, false);
+            window.addEventListener('scroll', this.handleScroll, false)
         }
     }
     login() {
-        this.context.push({ showLogin: !this.props.showLogin });
+        this.context.dispatch(toggleModal())
     }
     trackAndroid() {
-        mixpanel && mixpanel.track("Android App Link Clicked");
+        mixpanel && mixpanel.track("Android App Link Clicked")
     }
     trackIos() {
-        mixpanel && mixpanel.track("iOS App Link Clicked");
+        mixpanel && mixpanel.track("iOS App Link Clicked")
     }
     landingPageActive() {
-        return this.props.location.pathname === '/';
+        return this.props.location.pathname === '/'
     }
     handleLogout() {
-        logout(this.context.push);
+        logout(this.context.push)
     }
     handleScroll() {
         if(!this.landingPageActive()) {
-            return;
+            return
         }
 
         if(window.scrollY >= (window.innerHeight - 260)) {
-            this.setState({ switchHeader: true });
+            this.setState({ switchHeader: true })
         } else {
-            this.setState({ switchHeader: false });
+            this.setState({ switchHeader: false })
         }
     }
     render() {
-        const {currentPage} = this.props;
-        const headerType = this.landingPageActive() ? 'Header--landing' : 'Header--main';
+        const { currentPage } = this.props
+        const headerClass = this.landingPageActive() ? 'Header--landing' : 'Header--main'
 
-        const style = this.state.switchHeader ? scrollStyle : null;
+        const style = this.state.switchHeader ? scrollStyle : null
 
         return (
-            <div className={headerType} style={style}>
+            <div className={headerClass} style={style}>
                 <Link to='/' className='icon-setmine' />
                 <div className='flex-fixed' style={{ margin: '0 3rem' }}>
                     <h4>{currentPage}</h4>
@@ -103,19 +104,17 @@ export default class Header extends Base {
                     </Link>
                 </IconMenu>
             </div>
-        );
+        )
     }
 }
 
-const {func, object, bool, string} = PropTypes;
 Header.contextTypes = {
-    push: func,
-    loginStatus: bool
-};
+    push: PropTypes.func,
+    loginStatus: PropTypes.bool,
+    dispatch: PropTypes.func
+}
 
 Header.propTypes = {
-    currentPage: string.isRequired,
-    location: object
-};
-
-export default Header;
+    currentPage: PropTypes.string.isRequired,
+    location: PropTypes.object
+}

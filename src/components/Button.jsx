@@ -1,37 +1,34 @@
-import React, {PropTypes} from 'react';
-import Ink from 'react-ink';
-import classNames from 'classNames';
-import Icon from './Icon';
+import React, { PropTypes } from 'react'
+import Ink from 'react-ink'
+import classNames from 'classnames'
+import Icon from './Icon'
 
-const {func, string, bool, object} = PropTypes;
-
-export default function Button({onClick, className, children, outline, icon, solid}, {router, push, dispatch}) {
+export default function Button({ onClick, className, children, outline, icon, solid }, { router, push, dispatch }) {
     const buttonClass = classNames('Button', className, {
-        solid: solid,
-        outline: outline
-    });
+        solid,
+        outline
+    })
 
     return (
         <div className={buttonClass} onClick={() => setTimeout(onClick, 100)}>
-            {icon && <Icon style={{marginRight: '1rem' }}>{icon}</Icon>}
+            {icon && <Icon>{icon}</Icon>}
             <p>{children}</p>
             <Ink/>
         </div>
-    );
+    )
 }
 
-Button.PropTypes = {
-    onClick: func,
-    className: string,
+Button.propTypes = {
+    onClick: PropTypes.func,
+    className: PropTypes.string,
     // solid or outlined button
-    outline: bool.isRequired,
-    solid: bool.isRequired,
-    // ionicons classname for adding an icon
-    icon: string
+    outline: PropTypes.bool,
+    solid: PropTypes.bool.isRequired,
+    icon: PropTypes.string
 }
 
 Button.contextTypes = {
-    router: object,
-    push: func,
-    dispatch: func
-};
+    router: PropTypes.object,
+    push: PropTypes.func,
+    dispatch: PropTypes.func
+}

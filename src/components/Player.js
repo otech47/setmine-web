@@ -1,71 +1,58 @@
-import React, {PropTypes} from 'react';
-import {generateSound} from '../services/playerService';
-import {trackSetPlay} from '../services/mixpanelService';
-import {checkIfFavorited} from '../services/favoriteSet';
+import React, {PropTypes} from 'react'
+import { connect } from 'react-redux'
+import Base from './Base'
+import PlayButton from './PlayButton'
+import PlayerSeek from './PlayerSeek'
+import PlayerSetInfo from './PlayerSetInfo'
+import PlayerTracklist from './PlayerTracklist'
 
-import Base from './Base';
-import PlayerControl from './PlayerControl';
-import PlayerSeek from './PlayerSeek';
-import PlayerSetInfo from './PlayerSetInfo';
-import PlayerTracklist from './PlayerTracklist';
-import SetShare from './SetShare';
+import { trackSetPlay } from '../services/mixpanelService'
+import { checkIfFavorited } from '../services/favoriteSet'
 
-export default class Player extends Base {
-	constructor(props) {
-		super(props);
-		this.autoBind('checkIfFavorited', 'playSet');
-	}
-	componentDidMount() {
-		this.playSet(this.props.appState);
-	}
-	componentWillReceiveProps(nextProps) {
-		const appState = this.props.appState;
-		if(nextProps.appState.get('currentSet') != appState.get('currentSet')) {
-			this.playSet(nextProps.appState);
-		} 
-	}
-	playSet(appState) {
-		generateSound(appState, this.context.push).then(smObj => {
-			this.context.push({
-				sound: smObj,
-				playing: true,
-				playerHidden: false
-			});
+import { changeTrack, generateSound, playSet, togglePlay, updateTime } from '../actions/player'
 
-			// Log Mixpanel event
-			trackSetPlay(appState.get('currentSet'));
-		})
-	}
-	checkIfFavorited(setId) {
-		return this.context.loginStatus ? checkIfFavorited(setId, this.context.favoriteSetIds) : false;
-	}
-	render() {
-		let appState = this.props.appState;
-		let currentSet = appState.get('currentSet');
-		let favorited = this.checkIfFavorited(currentSet.id);
+// refactor
+// import SetShare from './SetShare'
 
-		return (
-			<div id='Player' className='flex-row-nowrap'>
-				<PlayerControl appState={appState} />
-				<div className='flex-column flex'>
-					<PlayerSeek appState={appState} />
-					<div className='flex flex-row'>
-						<PlayerSetInfo appState={appState} />
-						<PlayerTracklist appState={appState} />
-						<SetShare id={currentSet.id} artistImage={currentSet.artistImage} favorited={favorited} />
-					</div>
-				</div>
-			</div>
-		);
-	}
+class Player extends Base {
+    render() {
+        return (
+            <div className='Player flex-row-nowrap'>
+                <PlayerControl {...this.props} />
+                <div className='flex-column flex'>
+                    <PlayerSeek {...this.props} />
+                    <div className='flex flex-row'>
+                        <PlayerSetInfo {...this.props} />
+                        <PlayerTracklist {...this.props} />
+                        {/*<SetShare id={currentSet.id} artistImage={currentSet.artistImage} />*/}
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
-Player.contextTypes = {
-	push: PropTypes.func,
-	loginStatus: PropTypes.bool,
-	favoriteSetIds: PropTypes.array
-};
+function mapStateToProps({ player }) {
+    return {
+        ...player
+    }
+}
 
-Player.propTypes = {
+function mapDispatchToProps(dispatch) {
+    return {
+        changeTrack(track) {
+            dispatch(changeTrack(track))
+        },
+        generateSound() {
+            dispatch(generateSound())
+        },
+        togglePlay() {
+            dispatch(togglePlay())
+        },
+        updateTime(time) {
+            dispatch(updateTime(time))
+        }
+    }
+}
 
-};
+export default connect(mapStateToProps, mapDispatchToProps)(Player)

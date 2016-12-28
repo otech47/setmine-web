@@ -1,36 +1,31 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 
 module.exports = {
 	entry: {
 		setmine: [
 			'webpack-dev-server/client?http://localhost:8080',
 			'webpack/hot/only-dev-server',
-			'./src/index.jsx'
+			'./src/index.js'
 		]
 	},
-	devtool: '#cheap-module-eval-source-map',
+	devtool: 'cheap-module-eval-source-map',
 	devServer: {
-		contentBase: './public', // where webpack-dev-server should look for static files
-		historyApiFallback: true,
-		colors: true,
-		hot: true
+		contentBase: './dist' // where webpack should look for static files
 	},
 	output: {
-		path: path.resolve(__dirname, 'public'), // where webpack saves bundled files
-		filename: '[name]-bundle.js', // name of output file
+		path: path.resolve(__dirname, 'dist'), // where webpack saves bundled files
+		publicPath: '/',
+		filename: 'bundle.js', // name of output file
 	},
 	resolve: {
-		extensions: ['', '.jsx', '.js', '.less'],
-		moduleDirectories: ['node_modules']
+		extensions: ['', '.jsx', '.js', '.less', '.jpg', '.jpeg', '.png']
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: 'src/index-dev.html',
-			inject: 'body'
-		}),
 		new webpack.HotModuleReplacementPlugin(),
+		new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        }),
 		new webpack.ProvidePlugin({
 			'Promise': 'exports?global.Promise!es6-promise',
 			'fetch': 'exports?self.fetch!whatwg-fetch'
@@ -39,11 +34,8 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test: /\.(js|jsx)$/,
-				loaders: ['react-hot', 'babel'], // plugins & presets in .babelrc file
-				include: [
-					path.resolve(__dirname, 'src')
-				],
+				test: /\.(jsx|js)?$/,
+				loader: 'react-hot!babel',
 				exclude: /node_modules/
 			},
 			{
@@ -52,10 +44,13 @@ module.exports = {
 				exclude: /node_modules/
 			},
 			{
-				test: /\.(png|jpeg|svg)$/,
-				loader: 'file',
-				exclude: /node_modules/
+				test: /\.(jpg|jpeg|png|gif|eot|svg|ttf|woff|woff2)(\?.*)?$/,
+                loader: 'file',
+                exclude: /node_modules/,
+                query: {
+                    name: '[path][name].[ext]'
+                }
 			}
 		]
 	}
-};
+}

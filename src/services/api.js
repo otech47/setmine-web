@@ -1,4 +1,4 @@
-import {API_ROOT} from '../constants/constants';
+import { API_ROOT } from '../constants/constants'
 
 module.exports = {
 	get(route) {
@@ -7,9 +7,9 @@ module.exports = {
 				.then(res => res.json())
 				.then(res => {
 					if(res.status === 'success') {
-						return res.payload;
+						return res.payload
 					} else {
-						console.error('API call failed');
+						console.error('API call failed')
 					}
 				})
 				.catch(err => console.error(err))
@@ -28,9 +28,9 @@ module.exports = {
 			.then(res => res.json())
 			.then(res => {
 				if(res.status === 'success') {
-					return res.payload;
+					return res.payload
 				} else {
-					console.error('API call failed');
+					console.error('API call failed')
 				}
 			})
 			.catch(err => console.error(err))
@@ -50,4 +50,4 @@ module.exports = {
 			.catch(err => console.error(err))
 		)
 	}
-};
+}
