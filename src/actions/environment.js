@@ -15,9 +15,10 @@ function changeIsMobile(isMobile) {
     }
 }
 
-export function changeIsLoading() {
+export function showLoader(loaded) {
     return {
-        type: types.TOGGLE_LOADER
+        type: types.SHOW_LOADER,
+        loaded
     }
 }
 

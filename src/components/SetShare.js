@@ -10,6 +10,7 @@ export default class SetShare extends Base {
 	constructor(props) {
 		super(props)
 		this.autoBind('handleCopy', 'favoriteSet', 'shareToFacebook', 'shareToTwitter')
+		this.playURL = `https://setmine.com/play/${props.id}`
 		this.state = {
 			favorited: props.favorited
 		}
@@ -42,14 +43,12 @@ export default class SetShare extends Base {
 		// shareToTwitter(this.props.id)
 	}
 	render() {
-		// const favorite = this.state.favorited ? 'favorite' : 'favorite_border'
-		const favorite = this.state.favorited ? 'heart' : 'heart-o'
-		const playURL = `https://setmine.com/play/${this.props.id}`
+		const favorite = this.state.favorited ? 'heart' : 'heart-broken'
 
 		return (
 			<div className='SetShare flex-row'>
 				<Icon onClick={this.favoriteSet} title='Favorite Set'>{favorite}</Icon>
-				<CopyToClipboard text={playURL} onCopy={this.handleCopy}>
+				<CopyToClipboard text={this.playURL} onCopy={this.handleCopy}>
 					<Icon title='Copy to Clipboard'>clipboard</Icon>
 				</CopyToClipboard>
 				<Icon onClick={this.shareToFacebook} fixed title='Share on Facebook'>facebook</Icon>

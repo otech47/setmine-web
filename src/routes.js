@@ -54,20 +54,17 @@ function requireAuth(nextState, replace) {
     // })
 }
 
-const newRoutes = (
+export default (
     <Route path='/' component={App}>
-        <IndexRoute 
-            component={LandingPage}
-            // components={{ main: LandingPage }}
-        />
-        <Route components={{ main: Sets, sidebar: NavSets }}>
+        <IndexRoute components={{ main: LandingPage }} />
+        <Route components={{ main: Sets, navbar: NavSets }}>
             <Route path='play/:set' component={Recent} />
             <Route path='recent' component={Recent} />
             <Route path='popular' component={Popular} />
             <Route path='mixes' component={Mixes} />
             <Route path='festivals' component={Festivals} />
         </Route>
-        <Route components={{ main: Home, sidebar: NavHome }}>
+        <Route components={{ main: Home, navbar: NavHome }}>
             <Route
                 path='favorites'
                 component={Favorites}
@@ -76,20 +73,28 @@ const newRoutes = (
             <Route path='recommended-sets' component={NewSets} />
             <Route path='recommended-events' component={NewEvents} />
         </Route>
-        <Route components={{ main: Events, sidebar: NavEvents }}>
+        <Route components={{ main: Events, navbar: NavEvents }}>
             <Route path='upcoming-events' component={UpcomingEvents} />
             <Route path='closest-events' component={ClosestEvents} />
             <Route path='featured-events' component={FeaturedEvents} />
         </Route>
-        {/* TODO test this */}
-        <Route path='artists' component={Artists} />
-        <Route component={ArtistDetail}>
+        <Route path='artists' components={{ main: Artists }} />
+        <Route path='search' components={{ main: SearchResults }} />
+        <Route components={{ main: ArtistDetail }}>
             <IndexRedirect to='artists/:artist' />
             <Route path='artists/:artist' component={SetContainer} />
-            <Route path='events' component={EventContainer} />
+            <Route path='artists/:artist/events' component={EventContainer} />
         </Route>
+
+        <Route path='venue/:venue' component={VenueDetail} />
+        <Route path='event/:event' component={EventDetail} />
+        <Route path='festival/:festival' component={FestivalDetail} />
+        <Route path='mix/:mix' component={MixDetail} />
+        <Route path='legal' component={DMCA} />
+        <Route path='about' component={About} />
+        <Route path='setstory' component={SetstoryLandingPage} />
         {/* Redirects */}
-        <Redirect from='/sets/recent' to='/recent' />
+        <Redirect from='/sets' to='/recent' />
         <Redirect from='/sets/popular' to='/popular' />
         <Redirect from='/sets/mixes' to='/mixes' />
         <Redirect from='/sets/festivals' to='/festivals' />
@@ -109,59 +114,59 @@ const newRoutes = (
     </Route>
 )
 
-export default (
-    <Route path='/' component={App}>
-        <IndexRoute component={LandingPage} />
+// export default (
+//     <Route path='/' component={App}>
+//         <IndexRoute component={LandingPage} />
 
-        <Route path='play/:set' component={Sets}>
-            <IndexRoute component={Recent} />
-            <Route path='mixes' component={Mixes} />
-            <Route path='popular' component={Popular} />
-            <Route path='festivals' component={Festivals} />
-        </Route>
+//         <Route path='play/:set' component={Sets}>
+//             <IndexRoute component={Recent} />
+//             <Route path='mixes' component={Mixes} />
+//             <Route path='popular' component={Popular} />
+//             <Route path='festivals' component={Festivals} />
+//         </Route>
 
-        <Route path='sets' component={Sets}>
-            <IndexRoute component={Recent} />
-            <Route path='mixes' component={Mixes} />
-            <Route path='popular' component={Popular}/>
-            <Route path='festivals' component={Festivals} />
-        </Route>
+//         <Route path='sets' component={Sets}>
+//             <IndexRoute component={Recent} />
+//             <Route path='mixes' component={Mixes} />
+//             <Route path='popular' component={Popular}/>
+//             <Route path='festivals' component={Festivals} />
+//         </Route>
 
-        <Route path='home' component={Home}>
-            <IndexRoute component={Stream} />
-            <Route path='favorites' component={Favorites} />
-            <Route path='sets' component={NewSets} />
-            <Route path='events' component={NewEvents} />
-        </Route>
+//         <Route path='home' component={Home}>
+//             <IndexRoute component={Stream} />
+//             <Route path='favorites' component={Favorites} />
+//             <Route path='sets' component={NewSets} />
+//             <Route path='events' component={NewEvents} />
+//         </Route>
 
-        <Route path='events' component={Events}>
-            <IndexRoute component={UpcomingEvents} />
-            <Route path='closest' component={ClosestEvents} />
-            <Route path='featured' component={FeaturedEvents} />
-        </Route>
+//         <Route path='events' component={Events}>
+//             <IndexRoute component={UpcomingEvents} />
+//             <Route path='closest' component={ClosestEvents} />
+//             <Route path='featured' component={FeaturedEvents} />
+//         </Route>
 
-        <Route path='artists' component={Artists} />
-        <Route path='search?query' component={SearchResults} />
+//         <Route path='artists' component={Artists} />
+//         <Route path='search?query' component={SearchResults} />
 
-        <Route path='artist/:artist' component={ArtistDetail}>
-            <IndexRoute component={SetContainer} />
-            <Route path='events' component={EventContainer} />
-        </Route>
+//         <Route path='artist/:artist' component={ArtistDetail}>
+//             <IndexRoute component={SetContainer} />
+//             <Route path='events' component={EventContainer} />
+//         </Route>
         
-        <Route path='venue/:venue' component={VenueDetail} />
-        <Route path='event/:event' component={EventDetail} />
-        <Route path='festival/:festival' component={FestivalDetail} />
-        <Route path='mix/:mix' component={MixDetail} />
-        <Route path='legal' component={DMCA} />
+//         <Route path='venue/:venue' component={VenueDetail} />
+//         <Route path='event/:event' component={EventDetail} />
+//         <Route path='festival/:festival' component={FestivalDetail} />
+//         <Route path='mix/:mix' component={MixDetail} />
+//         <Route path='legal' component={DMCA} />
 
-        {/*Redirects from Setmine v5.0*/}
-        <Redirect from='/browse/:artist/artist' to='/artist/:artist' />
-        <Redirect from='/browse/:festival/festival' to='/festival/:festival' />
-        <Redirect from='/browse/:mix/mix' to='/mix/:mix' />
-        <Redirect from='/event/:eventID' to='/event/:eventID' />
-        <Redirect from='/offer/:offerId' to='/' />
+//         {/*Redirects from Setmine v5.0*/}
+//         <Redirect from='/browse/:artist/artist' to='/artist/:artist' />
+//         <Redirect from='/browse/:festival/festival' to='/festival/:festival' />
+//         <Redirect from='/browse/:mix/mix' to='/mix/:mix' />
+//         <Redirect from='/event/:eventID' to='/event/:eventID' />
+//         <Redirect from='/offer/:offerId' to='/' />
 
-        <Route path='about' component={About} />
-        <Route path='setstory' component={SetstoryLandingPage} />
-    </Route>
-)
+//         <Route path='about' component={About} />
+//         <Route path='setstory' component={SetstoryLandingPage} />
+//     </Route>
+// )

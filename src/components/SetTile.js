@@ -7,7 +7,7 @@ import SetShare from './SetShare'
 import { fetchSet, playSet } from '../actions/player'
 import { connect } from 'react-redux'
 
-class SetTile extends Base {
+export default class SetTile extends Base {
     static propTypes = {
         id: PropTypes.number,
         eventId: PropTypes.number,
@@ -25,7 +25,7 @@ class SetTile extends Base {
         artistImage: DEFAULT_IMAGE
     }
     static contextTypes = {
-        push: PropTypes.func,
+        dispatch: PropTypes.func,
         user: PropTypes.object,
         loginStatus: PropTypes.bool,
         router: PropTypes.object
@@ -53,8 +53,8 @@ class SetTile extends Base {
         }
     }
     playSet() {
-        // TODO fix this
-        this.props.playSet(this.props.id)
+        // TODO test this
+        this.context.dispatch(playSet(this.props.id))
     }
     renderArtists() {
         return this.props.artists.map((artist, index) => {
@@ -90,7 +90,7 @@ class SetTile extends Base {
                             />
                         </div>
 
-                        <div className='horizontal-divider center'/>
+                        <div className='horizontal-divider center' />
 
                         <div className='flex-row flex-fixed flex-row'>
                             <div className='play clickable flex-fixed' onClick={this.playSet}>
@@ -98,7 +98,7 @@ class SetTile extends Base {
                                 <p>{this.props.popularity}</p>
                             </div>
 
-                            <div className='vertical-divider'/>
+                            <div className='vertical-divider' />
 
                             <div className='time flex-fixed flex-row'>
                                 <Icon>time</Icon>
@@ -112,13 +112,3 @@ class SetTile extends Base {
         )
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return {
-        playSet(id) {
-            dispatch(playSet(id))
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(SetTile)

@@ -1,32 +1,42 @@
-.NavBar {
-	&:extend(.flex-column);
-	.colors(@dark-gray, @light-gray);
-	// .colors(@aegean, @cloud);
-	cursor: pointer;
-	width: @navbarWidth;
-	z-index: 100;
-	position: fixed;
-	top: @headerHeight;
-	.card(2);
-	a {
-		display: flex;
-		position: relative;
-		justify-content: center;
-		align-items: center;
-		height: @headerHeight;
-		.transition(border);
-		&:hover {
-			background: @dark-gray*0.9;
-			color: white;
-			.tooltip {
-				visibility: visible;
-				opacity: 1;
-			}
-		}
-		&.active {
-			background: @dark-gray*0.8;
-			color: @white;
-			border-left: solid 3px @blue;
-		}
-	}
+.Navbar {
+    &:extend(.flex-row);
+    .colors(@cloud, @aegean);
+    .card(1);
+    height: @navbarHeight;
+    width: 100%;
+    position: fixed;
+    top: @headerHeight;
+    padding-left: @sidebarWidth;
+    z-index: 98;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        cursor: pointer;
+        position: relative;
+        &:hover {
+            background: @light-gray*0.95;
+            .transition(background);
+        }
+        &.active {
+            background: @light-gray*0.9;
+            border-bottom: solid 3px @blue;
+            .transition(border);
+        }
+    }
+    p {
+        margin: 3rem;
+    }
+}
+
+.Tab--active {
+    background-color: @light-gray * 0.9;
+    cursor: pointer;
+    border-bottom: solid 3px @blue;
+    .transition();
+}
+
+.Tab--disabled, .disabled-tab {
+    &:extend(.tab-base);
+    .colors(#cfd4d6, @gray);
 }

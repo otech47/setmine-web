@@ -22,11 +22,12 @@ export default function environment(state = initialState, action) {
                 ...state,
                 isMobile: action.isMobile
             }
-        case types.TOGGLE_LOADER:
+        case types.SHOW_LOADER:
             return {
                 ...state,
-                loaded: !state.loaded
+                loaded: action.loaded
             }
+        
         case types.TOGGLE_MODAL:
             return {
                 ...state,

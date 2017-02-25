@@ -35,7 +35,6 @@ class SetContainer extends Component {
             const favorited = this.context.loginStatus ? checkIfFavorited(set.id, this.context.favoriteSetIds) : false
 
             // show episode on set tiles
-            // const setName = (set.episode != undefined && Object.keys(set.episode).length != 0) ? `${set.event.event} - ${set.episode.episode}` : set.event.event
             const setName = formatSetName(set)
             const bannerImage = (set.icon_image && set.icon_image.imageURL) ? set.icon_image.imageURL : set.event.banner_image.imageURL
 

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
-import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
-import _ from 'underscore'
+import _ from 'lodash'
 import api from '../services/api'
 import Base from './Base'
 import Icon from './Icon'
@@ -9,52 +8,34 @@ import Icon from './Icon'
 import { search } from '../actions/search'
 
 export default class SearchBar extends Base {
+    static contextTypes = {
+        dispatch: PropTypes.func,
+        router: PropTypes.object
+    }
     constructor(props) {
         super(props)
-        this.autoBind('search', 'handleKeypress', 'handleKeydown')
+        this.autoBind('handleKeyPress', 'handleChange')
+        this.state = {
+            value: ''
+        }
     }
-    componentDidMount() {
-        document.addEventListener('keydown', this.handleKeydown)
+    handleChange(e) {
+        const value = e.target.value
+        this.setState({ value })
     }
-    handleKeydown(e) {
-        let key = e.keyCode || e.which
-        let search = ReactDOM.findDOMNode(this.refs.search)
-        let inactiveInput = document.activeElement.tagName.toLowerCase() === 'body'
-        let isSearchingEvents = !((search != document.activeElement) && inactiveInput)
+    handleKeyPress(e) {
+        const value = this.state.value
+        const key = e.keyCode || e.which
 
-        if(isSearchingEvents) {
-            return
-        }
-
-        switch(true) {
-            case (key >= 97 && key <= 122):
-                search.focus()
-                break
-            case (key >= 65 && key <= 90):
-                search.focus()
-                break
-        }
-    }
-    handleKeypress(e) {
-        const query = ReactDOM.findDOMNode(this.refs.search).value
-        if (e.charCode === 13) {
-            this.context.dispatch(serch(query))
-        }
-    }
-    search(query) {
-        api.get(`search/${query}`).then(res => {
-            var {artists, sets, events, tracks} = res.search
-            this.context.push({
-                searchResults: {
-                    sets: sets,
-                    upcomingEvents: events,
-                    tracks: tracks,
-                    artists: artists
+        if (value.length !== 0 && key === 13) {
+            console.log('searching...')
+            this.context.router.push({
+                pathname: '/search',
+                query: {
+                    q: this.state.value
                 }
             })
-
-            this.context.router.push('/search')
-        })
+        }
     }
     render() {
         return (
@@ -63,16 +44,12 @@ export default class SearchBar extends Base {
                 <input
                     className='SearchBar__input'
                     placeholder='search'
-                    ref='search'
-                    onKeyPress={_.debounce(this.handleKeypress, 300)}
+                    ref={input => this.input = input}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleKeyPress}
+                    value={this.state.value}
                 />
             </div>
         )
     }
-}
-
-SearchBar.contextTypes = {
-    push: PropTypes.func,
-    dispatch: PropTypes.func,
-    router: PropTypes.object
 }

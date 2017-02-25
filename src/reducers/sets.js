@@ -2,8 +2,7 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
     page: 1,
-    sets: [],
-    loaded: false
+    sets: []
 }
 
 export default function sets(state = initialState, action) {
@@ -12,8 +11,7 @@ export default function sets(state = initialState, action) {
             return {
                 ...state,
                 page: action.page,
-                sets: action.sets,
-                loaded: action.loaded
+                sets: action.sets
             }
         case types.RESET_SETS:
             return initialState;

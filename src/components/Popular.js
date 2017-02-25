@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Base from './Base'
 import Loader from './Loader'
 import api from '../services/api'
@@ -8,6 +8,9 @@ import Spinner from './Spinner'
 import { fetchPopularSets, resetSets } from '../actions/sets'
 
 export default class Popular extends Base {
+    static contextTypes = {
+        dispatch: PropTypes.func
+    }
     constructor(props) {
         super(props)
         this.autoBind('getPopularSets', 'onScroll')
@@ -19,11 +22,10 @@ export default class Popular extends Base {
         // mixpanel && mixpanel.track("Popular Sets Page Open")
     }
     componentWillUnmount() {
-        this.props.dispatch(resetSets())
+        this.context.dispatch(resetSets())
     }
     getPopularSets(page) {
-        const { dispatch } = this.props
-        dispatch(fetchPopularSets(page))
+        this.context.dispatch(fetchPopularSets(page))
     }
     onScroll() {
         this.getPopularSets(this.props.page)

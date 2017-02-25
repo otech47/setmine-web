@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes'
 import api from '../services/api'
 import _ from 'lodash'
+import { showLoader } from './environment'
 
 // TODO move to component specific
 export function fetchPopularSets(page) {
@@ -16,6 +17,7 @@ export function fetchPopularSets(page) {
 
 export function fetchRecentSets(page) {
     return (dispatch, getState) => {
+        dispatch(showLoader(true))
         api.get(`sets/recent?limit=12&page=${page}`)
             .then(payload => {
                 const { sets } = getState()
@@ -25,6 +27,7 @@ export function fetchRecentSets(page) {
                 page++
 
                 dispatch(receiveSets(newSets, page))
+                dispatch(showLoader(false))
             })
     }
 }

@@ -5,6 +5,7 @@ import environment from './environment'
 import player from './player'
 import sets from './sets'
 import events from './events'
+import search from './search'
 
 const rootReducer = combineReducers({
     auth,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     events,
     player,
     routing,
-    sets 
+    sets,
+    search
 })
 
 export default rootReducer

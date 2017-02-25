@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react'
 
-export default class BaseComponent extends React.Component {
+export default class Base extends Component {
 	autoBind(...methods) {
-		methods.forEach(method => this[method] = this[method].bind(this));
+		methods.forEach(method => this[method] = this[method].bind(this))
 	}
 }

@@ -42,3 +42,7 @@ export default class EventContainer extends Component {
 EventContainer.propTypes = {
     events: PropTypes.array.isRequired
 };
+
+EventContainer.defaultProps = {
+    events: []
+}

@@ -15,14 +15,15 @@ import festivalImg from '../images/festivals.png'
 
 export default class LandingPage extends Base {
     static contextTypes = {
-        router: PropTypes.object.isRequired
+        router: PropTypes.object.isRequired,
+        dispatch: PropTypes.func.isRequired
     }
     constructor(props) {
         super(props)
         this.autoBind('scrollTo', 'handleClick')
     }
     componentWillMount() {
-        this.props.dispatch(changeCurrentPage('Setmine'))
+        this.context.dispatch(changeCurrentPage('Setmine'))
     }
     componentDidMount() {
         Events.scrollEvent.register('begin', () => {
