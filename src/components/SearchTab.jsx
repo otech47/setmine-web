@@ -1,25 +1,31 @@
-import React, {PropTypes} from 'react';
-import Base from './Base';
-import {Link} from 'react-scroll';
-import Ink from 'react-ink';
+import React, { PropTypes } from 'react'
+import Base from './Base'
+import { Link } from 'react-scroll'
+import Ink from 'react-ink'
+import styled from 'styled-components'
+import { colors } from '../ui'
 
-const {number, string, func} = PropTypes;
+const Root = styled(Link)`
+    position: relative;
+    background: ${colors.cloud};
+    color: ${colors.aegean};
+    padding: 1rem 2rem;
+    text-align: center;
+`
 
 export default class SearchTab extends Base {
     constructor(props) {
-        super(props);
-        this.autoBind('handleClick');
+        super(props)
+        this.autoBind('handleClick')
     }
     handleClick(e) {
-        this.props.onClick(null, e, this); // changes inkbar position
+        this.props.onClick(null, e, this) // changes inkbar position
     }
     render() {
-        let { width, children, to, duration, offset, tabIndex } = this.props;
+        const { width, children, to, duration, offset, tabIndex } = this.props
 
         return (
-            <Link 
-                className='Tab'
-                activeClass='Tab--active'
+            <Root
                 to={to}
                 style={{ width: width.toString() + '%'}}
                 onClick={this.handleClick}
@@ -30,18 +36,18 @@ export default class SearchTab extends Base {
             >
                 <p>{children.toUpperCase()}</p>
                 <Ink />
-            </Link>
-        );
+            </Root>
+        )
     }
 }
 
 SearchTab.propTypes = {
-    width: number,
-    children: string,
-    onClick: func
-};
+    width: PropTypes.number,
+    children: PropTypes.string,
+    onClick: PropTypes.func
+}
 
 SearchTab.defaultProps = {
     offset: -112,
     duration: 200
-};
+}

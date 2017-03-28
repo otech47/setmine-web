@@ -43,7 +43,7 @@ export default class SetShare extends Base {
 		// shareToTwitter(this.props.id)
 	}
 	render() {
-		const favorite = this.state.favorited ? 'heart' : 'heart-broken'
+		const favorite = this.state.favorited ? 'heart' : 'heart-o'
 
 		return (
 			<div className='SetShare flex-row'>

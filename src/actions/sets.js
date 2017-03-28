@@ -18,15 +18,16 @@ export function fetchPopularSets(page) {
 export function fetchRecentSets(page) {
     return (dispatch, getState) => {
         dispatch(showLoader(true))
-        api.get(`sets/recent?limit=12&page=${page}`)
+        api.get(`sets/recent?limit=24&page=${page}`)
             .then(payload => {
-                const { sets } = getState()
+                let { sets } = getState()
+                
 
-                let newSets = _.concat(sets.sets, payload.sets_recent)
-                newSets = _.uniq(newSets)
+                sets = [].concat(sets.sets, payload.sets_recent)
+                sets = _.uniq(sets)
                 page++
 
-                dispatch(receiveSets(newSets, page))
+                dispatch(receiveSets(sets, page))
                 dispatch(showLoader(false))
             })
     }

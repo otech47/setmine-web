@@ -1,17 +1,12 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import colors from './colors'
-import { colorize } from './mixins'
 
-const Title = styled.h5`
-    font-size: 20px;
+const Headline = styled.h4`
+    font-size: 24px;
     font-weight: 400;
-    line-height: 32px;
+    line-height: 39px;
     color: ${props => props.color ? props.color : colors.aegean};
 `
 
-Title.propTypes = {
-    color: PropTypes.oneOf(Object.keys(colors))
-}
-
-export default Title
+export default Headline

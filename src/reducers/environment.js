@@ -4,7 +4,7 @@ const initialState = {
     currentPage: 'Setmine',
     isMobile: false,
     loaded: true,
-    playerVisible: false,
+    playerVisible: true,
     notification: '',
     showModal: false,
     showNotification: false
@@ -34,6 +34,7 @@ export default function environment(state = initialState, action) {
                 showModal: !state.showModal
             }
         case types.TOOGLE_PLAYER:
+            console.log('playerVisible', !state.playerVisible)
             return {
                 ...state,
                 playerVisible: !state.playerVisible

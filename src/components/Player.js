@@ -18,7 +18,7 @@ class Player extends Base {
     render() {
         return (
             <div className='Player flex-row-nowrap'>
-                <PlayerControl {...this.props} />
+                <PlayButton {...this.props} />
                 <div className='flex-column flex'>
                     <PlayerSeek {...this.props} />
                     <div className='flex flex-row'>

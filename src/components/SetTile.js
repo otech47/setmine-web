@@ -5,7 +5,6 @@ import { API_ROOT, S3_ROOT_FOR_IMAGES, DEFAULT_IMAGE } from '../constants/consta
 import { trackSetPlay } from '../services/mixpanelService'
 import SetShare from './SetShare'
 import { fetchSet, playSet } from '../actions/player'
-import { connect } from 'react-redux'
 
 export default class SetTile extends Base {
     static propTypes = {
@@ -94,14 +93,14 @@ export default class SetTile extends Base {
 
                         <div className='flex-row flex-fixed flex-row'>
                             <div className='play clickable flex-fixed' onClick={this.playSet}>
-                                <Icon>control-play</Icon>
+                                <Icon>play</Icon>
                                 <p>{this.props.popularity}</p>
                             </div>
 
                             <div className='vertical-divider' />
 
                             <div className='time flex-fixed flex-row'>
-                                <Icon>time</Icon>
+                                <Icon>clock-o</Icon>
                                 <p>{this.props.setLength}</p>
                             </div>
                         </div>

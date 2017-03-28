@@ -15,16 +15,6 @@ export function card(level) {
     }
 }
 
-export function colorize(props = {}) {
-    if (props.color) {
-        return colors[props.color]
-    } else if (props.small) {
-        return colors.gray
-    } else {
-        return colors.darkGray
-    }
-}
-
 export function transition(property = 'all', time, type) {
     return `
         transition: ${property} ${time} ${type};

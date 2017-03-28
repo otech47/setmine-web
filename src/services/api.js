@@ -38,7 +38,7 @@ module.exports = {
 	},
 	graph(query) {
 		return (
-			fetch(`${API_ROOT}graphql`, {
+			fetch(`${API_ROOT}graph`, {
 				method: 'post',
 				headers: {
 					'Accept': 'application/json',
@@ -47,6 +47,7 @@ module.exports = {
 				body: JSON.stringify(query)
 			})
 			.then(res => res.json())
+			.then(json => json.data)
 			.catch(err => console.error(err))
 		)
 	}

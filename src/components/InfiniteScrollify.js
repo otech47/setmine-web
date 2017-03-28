@@ -19,12 +19,12 @@ export default function(InnerComponent) {
 			// console.log('total page height', document.body.offsetHeight)
 
 			// must pass onScroll method to instance of wrapped component
-			if(this.props.onScroll) {
-				if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+			// if(this.props.onScroll) {
+				if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 400)) {
 					console.log('fetching more...');
 					this.props.onScroll();
 				}
-			}
+			// }
 		}
 		render() {
 			return <InnerComponent {...this.props} />
@@ -32,7 +32,7 @@ export default function(InnerComponent) {
 	}
 
 	InfiniteScrollify.propTypes = {
-		onScroll: PropTypes.func
+		onScroll: PropTypes.func.isRequired
 	};
 
 	return InfiniteScrollify;

@@ -18,10 +18,10 @@ export default class Recent extends Base {
     }
     constructor(props) {
         super(props)
-        this.autoBind('getRecentSets', 'onScroll')
+        this.autoBind('onScroll')
     }
     componentWillMount() {
-        this.getRecentSets(this.props.page)
+        this.context.dispatch(fetchRecentSets(this.props.page))
     }
     componentDidMount() {
         // mixpanel && mixpanel.track("Sets Page Open")
@@ -29,17 +29,14 @@ export default class Recent extends Base {
     componentWillUnmount() {
         this.context.dispatch(resetSets())
     }
-    getRecentSets(page) {
-        this.context.dispatch(fetchRecentSets(page))
-    }
     onScroll() {
-        this.getRecentSets(this.props.page)
+        this.context.dispatch(fetchRecentSets(this.props.page))
     }
     render() {
         const { sets, loaded } = this.props
         return (
             <Loader loaded={loaded}>
-                <SetContainer sets={sets} onScroll={this.onScroll}/>
+                <SetContainer sets={sets} onScroll={this.onScroll} />
                 <Spinner />
             </Loader>
         )

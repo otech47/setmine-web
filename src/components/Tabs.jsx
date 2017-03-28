@@ -59,7 +59,7 @@ export default class Tabs extends Base {
 		let mergedStyle = Object.assign({}, style, this.props.style);
 
 		return (
-			<nav className='Tabs' style={mergedStyle}>
+			<nav className='Tabs flex-row' style={mergedStyle}>
 				{this.renderTabs()}
 				{/*<Motion style={{ left: spring(this.state.left, presets.gentle) }} >
 					{

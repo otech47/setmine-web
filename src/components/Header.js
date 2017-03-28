@@ -8,6 +8,7 @@ import LoginOverlay from './LoginOverlay'
 import colors from '../constants/colors'
 import Ink from 'react-ink'
 import Button from './Button'
+// import { Button, Text, Headline } from '../ui'
 import { logout } from '../actions/auth'
 import { toggleModal } from '../actions/environment'
 
@@ -80,10 +81,10 @@ export default class Header extends Base {
                 <SearchBar />
                 {
                     !this.context.loginStatus && (
-                        <Button solid className='Header__login-button' onClick={this.login}>Login</Button>
+                        <Button onClick={this.login}>Login</Button>
                     )
                 }
-                <IconMenu icon={<Icon>ellipsis-h</Icon>}>
+                <IconMenu icon={<Icon>ellipsis-h`</Icon>}>
                     <Link to='/about'>
                         <p>About</p>
                     </Link>

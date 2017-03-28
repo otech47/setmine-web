@@ -1,4 +1,4 @@
-const API_VERSION = 10;
+const API_VERSION = 11;
 
 const API_BASE_URL = 'https://api.setmine.com';
 export const API_ROOT = `${API_BASE_URL}/v/${API_VERSION}/`;

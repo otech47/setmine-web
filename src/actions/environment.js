@@ -24,7 +24,7 @@ export function showLoader(loaded) {
 
 export function toggleModal() {
     return {
-        type: types.TOGGLE_MODAL
+        type: types.SHOW_MODAL
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Element, Events, animateScroll } from 'react-scroll'
+import styled from 'styled-components'
 import { changeCurrentPage } from '../actions/environment'
 import { search, resetSearch } from '../actions/search'
 
@@ -11,11 +12,22 @@ import EventContainer from './EventContainer'
 import TrackContainer from './TrackContainer'
 import SearchTab from './SearchTab'
 import Loader from './Loader'
+import { Page, variables as vars, colors } from '../ui'
 
 const scroll = animateScroll
 const scrollDuration = 200
 
-class SearchResults extends Component {
+const SearchPage = styled(Page)`
+    top: ${vars.headerHeight}px;
+`
+
+// const Header = styled.div`
+//     background: ${colors.cloud};
+//     color: ${colors.aegean};
+//     padding: 1rem 2rem;
+// `
+
+class Search extends Component {
     static propTypes = {
         artists: PropTypes.array.isRequired,
         sets: PropTypes.array.isRequired,
@@ -55,7 +67,7 @@ class SearchResults extends Component {
         } = this.props
 
         return (
-            <div className='SearchPage'>
+            <SearchPage>
                 <Tabs>
                     <SearchTab to='artists'>artists</SearchTab>
                     <SearchTab to='sets'>sets</SearchTab>
@@ -80,7 +92,7 @@ class SearchResults extends Component {
                         <TrackContainer tracks={tracks} />
                     </Element>
                 </div>
-            </div>
+            </SearchPage>
         )
     }
 }
@@ -95,4 +107,4 @@ function mapStateToProps({ search }) {
     }
 }
 
-export default connect(mapStateToProps)(SearchResults)
+export default connect(mapStateToProps)(Search)

@@ -9,3 +9,5 @@ const Page = styled.div`
     width: 100%;
     bottom: ${vars.playerHeight}px;
 `
+
+export default Page

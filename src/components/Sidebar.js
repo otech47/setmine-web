@@ -33,7 +33,7 @@ export default function Sidebar(props) {
                 className='Sidebar__link' 
                 activeClassName='Sidebar--active'
             >
-                <Icon size={24} fixed>calendar</Icon>
+                <Icon size={24} fixed>calendar-o</Icon>
                 <ToolTip>Events</ToolTip>
                 <Ink />
             </Link>

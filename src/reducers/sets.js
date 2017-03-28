@@ -8,6 +8,7 @@ const initialState = {
 export default function sets(state = initialState, action) {
     switch(action.type) {
         case types.RECEIVE_SETS:
+        console.log('page', action.page)
             return {
                 ...state,
                 page: action.page,
