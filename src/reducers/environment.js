@@ -4,7 +4,7 @@ const initialState = {
     currentPage: 'Setmine',
     isMobile: false,
     loaded: true,
-    playerVisible: true,
+    playerVisible: false,
     notification: '',
     showModal: false,
     showNotification: false

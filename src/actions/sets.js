@@ -1,34 +1,32 @@
 import * as types from '../constants/actionTypes'
 import api from '../services/api'
-import _ from 'lodash'
-import { showLoader } from './environment'
+// import { showLoader } from './environment'
 
 // TODO move to component specific
-export function fetchPopularSets(page) {
+export function fetchPopularSets() { 
     return (dispatch, getState) => {
+        let page = getState().sets.page
         api.get(`sets/popular?limit=24&page=${page}`)
             .then(payload => {
-                const { sets } = getState()
-                let newSets = [].concat(sets.sets, payload.sets_popular)
-                dispatch(receiveSets(newSets, page))
+                let { sets } = getState()
+                sets = [].concat(sets.sets, payload.sets_popular)
+                page++
+
+                dispatch(receiveSets(sets, page))
             })
     }
 }
 
-export function fetchRecentSets(page) {
-    console.log('fetching')
+export function fetchRecentSets() {
     return (dispatch, getState) => {
+        let page = getState().sets.page
         api.get(`sets/recent?limit=24&page=${page}`)
             .then(payload => {
                 let { sets } = getState()
-
                 sets = [].concat(sets.sets, payload.sets_recent)
-                sets = _.uniqBy(sets, 'id')
-                console.log(sets)
                 page++
 
                 dispatch(receiveSets(sets, page))
-                // dispatch(showLoader(false))
             })
     }
 }

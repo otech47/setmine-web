@@ -49,19 +49,19 @@ export function NavHome(props) {
 export function NavSets() {
     return (
         <nav className='Navbar'>
-            <Link to='/sets' activeClassName='active' onlyActiveOnIndex>
+            <Link to='/recent' activeClassName='active' onlyActiveOnIndex>
                 <p>RECENT</p>
                 <Ink />
             </Link>
-            <Link to='/sets/popular' activeClassName='active'>
+            <Link to='/popular' activeClassName='active'>
                 <p>POPULAR</p>
                 <Ink />
             </Link>
-            <Link to='/sets/festivals' activeClassName='active'>
+            <Link to='/festivals' activeClassName='active'>
                 <p>FESTIVALS</p>
                 <Ink />
             </Link>
-            <Link to='/sets/mixes' activeClassName='active'>
+            <Link to='/mixes' activeClassName='active'>
                 <p>MIXES</p>
                 <Ink />
             </Link>
