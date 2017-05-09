@@ -44,7 +44,7 @@ export default class SearchBar extends Base {
                 <input
                     className='SearchBar__input'
                     placeholder='search'
-                    ref={input => this.input = input}
+                    // ref={input => this.input = input}
                     onChange={this.handleChange}
                     onKeyPress={this.handleKeyPress}
                     value={this.state.value}

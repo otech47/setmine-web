@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes'
 const initialState = {
     currentPage: 'Setmine',
     isMobile: false,
-    loaded: true,
+    loading: false,
     playerVisible: false,
     notification: '',
     showModal: false,
@@ -25,7 +25,7 @@ export default function environment(state = initialState, action) {
         case types.SHOW_LOADER:
             return {
                 ...state,
-                loaded: action.loaded
+                loading: action.loading
             }
         
         case types.TOGGLE_MODAL:

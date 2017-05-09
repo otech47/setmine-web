@@ -1,31 +1,31 @@
-import React, {PropTypes} from 'react';
-import Moment from 'moment';
-import {S3_ROOT_FOR_IMAGES} from '../constants/constants';
-import Base from './Base';
-import Icon from './FaIcon';
+import React, {PropTypes} from 'react'
+import Moment from 'moment'
+import {S3_ROOT_FOR_IMAGES} from '../constants/constants'
+import Base from './Base'
+import Icon from './Icon'
 
 export default class EventTile extends Base {
     constructor(props) {
-        super(props);
-        this.autoBind('openEventPage', 'openTicketLink', 'openVenuePage');
+        super(props)
+        this.autoBind('openEventPage', 'openTicketLink', 'openVenuePage')
     }
     openEventPage(e) {
-        e.stopPropagation();
-        this.context.router.push('/event/' + this.props.id);
+        e.stopPropagation()
+        this.context.router.push('/event/' + this.props.id)
     }
     openVenuePage(e) {
-        e.stopPropagation();
-        this.context.router.push('/venue/' + this.props.venueId);
+        e.stopPropagation()
+        this.context.router.push('/venue/' + this.props.venueId)
     }
     openTicketLink() {
-        window.open(this.props.ticketLink);
+        window.open(this.props.ticketLink)
     }
     render() {
-        let month = Moment(this.props.startDate).format('MMM');
-        let day = Moment(this.props.startDate).format('DD');
+        let month = Moment(this.props.startDate).format('MMM')
+        let day = Moment(this.props.startDate).format('DD')
         let image = {
             backgroundImage: `url('${S3_ROOT_FOR_IMAGES+this.props.bannerImage}')`
-        };
+        }
 
         return (
             <div className='col-xs-6 col-sm-4 col-xl-3'>
@@ -53,16 +53,16 @@ export default class EventTile extends Base {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
-const {func, object, string, number} = PropTypes;
+const {func, object, string, number} = PropTypes
 
 EventTile.contextTypes = {
     push: func,
     router: object
-};
+}
 
 EventTile.propTypes = {
     id: number,
@@ -72,4 +72,4 @@ EventTile.propTypes = {
     ticketLink: string,
     venue: string,
     address: string
-};
+}

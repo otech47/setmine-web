@@ -101,10 +101,10 @@ class App extends Base {
     render() {
         // let appState = this.state.appState
         // let snackbar = appState.get('snackbar')
-        const { currentPage, loaded, playerVisible, showModal, dispatch, navbar, main, children } = this.props
+        const { currentPage, loading, playerVisible, showModal, dispatch, navbar, main, children } = this.props
 
         return (
-            <Loader loaded={loaded}>
+            <div>
                 { 
                     // process.env.NODE_ENV !== 'production' && <DevTools />
                 }
@@ -119,7 +119,7 @@ class App extends Base {
                 {/*<Notifications snackbar={snackbar} playerHidden={playerHidden} />*/}
                 <LoginOverlay open={showModal} />
                 { playerVisible && <Player /> }
-            </Loader>
+            </div>
         )
     }
 }

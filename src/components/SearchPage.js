@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Element, Events, animateScroll } from 'react-scroll'
-import { changeCurrentPage } from '../actions/environment'
 import { search, resetSearch } from '../actions/search'
 
 import Tabs from './Tabs'
@@ -27,23 +26,22 @@ class SearchPage extends Component {
     componentWillMount() {
         const { dispatch } = this.context
         const query = this.props.location.query.q
-        dispatch(changeCurrentPage(`Results for ${query}`))
         dispatch(search(query))
     }
     componentDidMount() {
         Events.scrollEvent.register('begin', (to, element) => {
             console.log(to, element)
-            console.log('begin')
+            // console.log('begin')
         })
 
         Events.scrollEvent.register('end', () => {
-            console.log('end')
+            // console.log('end')
         })
 
         scroll.scrollToTop()
     }
     componentWillUnmount() {
-        this.context.dispatch(resetSearch())
+        // this.context.dispatch(resetSearch())
     }
     render() {
         const {
@@ -52,13 +50,13 @@ class SearchPage extends Component {
             events,
             tracks,
             navbar,
-            loaded
+            loading
         } = this.props
 
         return (
-            <Loader loaded={loaded}>
-                <div className='SearchPage'>
-                    { navbar }
+            <div className='SearchPage'>
+                { navbar }
+                <Loader loading={loading}>
                     <div className='SearchPage__results'>
                         <Element name='artists'>
                             <h6 className='SearchPage__header'>ARTISTS</h6>
@@ -77,8 +75,8 @@ class SearchPage extends Component {
                             <TrackContainer tracks={tracks} />
                         </Element>
                     </div>
-                </div>
-            </Loader>
+                </Loader>
+            </div>
         )
     }
 }
@@ -87,7 +85,7 @@ function mapStateToProps(state) {
     const { search, environment } = state
     const { sets, events, tracks, artists } = search
     return {
-        loaded: environment.loaded,
+        loading: environment.loading,
         sets,
         events,
         artists,
