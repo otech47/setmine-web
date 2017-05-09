@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Element, Events, animateScroll } from 'react-scroll'
-import styled from 'styled-components'
 import { changeCurrentPage } from '../actions/environment'
 import { search, resetSearch } from '../actions/search'
 
@@ -10,24 +9,12 @@ import ArtistTileContainer from './ArtistTileContainer'
 import SetContainer from './SetContainer'
 import EventContainer from './EventContainer'
 import TrackContainer from './TrackContainer'
-import SearchTab from './SearchTab'
 import Loader from './Loader'
-import { Page, variables as vars, colors } from '../ui'
 
 const scroll = animateScroll
 const scrollDuration = 200
 
-const SearchPage = styled(Page)`
-    top: ${vars.headerHeight}px;
-`
-
-// const Header = styled.div`
-//     background: ${colors.cloud};
-//     color: ${colors.aegean};
-//     padding: 1rem 2rem;
-// `
-
-class Search extends Component {
+class SearchPage extends Component {
     static propTypes = {
         artists: PropTypes.array.isRequired,
         sets: PropTypes.array.isRequired,
@@ -63,43 +50,44 @@ class Search extends Component {
             artists,
             sets,
             events,
-            tracks
+            tracks,
+            navbar,
+            loaded
         } = this.props
 
         return (
-            <SearchPage>
-                <Tabs>
-                    <SearchTab to='artists'>artists</SearchTab>
-                    <SearchTab to='sets'>sets</SearchTab>
-                    <SearchTab to='events'>events</SearchTab>
-                    <SearchTab to='tracks'>tracks</SearchTab>
-                </Tabs>
-                <div className='SearchPage__results'>
-                    <Element name='artists'>
-                        <h6 className='SearchPage__header'>ARTISTS</h6>
-                        <ArtistTileContainer artists={artists} />
-                    </Element>
-                    <Element name='sets'>
-                        <h6 className='SearchPage__header'>SETS</h6>
-                        <SetContainer sets={sets} />
-                    </Element>
-                    <Element name='events'>
-                        <h6 className='SearchPage__header'>EVENTS</h6>
-                        <EventContainer events={events} />
-                    </Element>
-                    <Element name='tracks'>
-                        <h6 className='SearchPage__header'>TRACKS</h6>
-                        <TrackContainer tracks={tracks} />
-                    </Element>
+            <Loader loaded={loaded}>
+                <div className='SearchPage'>
+                    { navbar }
+                    <div className='SearchPage__results'>
+                        <Element name='artists'>
+                            <h6 className='SearchPage__header'>ARTISTS</h6>
+                            <ArtistTileContainer artists={artists} />
+                        </Element>
+                        <Element name='sets'>
+                            <h6 className='SearchPage__header'>SETS</h6>
+                            <SetContainer sets={sets} />
+                        </Element>
+                        <Element name='events'>
+                            <h6 className='SearchPage__header'>EVENTS</h6>
+                            <EventContainer events={events} />
+                        </Element>
+                        <Element name='tracks'>
+                            <h6 className='SearchPage__header'>TRACKS</h6>
+                            <TrackContainer tracks={tracks} />
+                        </Element>
+                    </div>
                 </div>
-            </SearchPage>
+            </Loader>
         )
     }
 }
 
-function mapStateToProps({ search }) {
+function mapStateToProps(state) {
+    const { search, environment } = state
     const { sets, events, tracks, artists } = search
     return {
+        loaded: environment.loaded,
         sets,
         events,
         artists,
@@ -107,4 +95,4 @@ function mapStateToProps({ search }) {
     }
 }
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(SearchPage)

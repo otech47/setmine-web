@@ -2,19 +2,20 @@ import React, { PropTypes } from 'react'
 import Link from 'react-router/lib/Link'
 import IndexLink from 'react-router/lib/IndexLink'
 import Ink from 'react-ink'
+import SearchTab from './SearchTab'
 import DisabledTab from './DisabledTab'
 
 export function NavHome(props) {
     const loggedIn = false
     return (
         <nav className='Navbar'>
-            <IndexLink to='/home' activeClassName='active'>
+            <IndexLink to='/home' className='Tab' activeClassName='active'>
                 <p>STREAM</p>
                 <Ink />
             </IndexLink>
             {
                 loggedIn ? (
-                    <Link to='/home/favorites' activeClassName='active'>
+                    <Link to='/home/favorites' className='Tab' activeClassName='active'>
                         <p>FAVORITES</p>
                         <Ink />
                     </Link>
@@ -24,7 +25,7 @@ export function NavHome(props) {
             }
             {
                 loggedIn ? (
-                    <Link to='/home/sets' activeClassName='active'>
+                    <Link to='/home/sets' className='Tab' activeClassName='active'>
                         <p>SETS</p>
                         <Ink />
                     </Link>
@@ -34,7 +35,7 @@ export function NavHome(props) {
             }
             {
                 loggedIn ? (
-                    <Link to='/home/events' activeClassName='active'>
+                    <Link to='/home/events' className='Tab' activeClassName='active'>
                         <p>EVENTS</p>
                         <Ink />
                     </Link>
@@ -49,19 +50,19 @@ export function NavHome(props) {
 export function NavSets() {
     return (
         <nav className='Navbar'>
-            <Link to='/recent' activeClassName='active' onlyActiveOnIndex>
+            <Link to='/recent' className='Tab' activeClassName='active' onlyActiveOnIndex>
                 <p>RECENT</p>
                 <Ink />
             </Link>
-            <Link to='/popular' activeClassName='active'>
+            <Link to='/popular' className='Tab' activeClassName='active'>
                 <p>POPULAR</p>
                 <Ink />
             </Link>
-            <Link to='/festivals' activeClassName='active'>
+            <Link to='/festivals' className='Tab' activeClassName='active'>
                 <p>FESTIVALS</p>
                 <Ink />
             </Link>
-            <Link to='/mixes' activeClassName='active'>
+            <Link to='/mixes' className='Tab' activeClassName='active'>
                 <p>MIXES</p>
                 <Ink />
             </Link>
@@ -72,18 +73,29 @@ export function NavSets() {
 export function NavEvents() {
     return (
         <nav className='Navbar'>
-            <IndexLink to='/events' activeClassName='active'>
+            <IndexLink to='/events' className='Tab' activeClassName='active'>
                 <p>UPCOMING</p>
                 <Ink />
             </IndexLink>
-            <Link to='/events/closest' activeClassName='active'>
+            <Link to='/events/closest' className='Tab' activeClassName='active'>
                 <p>NEAR YOU</p>
                 <Ink />
             </Link>
-            <Link to='/events/featured' activeClassName='active'>
+            <Link to='/events/featured' className='Tab' activeClassName='active'>
                 <p>FEATURED</p>
                 <Ink />
             </Link>
+        </nav>
+    )
+}
+
+export function NavSearch() {
+    return (
+        <nav className='Navbar'>
+            <SearchTab to='artists'>artists</SearchTab>
+            <SearchTab to='sets'>sets</SearchTab>
+            <SearchTab to='events'>events</SearchTab>
+            <SearchTab to='tracks'>tracks</SearchTab>
         </nav>
     )
 }

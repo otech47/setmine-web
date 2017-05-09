@@ -8,21 +8,49 @@
     top: @headerHeight;
     padding-left: @sidebarWidth;
     z-index: 98;
-    a {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        cursor: pointer;
-        position: relative;
-        &:hover {
-            background: @light-gray*0.95;
-            .transition(background);
-        }
-        &.active {
-            background: @light-gray*0.9;
-            border-bottom: solid 3px @blue;
-            .transition(border);
-        }
+}
+
+.tab-base {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    cursor: pointer;
+    position: relative;   
+}
+
+@tabHover: {
+    background: @cloud*0.95;
+    .transition(background);
+};
+
+@tabActive: {
+    background: @cloud*0.9;
+    border-bottom: solid 3px @blue;
+    .transition(border);
+};
+
+.SearchTab {
+    &:extend(.tab-base);    
+    background: @cloud;
+    color: @aegean;
+    padding: 1rem 2rem;
+    .flex();
+    &:hover {
+        @tabHover();
+    }
+    &.active {
+        @tabActive();
+    }
+}
+
+.Tab {
+    &:extend(.tab-base);
+    &:hover {
+        @tabHover();
+    }
+    &.active {
+        @tabActive();
     }
     p {
         margin: 3rem;
@@ -30,13 +58,13 @@
 }
 
 .Tab--active {
-    background-color: @light-gray * 0.9;
+    background-color: @cloud * 0.9;
     cursor: pointer;
     border-bottom: solid 3px @blue;
     .transition();
 }
 
 .Tab--disabled, .disabled-tab {
-    &:extend(.tab-base);
+    // &:extend(.tab-base);
     .colors(#cfd4d6, @gray);
 }

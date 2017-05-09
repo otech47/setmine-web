@@ -11,7 +11,7 @@ import LandingPage from './components/LandingPage'
 import Events from './components/Events'
 import Home from './components/Home'
 import Sets from './components/Sets'
-import SearchResults from './components/SearchResults'
+import SearchPage from './components/SearchPage'
 
 import FeaturedEvents from './components/FeaturedEvents'
 import UpcomingEvents from './components/UpcomingEvents'
@@ -43,7 +43,7 @@ import Setmusic from './components/Setmusic'
 import SetstoryLandingPage from './components/SetstoryLandingPage'
 import About from './components/About'
 
-import { NavHome, NavSets, NavEvents } from './components/Navbar'
+import { NavHome, NavSets, NavEvents, NavSearch } from './components/Navbar'
 
 function requireAuth(nextState, replace) {
     // TODO check if logged in
@@ -79,7 +79,7 @@ export default (
             <Route path='featured-events' component={FeaturedEvents} />
         </Route>
         <Route path='artists' components={{ main: Artists }} />
-        <Route path='search' components={{ main: SearchResults }} />
+        <Route path='search' components={{ main: SearchPage, navbar: NavSearch }} />
         <Route components={{ main: ArtistDetail }}>
             <IndexRedirect to='artists/:artist' />
             <Route path='artists/:artist' component={SetContainer} />
@@ -146,7 +146,7 @@ export default (
 //         </Route>
 
 //         <Route path='artists' component={Artists} />
-//         <Route path='search?query' component={SearchResults} />
+//         <Route path='search?query' component={SearchPage} />
 
 //         <Route path='artist/:artist' component={ArtistDetail}>
 //             <IndexRoute component={SetContainer} />

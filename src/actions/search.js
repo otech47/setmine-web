@@ -3,8 +3,8 @@ import api from '../services/api'
 import { receiveSets } from './sets'
 import { showLoader } from './environment'
 
-// search :: String -> Object
 export function search(query) {
+    console.log(query)
     return (dispatch, getState) => {
         dispatch(showLoader(true))
         api.get(`search/${query}`)

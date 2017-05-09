@@ -20,7 +20,8 @@ const ArtistTileContainer = ({ artists }) => (
 
 ArtistTileContainer.propTypes = {
 	artists: PropTypes.array.isRequired,
-	onScroll: PropTypes.func
+	loadMore: PropTypes.func
 }
 
-export default InfiniteScrollify(ArtistTileContainer)
+// export default InfiniteScrollify(ArtistTileContainer)
+export default ArtistTileContainer
