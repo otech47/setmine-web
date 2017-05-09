@@ -6,7 +6,7 @@ import { S3_ROOT } from '../constants/constants'
 import api from '../services/api'
 import { togglePlayer } from './environment'
 
-// changeTrack :: Object -> Action
+// changeTrack :: Object => Action
 export function changeTrack(track) {
     return (dispatch, getState) => {
         const { player: { sound } } = getState()
@@ -21,7 +21,7 @@ export function changeTrack(track) {
     }
 }
 
-// destroyPlayingSet :: Object -> SM2
+// destroyPlayingSet :: Object => SM2
 function destroyPlayingSet(sound) {
     if(sound != null) {
         console.log('destroying currently playing set')
@@ -29,7 +29,7 @@ function destroyPlayingSet(sound) {
     }
 }
 
-// fetchSet :: String -> Object
+// fetchSet :: String => Object
 function fetchSet(id) {
     return dispatch => {
         api.graph({
@@ -64,7 +64,7 @@ function fetchSet(id) {
     }
 }
 
-// generateSound :: None -> Promise
+// generateSound :: None => Promise
 export function generateSound() {
     return (dispatch, getState) => {
         let { player: { currentSet, sound } } = getState()
@@ -93,7 +93,7 @@ export function generateSound() {
     }
 }
 
-// playSet :: String -> Object, String
+// playSet :: String => Object, String
 export function playSet(id) {
     return (dispatch, getState) => {
         const { 
@@ -110,6 +110,7 @@ export function playSet(id) {
     }
 }
 
+// Object => Object
 function receiveSet(set) {
     const tracks = set.tracks
     const currentSet = {

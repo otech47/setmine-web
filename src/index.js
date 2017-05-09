@@ -14,11 +14,11 @@ const history = isProduction ? browserHistory : hashHistory
 
 // styling
 import './styles/index.less'
-import { colors } from './ui'
-import AvenirLight from './fonts/Avenir-Light.ttf'
-import AvenirRoman from './fonts/Avenir-Roman.ttf'
-import AvenirMedium from './fonts/Avenir-Medium.ttf'
-import AvenirHeavy from './fonts/Avenir-Heavy.ttf'
+// import { colors } from './ui'
+// import AvenirLight from './fonts/Avenir-Light.ttf'
+// import AvenirRoman from './fonts/Avenir-Roman.ttf'
+// import AvenirMedium from './fonts/Avenir-Medium.ttf'
+// import AvenirHeavy from './fonts/Avenir-Heavy.ttf'
 
 // injectGlobal`
 //     @font-face {

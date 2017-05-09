@@ -6,6 +6,7 @@ import SetContainer from './SetContainer'
 import Spinner from './Spinner'
 
 import { fetchRecentSets, resetSets } from '../actions/sets'
+import { showLoader } from '../actions/environment'
 
 export default class Recent extends Base {
     static propTypes = {
@@ -21,6 +22,7 @@ export default class Recent extends Base {
         this.autoBind('onScroll')
     }
     componentWillMount() {
+        // this.context.dispatch(showLoader(true))
         this.context.dispatch(fetchRecentSets(this.props.page))
     }
     componentDidMount() {

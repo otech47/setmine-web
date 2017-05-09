@@ -1,39 +1,48 @@
-import React, {PropTypes} from 'react';
-import Base from './Base';
+import React, {PropTypes} from 'react'
+import Base from './Base'
 
 export default function(InnerComponent) {
 	class InfiniteScrollify extends Base {
+		static propTypes = {
+			onScroll: PropTypes.func.isRequired
+		}
 		constructor(props) {
-			super(props);
-			this.autoBind('onScroll');
+			super(props)
+			this.autoBind(
+				'onScroll',
+				'attachScrollListener',
+				'detachScrollListener'
+			)
 		}
 		componentDidMount() {
-			window.addEventListener('scroll', this.onScroll, false);
+			this.attachScrollListener()
 		}
 		componentWillUnmount() {
-			window.removeEventListener('scroll', this.onScroll, false);
+			this.detachScrollListener()
+		}
+		componentDidUpdate() {
+			this.attachScrollListener()
+		}
+		attachScrollListener() {
+			window.addEventListener('scroll', this.onScroll, true)
+		}
+		detachScrollListener() {
+			window.removeEventListener('scroll', this.onScroll, true)
 		}
 		onScroll() {
 			// console.log('distance scrolled', window.scrollY)
 			// console.log('window inner height', window.innerHeight)
 			// console.log('total page height', document.body.offsetHeight)
 
-			// must pass onScroll method to instance of wrapped component
-			// if(this.props.onScroll) {
-				if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 400)) {
-					console.log('fetching more...');
-					this.props.onScroll();
-				}
-			// }
+			if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200)) {
+				this.detachScrollListener()
+				this.props.onScroll()
+			}
 		}
 		render() {
 			return <InnerComponent {...this.props} />
 		}
 	}
 
-	InfiniteScrollify.propTypes = {
-		onScroll: PropTypes.func.isRequired
-	};
-
-	return InfiniteScrollify;
+	return InfiniteScrollify
 }

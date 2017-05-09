@@ -6,6 +6,7 @@ import SetContainer from './SetContainer'
 import Spinner from './Spinner'
 
 import { fetchPopularSets, resetSets } from '../actions/sets'
+import { showLoader } from '../actions/environment'
 
 export default class Popular extends Base {
     static contextTypes = {
@@ -16,6 +17,7 @@ export default class Popular extends Base {
         this.autoBind('getPopularSets', 'onScroll')
     }
     componentWillMount() {
+        this.context.dispatch(showLoader(true))
         this.getPopularSets(this.props.page)
     }
     componentDidMount() {
