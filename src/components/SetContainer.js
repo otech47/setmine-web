@@ -62,4 +62,4 @@ class SetContainer extends Component {
     }
 }
 
-export default InfiniteScrollify(SetContainer)
+export default SetContainer

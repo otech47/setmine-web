@@ -3,7 +3,7 @@ import Ink from 'react-ink'
 import classNames from 'classnames'
 import Icon from './Icon'
 
-export default function Button({ onClick, className, children, outline, icon, solid }, { router, push, dispatch }) {
+export default function Button({ onClick, className, children, outline, icon, solid }, { router, dispatch }) {
     const buttonClass = classNames('Button', className, {
         solid,
         outline
@@ -29,6 +29,5 @@ Button.propTypes = {
 
 Button.contextTypes = {
     router: PropTypes.object,
-    push: PropTypes.func,
     dispatch: PropTypes.func
 }

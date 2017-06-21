@@ -1,38 +1,42 @@
-import React from 'react';
-import Loader from 'react-loader';
-import api from '../services/api';
+import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+import FestivalContainer from './FestivalContainer'
+import Base from './Base'
+import Spinner from './Spinner'
+import { fetchFestivals, resetEvents } from '../actions/events'
 
-import FestivalContainer from './FestivalContainer';
-import Base from './Base';
-
-export default class Festivals extends Base {
+class Festivals extends Base {
+	static contextTypes = {
+		dispatch: PropTypes.func
+	}
 	constructor(props) {
 		super(props)
-		this.autoBind('getFestivals')
-		this.state = {
-			loaded: false,
-			festivals: []
-		}
+		this.autoBind('fetchFestivals')
 	}
 	componentWillMount() {
-		this.getFestivals();
+		this.fetchFestivals()
 	}
 	componentDidMount() {
-		mixpanel && mixpanel.track("Festivals Page Open")
+		// mixpanel && mixpanel.track("Festivals Page Open")
 	}
-	getFestivals() {
-		api.get('events/festivals').then(payload => {
-			this.setState({
-				loaded: true,
-				festivals: payload.events_festivals
-			})
-		})
+	componentWillUnmount() {
+		this.context.dispatch(resetEvents())
+	}
+	fetchFestivals() {
+		this.context.dispatch(fetchFestivals())
 	}
 	render() {
 		return (
-			<Loader loaded={this.state.loaded}>
-				<FestivalContainer festivals={this.state.festivals} />
-			</Loader>
+			<div>
+				<FestivalContainer events={this.props.events} loadMore={this.fetchFestivals} />
+				<Spinner />
+			</div>
 		)
 	}
 }
+
+function mapStateToProps({ events }) {
+    return events
+}
+
+export default connect(mapStateToProps)(Festivals)

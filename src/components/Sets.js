@@ -18,7 +18,6 @@ class Sets extends Component {
             <div className='view'>
                 {
                     React.cloneElement(this.props.children, {
-                        ...sets,
                         ...environment
                     })
                 }
@@ -27,11 +26,8 @@ class Sets extends Component {
     }
 }
 
-function mapStateToProps({ sets, environment }) {
-    return {
-        sets,
-        environment
-    }
+function mapStateToProps({ environment }) {
+    return environment
 }
 
 export default connect(mapStateToProps)(Sets)

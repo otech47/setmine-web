@@ -4,7 +4,7 @@ import Icon from './Icon'
 import { API_ROOT, S3_ROOT_FOR_IMAGES, DEFAULT_IMAGE } from '../constants/constants'
 import { trackSetPlay } from '../services/mixpanelService'
 import SetShare from './SetShare'
-import { fetchSet, playSet } from '../actions/player'
+import { playSet } from '../actions/player'
 
 export default class SetTile extends Base {
     static propTypes = {
@@ -38,7 +38,7 @@ export default class SetTile extends Base {
     }
     openArtistPage(artist) {
         const route = artist.split(' ').join('_')
-        this.context.router.push(`/artist/${route}`)
+        this.context.router.push(`/artists/${route}`)
 
         mixpanel.track("Artist Clicked", {
             "Artist": artist
@@ -52,7 +52,6 @@ export default class SetTile extends Base {
         }
     }
     playSet() {
-        // TODO test this
         this.context.dispatch(playSet(this.props.id))
     }
     renderArtists() {
@@ -63,7 +62,6 @@ export default class SetTile extends Base {
             return <span className='artist' key={index} onClick={() => this.openArtistPage(artist.artist)}>{`${artist.artist}, `}</span>
         })
     }
-    renderNewTile() {}
     render() {
         const artistImage = this.props.artists[0].icon_image.imageURL_small
         const eventImage = {

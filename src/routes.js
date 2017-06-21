@@ -78,8 +78,8 @@ export default (
             <Route path='closest-events' component={ClosestEvents} />
             <Route path='featured-events' component={FeaturedEvents} />
         </Route>
-        <Route path='artists' components={{ main: Artists }} />
         <Route path='search' components={{ main: SearchPage, navbar: NavSearch }} />
+        <Route path='artists' components={{ main: Artists }} />
         <Route components={{ main: ArtistDetail }}>
             <IndexRedirect to='artists/:artist' />
             <Route path='artists/:artist' component={SetContainer} />

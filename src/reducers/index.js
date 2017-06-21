@@ -6,6 +6,7 @@ import player from './player'
 import sets from './sets'
 import events from './events'
 import search from './search'
+import artists from './artists'
 
 const rootReducer = combineReducers({
     auth,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     player,
     routing,
     sets,
-    search
+    search,
+    artists
 })
 
 export default rootReducer

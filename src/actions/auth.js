@@ -38,6 +38,12 @@ function statusChangeCallback(response) {
     }
 }
 
+export function favoriteSet(id) {
+    return (dispatch, getState) => {
+        
+    }
+}
+
 // starts login process
 export function initAuth() {
     return dispatch => {

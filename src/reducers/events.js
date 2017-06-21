@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes'
 
 const initialState = {
-    events: []
+    events: [],
+    page: 1
 }
 
 export default function reducer(state = initialState, action) {
@@ -11,6 +12,8 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 events: action.events
             }
+        case types.RESET_EVENTS:
+            return initialState
         default:
             return state
     }

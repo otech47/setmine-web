@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import Link from 'react-router/lib/Link'
 import _ from 'lodash'
 import api from '../services/api'
 import Base from './Base'
@@ -28,7 +28,7 @@ export default class SearchBar extends Base {
         const key = e.keyCode || e.which
 
         if (value.length !== 0 && key === 13) {
-            console.log('searching...')
+            // console.log('searching...')
             this.context.router.push({
                 pathname: '/search',
                 query: {

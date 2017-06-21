@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Base from './Base'
 import api from '../services/api'
 import SetContainer from './SetContainer'
+import InfiniteScrollify from './InfiniteScrollify'
 import Spinner from './Spinner'
-
 import { fetchPopularSets, resetSets } from '../actions/sets'
 
-export default class Popular extends Base {
+const Sets = InfiniteScrollify(SetContainer)
+
+class Popular extends Base {
     static contextTypes = {
         dispatch: PropTypes.func
     }
@@ -30,9 +33,15 @@ export default class Popular extends Base {
     render() {
         return (
             <div>
-                <SetContainer sets={this.props.sets} loadMore={this.loadMore} />
+                <Sets sets={this.props.sets} loadMore={this.loadMore} />
                 <Spinner />
             </div>
         )
     }
 }
+
+function mapStateToProps({ sets }) {
+    return sets
+}
+
+export default connect(mapStateToProps)(Popular)

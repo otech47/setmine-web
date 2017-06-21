@@ -33,8 +33,7 @@ export default function environment(state = initialState, action) {
                 ...state,
                 showModal: !state.showModal
             }
-        case types.TOOGLE_PLAYER:
-            console.log('playerVisible', !state.playerVisible)
+        case types.TOGGLE_PLAYER:
             return {
                 ...state,
                 playerVisible: !state.playerVisible

@@ -154,22 +154,25 @@ export function togglePlay() {
 // TODO test
 export function updateCurrentTrack() {
     return (dispatch, getState) => {
-        const { player: { sound, tracks } } = getState()
+        const { player: { sound, tracks, currentTrack } } = getState()
         const currentPosition = sound.position
 
-        let currentTrack = tracks.filter(track => {
+        let newTrack = tracks.filter(track => {
             const startTime = MMSSToMilliseconds(track.starttime)
             if(startTime <= currentPosition) {
                 return track.trackname
             }
         })
 
-        currentTrack = _.last(currentTrack).trackname
+        newTrack = _.last(newTrack).trackname
 
-        dispatch({
-            type: types.UPDATE_CURRENT_TRACK,
-            currentTrack
-        })
+        if (newTrack != currentTrack) {
+            console.log(newTrack, currentTrack)            
+            dispatch({
+                type: types.UPDATE_CURRENT_TRACK,
+                currentTrack: newTrack
+            })
+        }
     }
 }
 

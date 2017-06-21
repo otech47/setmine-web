@@ -1,13 +1,11 @@
-import React, { PropTypes } from 'react'
-import Loader from 'react-loader'
-import api from '../services/api'
-import { DEFAULT_IMAGE } from '../constants/constants'
-
-import Base from './Base'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import Loader from './Loader'
 import DetailHeader from './DetailHeader'
 import ShuffleButton from './ShuffleButton'
 import Tabs from './Tabs'
 import Tab from './Tab'
+import { fetchArtist } from '../actions/artists'
 
 import { changeCurrentPage } from '../actions/environment'
 
@@ -16,66 +14,41 @@ const tabStyle = {
 	top: 0
 }
 
-export default class ArtistDetail extends Base {
-	constructor(props) {
-		super(props)
-		this.autoBind('getArtist')
-		this.state = {
-			loaded: false,
-			sets: [],
-			events: [],
-			artistImage: DEFAULT_IMAGE,
-			setCount: 0,
-			eventCount: 0
-		}
+class ArtistDetail extends Component {
+	static contextTypes = {
+		dispatch: PropTypes.func
 	}
 	componentWillMount() {
-		this.getArtist()
-		this.props.dispatch(changeCurrentPage('Artists'))
-	}
-	getArtist() {
-		const artist = this.props.params.artist
-		const query = artist.split('_').join('%20')
+		const query = this.props.params.artist.split('_').join('%20')
 
-		api.get(`artists/search/${query}`).then(payload => {
-			const a = payload.artists_search
-
-			this.setState({
-				artist: a.artist,
-				sets: a.sets,
-				events: a.upcoming_events,
-				artistImage: a.icon_image.imageURL,
-				setCount: a.set_count,
-				eventCount: a.event_count
-			})
-		}).then(() => {
-			this.setState({ loaded: true })
-		})
+		this.context.dispatch(changeCurrentPage(this.props.params.artist))
+		this.context.dispatch(fetchArtist(query))
 	}
 	render() {
-		const setText = this.state.setCount != 1 ? 'sets' : 'set'
-		const eventText = this.state.eventCount != 1 ? 'events' : 'event'
-		const artistInfo = `${this.state.setCount} ${setText} | ${this.state.eventCount} ${eventText}`
-		const setIds = this.state.sets.map(set => {
+		const setText = this.props.setCount != 1 ? 'sets' : 'set'
+		const eventText = this.props.eventCount != 1 ? 'events' : 'event'
+		const artistInfo = `${this.props.setCount} ${setText} | ${this.props.eventCount} ${eventText}`
+
+		const setIds = this.props.sets.map(set => {
 			return set.id
 		})
 
 		return (
-			<Loader loaded={this.state.loaded}>
+			<Loader loading={this.props.loading}>
 				<div className='detail-view'>
-					<DetailHeader image={this.state.artistImage}>
-						<h3>{this.state.artist}</h3>
+					<DetailHeader image={this.props.image}>
+						<h3>{this.props.artist}</h3>
 						<h5>{artistInfo}</h5>
-						<ShuffleButton setIds={setIds} dispatch={this.props.dispatch} />
+						<ShuffleButton setIds={setIds} />
 					</DetailHeader>
-					<Tabs type='detail' style={tabStyle}>
+					{/*<Tabs type='detail' style={tabStyle}>
 						<Tab to={`/artist/${this.props.params.artist}`} index>SETS</Tab>
 						<Tab to={`/artist/${this.props.params.artist}/events`}>EVENTS</Tab>
-					</Tabs>
+					</Tabs>*/}
 					{
 						React.cloneElement(this.props.children, {
-							sets: this.state.sets,
-							events: this.state.events
+							sets: this.props.sets,
+							events: this.props.events
 						})
 					}
 				</div>
@@ -83,3 +56,12 @@ export default class ArtistDetail extends Base {
 		)
 	}
 }
+
+function mapStateToProps({ artists, environment }) {
+	return {
+		loading: environment.loading,
+		...artists.artist
+	}
+}
+
+export default connect(mapStateToProps)(ArtistDetail)

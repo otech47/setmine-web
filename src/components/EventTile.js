@@ -1,8 +1,9 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Moment from 'moment'
-import {S3_ROOT_FOR_IMAGES} from '../constants/constants'
+import { S3_ROOT_FOR_IMAGES } from '../constants/constants'
 import Base from './Base'
 import Icon from './Icon'
+import Button from './Button'
 
 export default class EventTile extends Base {
     constructor(props) {
@@ -21,15 +22,15 @@ export default class EventTile extends Base {
         window.open(this.props.ticketLink)
     }
     render() {
-        let month = Moment(this.props.startDate).format('MMM')
-        let day = Moment(this.props.startDate).format('DD')
-        let image = {
+        const month = Moment(this.props.startDate).format('MMM')
+        const day = Moment(this.props.startDate).format('DD')
+        const image = {
             backgroundImage: `url('${S3_ROOT_FOR_IMAGES+this.props.bannerImage}')`
         }
 
         return (
             <div className='col-xs-6 col-sm-4 col-xl-3'>
-                <div className='event-tile flex-column' style={image}>
+                <div className='EventTile flex-column' style={image}>
                     <div className='body flex-column flex'>
                         <div className='event-info flex-column flex'>
                             <div className='event'>
@@ -37,7 +38,7 @@ export default class EventTile extends Base {
                                     <h4>{day}</h4>
                                     <p className='caption'>{month}</p>
                                 </div>
-                                <h5 onClick={this.openEventPage} title={this.props.event}>{this.props.event}</h5>
+                                <h4 onClick={this.openEventPage} title={this.props.event}>{this.props.event}</h4>
                             </div>
                             <div className='venue-container'>
                                 <Icon>map-marker</Icon>
@@ -49,7 +50,7 @@ export default class EventTile extends Base {
                                 </p>
                             </div>
                         </div>
-                        <button onClick={this.openTicketLink}>TICKETS</button>
+                        <Button onClick={this.openTicketLink}>TICKETS</Button>
                     </div>
                 </div>
             </div>

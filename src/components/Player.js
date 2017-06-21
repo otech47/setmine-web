@@ -33,9 +33,7 @@ class Player extends Base {
 }
 
 function mapStateToProps({ player }) {
-    return {
-        ...player
-    }
+    return player
 }
 
 function mapDispatchToProps(dispatch) {

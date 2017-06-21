@@ -9,5 +9,5 @@ export default function ToolTip ({ children, direction }) {
 }
 
 ToolTip.propTypes = {
-	direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom'])
+	direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']).isRequired
 }

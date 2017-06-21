@@ -100,6 +100,13 @@ export function NavSearch() {
     )
 }
 
+export function NavArtists() {
+    return (
+        <nav className='Navbar'>
+        </nav>
+    )
+}
+
 NavHome.propTypes = {
     loggedIn: PropTypes.bool.isRequired
 }

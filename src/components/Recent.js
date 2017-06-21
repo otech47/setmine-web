@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Base from './Base'
 import api from '../services/api'
 import SetContainer from './SetContainer'
+import InfiniteScrollify from './InfiniteScrollify'
 import Spinner from './Spinner'
 
 import { fetchRecentSets, resetSets } from '../actions/sets'
 
-export default class Recent extends Base {
+const Sets = InfiniteScrollify(SetContainer)
+
+class Recent extends Base {
     static propTypes = {
         sets: PropTypes.array.isRequired
     }
@@ -15,10 +19,10 @@ export default class Recent extends Base {
     }
     constructor(props) {
         super(props)
-        this.autoBind('loadMore')
+        this.autoBind('fetchSets')
     }
     componentWillMount() {
-        this.context.dispatch(fetchRecentSets())
+        this.fetchSets()
     }
     componentDidMount() {
         // mixpanel && mixpanel.track("Sets Page Open")
@@ -26,15 +30,21 @@ export default class Recent extends Base {
     componentWillUnmount() {
         this.context.dispatch(resetSets())
     }
-    loadMore() {
-        this.context.dispatch(fetchRecentSets(this.props.page))
+    fetchSets() {
+        this.context.dispatch(fetchRecentSets())
     }
     render() {
         return (
             <div>
-                <SetContainer sets={this.props.sets} loadMore={this.loadMore} />
+                <Sets sets={this.props.sets} loadMore={this.fetchSets} />
                 <Spinner />
             </div>
         )
     }
 }
+
+function mapStateToProps({ sets }) {
+    return sets
+}
+
+export default connect(mapStateToProps)(Recent)

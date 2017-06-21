@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import ArtistTile from './ArtistTile'
-import InfiniteScrollify from './InfiniteScrollify'
 
 const ArtistTileContainer = ({ artists }) => (
 	<div className='artist-tile-container'>
@@ -23,5 +22,4 @@ ArtistTileContainer.propTypes = {
 	loadMore: PropTypes.func
 }
 
-// export default InfiniteScrollify(ArtistTileContainer)
 export default ArtistTileContainer

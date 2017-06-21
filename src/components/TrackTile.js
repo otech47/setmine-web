@@ -3,8 +3,8 @@ import Base from './Base'
 import Icon from './Icon'
 
 import { S3_ROOT_FOR_IMAGES } from '../constants/constants'
-// import { playSet, updatePlayCount } from '../services/playerService'
 import { trackTrackPlay } from '../services/mixpanelService'
+import { playSet } from '../actions/player'
 
 export default class TrackTile extends Base {
     static propTypes = {
@@ -23,18 +23,17 @@ export default class TrackTile extends Base {
         artistImage: PropTypes.string
     }
     static contextTypes = {
-        push: PropTypes.func,
-        user: PropTypes.object,
+        dispatch: PropTypes.func,
         router: PropTypes.object
     }
     constructor(props) {
         super(props)
-        this.autoBind('openArtistPage', 'openFestivalPage', 'playSet', 'trackPlay', 'renderArtists')
+        this.autoBind('openArtistPage', 'openFestivalPage', 'playSet', 'renderArtists')
     }
     openArtistPage(e, artist) {
         e.stopPropagation()
         const artistRoute = artist.split(' ').join('_')
-        this.context.router.push(`/artist/${artistRoute}`)
+        this.context.router.push(`/artists/${artistRoute}`)
         // mixpanel.track("Artist Clicked", {
         //     "Artist": this.props.artist
         // })
@@ -48,41 +47,35 @@ export default class TrackTile extends Base {
         }
     }
     playSet() {
-        // playSet(this.props.id, this.context.push, this.props.startTime)
-        // updatePlayCount(this.props.id, this.context.user.id)
-        // this.trackPlay()
-    }
-    trackPlay() {
-        // trackTrackPlay(
-        //  this.props.artistName,
-        //  this.props.trackName,
-        //  this.props.artist,
-        //  this.props.event
-        // )
+        this.context.dispatch(playSet(this.props.id))
+        // TODO mixpanel track
     }
     renderArtists() {
         return this.props.artists.map((artist, index) => {
             if(index === this.props.artists.length - 1) {
                 return <span key={index} onClick={e => this.openArtistPage(e, artist.artist)}>{artist.artist}</span>
             }
+
             return <span key={index} onClick={e => this.openArtistPage(e, artist.artist)}>{`${artist.artist}, `}</span>
         })
     }
     render() {
-        var image = {
+        const image = {
             backgroundImage: `url('${S3_ROOT_FOR_IMAGES+this.props.bannerImage}')`,
             backgroundSize: '100% 100%'
         }
-        var time = `${this.props.startTime} | ${this.props.setLength}`
+        const time = `${this.props.startTime} | ${this.props.setLength}`
 
         return (
             <div className='col-xs-6 col-sm-4 col-md-3 col-xl-2'>
-                <div className='track-tile flex-column' style={image}>
+                <div className='track-tile flex-column' style={image} title={this.props.trackName}>
                     <div className='track-info flex-row'>
                         <img src={S3_ROOT_FOR_IMAGES+this.props.artistImage} />
                         <header onClick={this.playSet}>
                             <h5>{this.props.trackName}</h5>
-                            <p className='play'><Icon size={14}>play</Icon>{time}</p>
+                            <p className='play'>
+                                <Icon size={14}>play</Icon>{time}
+                            </p>
                         </header>
                     </div>
                     <div className='set-info flex-column'>

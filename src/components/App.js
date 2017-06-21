@@ -125,9 +125,7 @@ class App extends Base {
 }
 
 function mapStateToProps({ environment }) {
-    return {
-        ...environment
-    }
+    return environment
 }
 
 export default connect(mapStateToProps)(App)

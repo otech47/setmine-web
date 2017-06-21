@@ -1,4 +1,4 @@
-.event-tile {
+.EventTile {
 	border: solid 1px @light-gray;
 	border-radius: 3px;
 	background-size: 100% 100%;
@@ -15,6 +15,9 @@
 	}
 	.event, .venue-container {
 		.flexContainer(row, nowrap);
+	}
+	.date {
+		margin-right: 1rem;
 	}
 	.date, i {
 		color: @red;
@@ -40,13 +43,18 @@
 			color: @blue;
 		}
 	}
+	.venue-container {
+		align-items: center;
+	}
 	.venue {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	button {
+	.Button {
 		.colors(@blue, @white);
+		margin: 0;
+		border-radius: 0;
 		&:hover {
 			background: @blue*0.95;
 		}

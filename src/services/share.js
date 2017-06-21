@@ -1,4 +1,4 @@
-import {S3_ROOT_FOR_IMAGES} from '../constants/constants'
+import { S3_ROOT_FOR_IMAGES } from '../constants/constants'
 
 export function shareToFacebook(setId, artistImage) {
 	FB.ui({
@@ -6,8 +6,8 @@ export function shareToFacebook(setId, artistImage) {
 		link: 'https://setmine.com/play/' + setId,
 		caption: 'Share this Set',
 		picture: S3_ROOT_FOR_IMAGES + artistImage
-	}, function(response) {
-		console.debug(response)
+	}, res => {
+		console.log(res)
 	})
 }
 
