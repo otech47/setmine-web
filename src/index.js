@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { Router, hashHistory, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
+import { AppContainer } from 'react-hot-loader'
 // import { injectGlobal } from 'styled-components'
 
 import configureStore from './store'
@@ -89,10 +90,27 @@ import './styles/index.less'
 const store = configureStore()
 
 render(
-    <Provider store={store}>
-        <Router routes={routes} history={history} />
-    </Provider>,
+    <AppContainer>
+        <Provider store={store}>
+            <Router routes={routes} history={history} />
+        </Provider>
+    </AppContainer>,
     document.getElementById('root')
 )
 
 // mixpanel.track("Page Load")
+
+// Hot Module Replacement API
+if (module.hot) {
+    module.hot.accept('./components/App', () => {
+        const NextApp = require('./components/App').default;
+        ReactDOM.render(
+            <AppContainer>
+                <Provider store={store}>
+                    <NextApp routes={routes} history={history} />
+                </Provider>
+            </AppContainer>,
+            document.getElementById('root')
+        )
+    })
+}

@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import vars from './variables'
+import config from './config'
 
 const Page = styled.div`
     position: relative;
-    top: ${vars.headerHeight + vars.navbarHeight}px;
-    padding-left: ${vars.sidebarWidth}px;
+    top: ${config.headerHeight + config.navbarHeight}px;
+    padding-left: ${config.sidebarWidth}px;
     width: 100%;
-    bottom: ${vars.playerHeight}px;
+    bottom: ${config.playerHeight}px;
 `
 
 export default Page

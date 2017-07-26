@@ -6,6 +6,7 @@ module.exports = {
 		setmine: [
 			'webpack-dev-server/client?http://localhost:8080',
 			'webpack/hot/only-dev-server',
+			'react-hot-loader/patch',
 			'./src/index.js'
 		]
 	},
@@ -35,7 +36,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.(jsx|js)?$/,
-				loader: 'react-hot!babel',
+				loader: 'babel',
 				exclude: /node_modules/
 			},
 			{

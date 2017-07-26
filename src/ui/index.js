@@ -1,12 +1,23 @@
-export Button from './Button'
-export colors from './colors'
-export Column from './Column'
-export Display from './Display'
-export Headline from './Headline'
-export Icon from './Icon'
-export * as mixins from './mixins'
-export Page from './Page'
-export Row from './Row'
-export Text from './Text'
-export Title from './Title'
-export variables from './variables'
+import Button from './Button'
+import colors from './colors'
+import Col from './Col'
+import Grid from './Grid'
+import Icon from './Icon'
+import * as mixins from './mixins'
+import Page from './Page'
+import Row from './Row'
+import Text from './Text'
+import config from './config'
+
+export {
+    Button,
+    colors,
+    Col,
+    Grid,
+    Icon,
+    mixins,
+    Page,
+    Row,
+    Text,
+    config
+}

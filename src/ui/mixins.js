@@ -1,7 +1,7 @@
 import colors from './colors'
 
-export function card(level) {
-    switch(level) {
+export function createBoxShadow(depth) {
+    switch(depth) {
         case 1:
             return 'box-shadow: 0 1px 4px rgba(49, 53, 66, 0.12), 0 1px 3px rgba(49, 53, 66, 0.24);'
         case 2:
@@ -20,8 +20,4 @@ export function transition(property = 'all', time, type) {
         transition: ${property} ${time} ${type};
         transition-duration: ${time};
     `
-}
-
-export function isDefined(prop, css = prop) {
-    return props => props[prop] ? `${css}: ${props[prop]}` : '';
 }
