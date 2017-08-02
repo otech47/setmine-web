@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Player from './components/Player'
-import Sidebar from './components/Sidebar'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Player from '../components/Player'
+import Sidebar from '../components/Sidebar'
 
 class Layout extends Component {
     static propTypes = {
@@ -31,7 +31,7 @@ class Layout extends Component {
 
         return (
             <div>
-                <Header clearHeader={clearHeader} currentPage={curentPage} title={title} />
+                <Header clearHeader={clearHeader} title={title} />
                 {!hideSidebar && <Sidebar />}
                 {children}
                 {footer && <Footer />}

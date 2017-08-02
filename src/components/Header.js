@@ -36,16 +36,11 @@ export default class Header extends Component {
         // logout(this.context.push)
     }
     render() {
-        const { currentPage } = this.props
-        const headerClass = this.landingPageActive() ? 'Header--landing' : 'Header--main'
-
-        const style = this.state.switchHeader ? scrollStyle : null
-
         return (
-            <div className={headerClass} style={style}>
+            <div className='Header--landing'>
                 <Link to='/' className='icon-setmine' />
                 <div className='flex-fixed' style={{ margin: '0 3rem' }}>
-                    <h4>{currentPage}</h4>
+                    <h4>{this.props.title}</h4>
                 </div>
                 <SearchBar />
                 {

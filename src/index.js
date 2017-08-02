@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter, HashRouter } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { AppContainer } from 'react-hot-loader'
@@ -10,11 +10,11 @@ import configureStore from './store'
 import App from './components/App';
 
 const isProduction = process.env.NODE_ENV === 'production'
-const Router = isProduction ? BrowserRouter : HashRouter
+// const Router = isProduction ? BrowserRouter : HashRouter
 
 // styling
 import './css/index.less'
-import { colors } from './ui'
+import { colors } from './styles'
 import AvenirLight from './fonts/Avenir-Light.ttf'
 import AvenirRoman from './fonts/Avenir-Roman.ttf'
 import AvenirMedium from './fonts/Avenir-Medium.ttf'

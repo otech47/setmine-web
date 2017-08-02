@@ -4,6 +4,7 @@ var path = require('path')
 module.exports = {
 	entry: {
 		setmine: [
+			'babel-polyfill',
 			'webpack-dev-server/client?http://localhost:8080',
 			'webpack/hot/only-dev-server',
 			'react-hot-loader/patch',
