@@ -13,7 +13,7 @@ import Loader from './Loader'
 const scroll = animateScroll
 const scrollDuration = 200
 
-class SearchPage extends Component {
+class Search extends Component {
     static propTypes = {
         artists: PropTypes.array.isRequired,
         sets: PropTypes.array.isRequired,
@@ -93,4 +93,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(SearchPage)
+export default connect(mapStateToProps)(Search)

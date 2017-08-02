@@ -1,25 +1,17 @@
-import React, {PropTypes, Component} from 'react';
+import React, { Component} from 'react';
 import Icon from './FaIcon';
 import Footer from './Footer';
 
-class SetstoryLandingPage extends Component {
-	constructor(props) {
-		super(props);
-	}
+export default class Setstory extends Component {
 	componentWillMount() {
-		this.context.push({
-			currentPage: 'Setstory',
-			showNavbar: false
-		});
+		// this.context.push({
+		// 	currentPage: 'Setstory',
+		// 	showNavbar: false
+		// });
 	}
 	componentDidMount() {
-		$(window).scrollTo(0,0);
-		mixpanel.track("Setstory About Page Open");
-	}
-	componentWillUnmount() {
-		this.context.push({
-			showNavbar: true
-		});
+		// $(window).scrollTo(0,0);
+		// mixpanel.track("Setstory About Page Open");
 	}
 	render() {
 		return (
@@ -116,9 +108,3 @@ class SetstoryLandingPage extends Component {
 		);
 	}
 }
-
-SetstoryLandingPage.contextTypes = {
-	push: PropTypes.func
-};
-
-export default SetstoryLandingPage;

@@ -1,7 +1,7 @@
 {
-	"presets": ["react", "env"],
+	"presets": ["env", "stage-2", "react"],
     "plugins": [
         "react-hot-loader/babel",
-        "transform-object-rest-spread", "transform-class-properties"
+        "transform-object-rest-spread"
     ]
 }

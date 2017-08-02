@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Motion, spring, presets } from 'react-motion'
-import Link from 'react-router/lib/Link'
+import { Link } from 'react-router-dom'
 import Icon from './Icon'
 import ToolTip from './ToolTip'
 import Ink from 'react-ink'

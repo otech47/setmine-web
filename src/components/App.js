@@ -1,26 +1,9 @@
-import React, { PropTypes } from 'react'
-// import DocMeta from 'react-doc-meta'
-
-// import initialAppState from '../services/appStateConfig'
-// import GlobalEventHandler from '../services/globalEventHandler'
-// import { playSet, updatePlayCount } from '../services/playerService'
-// import { startFacebookSDK } from '../services/loginService'
-import { getFavorites } from '../services/favoriteSet'
-import detectMobileService from '../services/detectMobileService'
-import { trackSetPlay } from '../services/mixpanelService'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { changeCurrentPage, initEnvironment } from '../actions/environment'
 import { initAuth } from '../actions/auth'
-
-import Base from './Base'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Player from './Player'
-// import Notifications from './Notifications'
-import LoginOverlay from './LoginOverlay'
-import Loader from './Loader'
-import DevTools from '../containers/DevTools'
+import routes from '../routes'
 
 // const tags = [
 //     {property: "description", content: "Setmine is a music app dedicated to live events! Relive past music festivals: Ultra, Coachella + more! Find upcoming shows + buy tix + listen to DJs' sets"},
@@ -33,57 +16,25 @@ import DevTools from '../containers/DevTools'
 //     {name: "google-site-verification", content: "T4hZD9xTwig_RvyoXaV9XQDYw5ksKEQywRkqaW-CGY4"}
 // ]
 
-// let evtHandler = GlobalEventHandler(initialAppState)
-// let evtTypes = evtHandler.types
-// let pushFn = evtHandler.push
-
-// wrapper for pushFn. data must be an object
-// const push = data => pushFn({
-//     type: evtTypes.SHALLOW_MERGE,
-//     data
-// })
-
-const isProduction = process.env.NODE_ENV === 'production'
-
-class App extends Base {
-    static contextTypes = {
-        router: PropTypes.object
-    }
+class App extends Component {
     static childContextTypes = {
-        // push: PropTypes.func,
-        // user: PropTypes.object,
-        // loginStatus: PropTypes.bool,
-        // favoriteSetIds: PropTypes.array,
         dispatch: PropTypes.func
     }
     getChildContext() {
         return {
-            // push: push,
-            // user: this.state.appState.get('user'),
-            // loginStatus: this.state.appState.get('loginStatus'),
-            // favoriteSetIds: this.state.appState.get('favoriteSetIds'),
             dispatch: this.props.dispatch
         }
     }
     componentWillMount() {
-        // const { appState } = this.state
-        // const { router } = this.context
         const { dispatch } = this.props
-        // initialize global appState and push fn
-        // this.initializeApp()
 
         // detect if user is on mobile web
         dispatch(initEnvironment())
 
-        // temporary workaround
-        // if(!isProduction) {
-        //     push({ loaded: true })
-        // }
-
         // initialize Facebook SDK & check if user is logged in
         // dispatch(initAuth())
 
-        // play set if specified in url
+        // TODO move this to Sets.js
         // if(!!this.props.params.set) {
         //     let setId = this.props.params.set
         //     let currentSet = appState.get('currentSet')
@@ -93,39 +44,9 @@ class App extends Base {
             // trackSetPlay(currentSet)
         // }
     }
-    // initializeApp() {
-    //     evtHandler.floodGate.subscribe(newState => {
-    //         this.setState({ appState: newState })
-    //     })
-    // }
     render() {
-        // let appState = this.state.appState
-        // let snackbar = appState.get('snackbar')
-        const { currentPage, loading, playerVisible, showModal, dispatch, navbar, main, children } = this.props
-
-        return (
-            <div>
-                { 
-                    // process.env.NODE_ENV !== 'production' && <DevTools />
-                }
-                {/*<DocMeta tags={tags} />*/}
-                <Header 
-                    currentPage={currentPage}
-                    location={this.props.location}
-                />
-                { this.props.location.pathname !== '/' && <Sidebar /> }
-                { navbar }
-                { main }
-                {/*<Notifications snackbar={snackbar} playerHidden={playerHidden} />*/}
-                <LoginOverlay open={showModal} />
-                { playerVisible && <Player /> }
-            </div>
-        )
+        return routes
     }
 }
 
-function mapStateToProps({ environment }) {
-    return environment
-}
-
-export default connect(mapStateToProps)(App)
+export default connect()(App)

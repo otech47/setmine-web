@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Link from 'react-router/lib/Link'
+import { Link } from 'react-router-dom'
 import _ from 'lodash'
 import api from '../services/api'
 import Base from './Base'

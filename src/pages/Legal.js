@@ -1,9 +1,13 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import Link from 'react-router/lib/Link';
 import Icon from './FaIcon';
 import Footer from './Footer';
 
-export default class DMCA extends Component {
+export default class Legal extends Component {
+	static contextTypes = {
+		dispatch: PropTypes.func
+	}
 	componentWillMount() {
 		this.context.push({ currentPage: 'DMCA Notice' });
 	}
@@ -78,7 +82,3 @@ export default class DMCA extends Component {
 		);
 	}
 }
-
-DMCA.contextTypes = {
-	push: PropTypes.func
-};

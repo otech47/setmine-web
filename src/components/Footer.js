@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Link from 'react-router/lib/Link'
+import { Link } from 'react-router-dom'
 import Icon from './Icon'
 
 const trackAndroid = () => mixpanel.track("Android App Link Clicked")

@@ -1,14 +1,11 @@
-import React, { PropTypes } from 'react'
-import Link from 'react-router/lib/Link'
-import Base from './Base'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import IconMenu from './IconMenu'
-import Icon from './Icon'
 import LoginOverlay from './LoginOverlay'
-import colors from '../constants/colors'
 import Ink from 'react-ink'
-import Button from './Button'
-// import { Button, Text, Headline } from '../ui'
+import { Button, Icon, colors } from '../styles'
 import { logout } from '../actions/auth'
 import { toggleModal } from '../actions/environment'
 
@@ -18,53 +15,25 @@ const scrollStyle = {
     boxShadow: '0 3px 6px rgba(49, 53, 66, 0.16), 0 3px 6px rgba(49, 53, 66, 0.23)'
 }
 
-export default class Header extends Base {
-    constructor(props) {
-        super(props)
-        this.autoBind(
-            'handleLogout',
-            'handleScroll',
-            'login'
-        )
-        this.state = {
-            switchHeader: false
-        }
-    }
-    componentWillReceiveProps(nextProps, nextContext) {
-        if(nextProps.location.pathname !== '/') {
-            window.removeEventListener('scroll', this.handleScroll, false)
-            return
-        }
-
-        if(this.landingPageActive()) {
-            window.addEventListener('scroll', this.handleScroll, false)
-        }
-    }
-    login() {
+export default class Header extends Component {
+    static propTypes = {
+        title: PropTypes.string.isRequired,
+        location: PropTypes.object
+    };
+    static contextTypes = {
+        dispatch: PropTypes.func
+    };
+    login = () => {
         this.context.dispatch(toggleModal())
     }
-    trackAndroid() {
+    trackAndroid = () => {
         mixpanel && mixpanel.track("Android App Link Clicked")
     }
-    trackIos() {
+    trackIos = () => {
         mixpanel && mixpanel.track("iOS App Link Clicked")
     }
-    landingPageActive() {
-        return this.props.location.pathname === '/'
-    }
-    handleLogout() {
-        logout(this.context.push)
-    }
-    handleScroll() {
-        if(!this.landingPageActive()) {
-            return
-        }
-
-        if(window.scrollY >= (window.innerHeight - 260)) {
-            this.setState({ switchHeader: true })
-        } else {
-            this.setState({ switchHeader: false })
-        }
+    handleLogout = () => {
+        // logout(this.context.push)
     }
     render() {
         const { currentPage } = this.props
@@ -100,22 +69,11 @@ export default class Header extends Base {
                     <Link to='/legal'>
                         <p>DMCA Notice</p>
                     </Link>
-                    <Link to='/' onClick={this.handleLogout.bind(this)}>
+                    <Link to='/' onClick={this.handleLogout}>
                         <p>Log Out</p>
                     </Link>
                 </IconMenu>
             </div>
         )
     }
-}
-
-Header.contextTypes = {
-    push: PropTypes.func,
-    loginStatus: PropTypes.bool,
-    dispatch: PropTypes.func
-}
-
-Header.propTypes = {
-    currentPage: PropTypes.string.isRequired,
-    location: PropTypes.object
 }

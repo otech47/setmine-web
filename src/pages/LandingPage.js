@@ -1,51 +1,36 @@
-import React, { PropTypes } from 'react'
-import Base from './Base'
-import { Element, Events, animateScroll } from 'react-scroll'
-import Footer from './Footer'
-import Button from './Button'
-import Icon from './Icon'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Events, animateScroll } from 'react-scroll'
+import Layout from './Layout'
+import { Button, Icon } from '../styles'
 import { IOS_URL, ANDROID_URL } from '../constants/constants'
-import { changeCurrentPage } from '../actions/environment'
-
-const scroll = animateScroll
 
 import unlockImg from '../images/beacons.png'
 import calendarImg from '../images/calendar.png'
 import festivalImg from '../images/festivals.png'
 
-export default class LandingPage extends Base {
+const scroll = animateScroll
+
+class LandingPage extends Component {
     static contextTypes = {
-        router: PropTypes.object.isRequired,
-        dispatch: PropTypes.func.isRequired
-    }
-    constructor(props) {
-        super(props)
-        this.autoBind('scrollTo', 'handleClick')
-    }
-    componentWillMount() {
-        this.context.dispatch(changeCurrentPage('Setmine'))
+        dispatch: PropTypes.func
     }
     componentDidMount() {
-        Events.scrollEvent.register('begin', () => {
-            console.log('begin')
-        })
-
-        Events.scrollEvent.register('end', () => {
-            console.log('end')
-        })
-
+        Events.scrollEvent.register('begin')
+        Events.scrollEvent.register('end')
         scroll.scrollToTop()
     }
     componentWillUnmount() {
         Events.scrollEvent.remove('begin')
         Events.scrollEvent.remove('end')
     }
-    handleClick() {
-        setTimeout(() => {
-            this.context.router.push('/sets')
-        }, 150)
+    handleClick = () => {
+        // setTimeout(() => {
+        //     this.context.router.push('/sets')
+        // }, 150)
     }
-    scrollTo() {
+    scrollTo = () => {
         scroll.scrollTo((window.innerHeight - 250), {
             duration: 450
         })
@@ -56,7 +41,7 @@ export default class LandingPage extends Base {
                 <section className='landing-page__section--main'>
                     <h2>Relive your favorite sets</h2>
                     <div className='flex-column'>
-                        <Button solid onClick={this.handleClick} className='ActionButton'>Listen Now</Button>
+                        <Button solid onClick={this.handleClick}>Listen Now</Button>
                         <h4>Discover music festivals and live events around the globe.</h4>
                     </div>
                 </section>
@@ -99,8 +84,18 @@ export default class LandingPage extends Base {
                     </div>
                 </section>
                 <h5 className='landing-page__scroll-back' onClick={animateScroll.scrollToTop}>Back to Top</h5>
-                <Footer/>
             </div>
         )
     }
 }
+
+export default props => (
+    <Layout 
+        clearHeader
+        footer
+        hideSidebar
+        title={props.title}
+    >
+        <LandingPage {...props} />
+    </Layout>
+)

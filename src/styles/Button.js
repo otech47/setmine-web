@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Ink from 'react-ink'
 import colors from './colors'
-import { card } from './mixins'
+import { createBoxShadow } from './mixins'
 import Text from './Text'
 
 const Root = styled.button`
-    ${card(1)}
+    ${createBoxShadow(1)}
     border-radius: 3px;
     cursor: pointer;
     position: relative;
@@ -21,14 +21,13 @@ const Root = styled.button`
     background: ${props => props.transparent ? 'transparent' : colors[props.background]};
     overflow: visible;
     letter-spacing: 1px;
-    border: ${props => props.transparent ? 'solid 1px' : 'none'};
-    border-color: ${props => colors[props.color] && colors[props.color]};    
+    ${props => props.transparent && css`solid 1px ${colors[props.color]}`};
 `
 
-function Button({ children, onClick }) {
+function Button(props) {
     return (
-        <Root onClick={onClick}>
-            <Text>{children}</Text>
+        <Root {...props}>
+            <Text>{props.children}</Text>
             <Ink />
         </Root>
     )
@@ -39,7 +38,7 @@ Button.propTypes = {
     background: PropTypes.oneOf(Object.keys(colors)),
     color: PropTypes.oneOf(Object.keys(colors)),
     children: PropTypes.any.isRequired,
-    solid: PropTypes.bool
+    transparent: PropTypes.bool
 }
 
 Button.defaultProps = {
