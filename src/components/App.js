@@ -123,6 +123,19 @@ export default class App extends Base {
             <Loader loaded={appState.get('loaded')}>
                 <div id='App' className='flex-column'>
                     <DocMeta tags={tags} />
+
+                    <div className='DonationsBanner'>
+                        <p>
+                            <b>SETMINERS: To protect our independence, we'll never run ads. 
+                            We take no government funds. We survive on donations averaging about €10. 
+                            Now is the time we ask. If everyone reading this right now gave €2, our fundraiser would be done within an hour. 
+                            We’re a small non-profit with costs of a top 5 website: servers, staff and programs. 
+                            Wikipedia is something special. It is like a library or a public park where we can all go to think and learn. 
+                            If Wikipedia is useful to you, please take one minute to make a donation to keep it online and ad-free for another year. Thank you.
+                            Donations can be made at <a href='donations.setmine.com'>donations.setmine.com.</a></b>
+                        </p>
+                    </div>
+
                     <Header currentPage={currentPage} showLogin={showLogin} location={this.props.location}/>
                     {showNavbar && <NavBar />}
                     {
