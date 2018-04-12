@@ -1,52 +1,25 @@
-import React, {PropTypes} from 'react';
-const {number, string, bool, object, func} = PropTypes;
+import React from 'react';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
-const Icon = ({children, caption, fixed, style, onClick, size, className, title}) => {
-    const fixedClass = fixed ? 'fixed' : '';
-    const clickable = onClick ? 'clickable' : '';
-    const captionClass = caption ? 'clickable' : '';
+import Base from './Base';
 
-    const iconSize = size || 24;
-    let mergedStyle = Object.assign({}, style, {
-        fontSize: iconSize
-    });
-
-    const iconElement = (
-        <i
-            className={`icon ${className} ion-${children} ${fixedClass} ${clickable}`}
-            style={mergedStyle}
-            onClick={onClick}
-            title={title}
-        />
-    );
-
-    if(caption) {
+export default class Icon extends Base {
+    render() {
         return (
-            <div className='flex-row-nowrap'>
-                {iconElement}
-                <p className='caption'>
-                    {caption}
-                </p>
+            <div
+                className={'Icon ' + this.props.faIconName}
+                onClick={this.props.onClick}
+            >
+                <FontAwesomeIcon
+                    icon={this.props.faIconName}
+                    size={this.props.size}
+                />
             </div>
+            
         );
     }
-
-    return iconElement;
 }
 
-Icon.propTypes = {
-    size: number,
-    // text placed to right of icon
-    caption: string,
-    // icon className from ionicons
-    children: string.isRequired,
-    // sets fixed width for icons, useful for stacking
-    fixed: bool,
-    // custom styling
-    style: object,
-    className: string,
-    // click handlers for icon
-    onClick: func
+Icon.defaultProps = {
+    size: 'lg'
 };
-
-export default Icon;

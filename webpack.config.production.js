@@ -3,66 +3,67 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 
-var mainPath = path.resolve(__dirname, 'src', 'index.jsx');
 var buildPath = path.resolve(__dirname, 'public');
+var mainPath = path.resolve(__dirname, 'src', 'index.js');
 
 module.exports = {
-    entry: {
-        'setmine': mainPath
-    },
-    devtool: 'cheap-module-source-map',
+    entry: [
+        './src/index.js'
+    ],
+    devtool: 'source-map',
     output: {
         path: buildPath,
-        filename: '/[name]-bundle.js',
+        filename: '/bundle.js',
     },
     resolve: {
-        extensions: ['', '.jsx', '.js', '.less'],
+        extensions: ['', '.jsx', '.es6', '.js', '.less'],
         moduleDirectories: ['node_modules']
     },
     module: {
         loaders: [
             {
                 test: /\.(js|jsx)?$/,
-                loader: 'babel-loader',
                 include: [
                     path.resolve(__dirname, 'src')
                 ],
-                exclude: /node_modules/
+                loaders: ['babel?presets[]=es2015,presets[]=react,presets[]=stage-0'],
+                exclude: /node_modules/,
+                
             },
             {
                 test: /\.less$/,
-                exclude: /node_modules/,
-                loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+                loader: 'style!css!less',
+                exclude: /node_modules/
             },
             {
-                test: /\.(png|jpeg|svg)$/,
-                loader: 'file',
-                exclude: /node_modules/
+                test: /\.css$/,
+                loader: 'style!css!less'
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url?limit=25000'
+            },
+            {
+                include: /\.json$/,
+                loaders: ['json-loader']
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html',
-            inject: 'body'
+            inject: 'body',
+            environment: JSON.stringify('production')
         }),
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
-            'Promise': 'exports?global.Promise!es6-promise',
-            'fetch': 'exports?self.fetch!whatwg-fetch'
+            Promise: 'exports?global.Promise!es6-promise',
+            fetch: 'exports?self.fetch!whatwg-fetch'
         }),
-        new ExtractTextPlugin('/[name].css'),
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            mangle: {
-                except: ['exports', 'require']
+                NODE_ENV: JSON.stringify('production')
             }
         })
-    ],
-    postcss: [
-        require('autoprefixer')
     ]
-};
+}

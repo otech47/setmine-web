@@ -1,46 +1,39 @@
-@spinnerHeight: 120px;
-@spinnerWidth: 126px;
+// breakpoints
+@xs: 480px;
+@sm: 768px;
+@md: 992px;
+@st: 1080px;
+@lg: 1200px;
+@xl: 1600px;
 
+// buttons
+@buttonHeight: 5rem;
+@buttonWidth: 10rem;
+@roundButtonSize: 2.75rem;
 
 // fonts
-@baseFont: 8px;
-@defaultFontSize: 1.75rem;
-@light: Avenir Light;
-@regular: Avenir Roman;
-@medium: Avenir Medium;
-@bold: Avenir Heavy;
+@defaultFontSize: 1.1rem;
+@defaultLineHeight: 1.6rem;
 
-// nav sizing
-@headerHeight: 64px;
-@tabsHeight: 48px;
-@navbarWidth: @headerHeight;
-@playerHeight: 64px;
+// factors
+@smallFactor: 0.75;
+@mediumFactor: 1.25;
+@largeFactor: 1.5;
 
-// page sizing
-@pageHeight: @windowHeight - @headerHeight - @playerHeight;
-@landingPageHeight: @windowHeight - @headerHeight;
-@pageWidth: @windowWidth;
+// spacing
+@baseRem: 0.75rem;
+@smallRem: @baseRem * @smallFactor;
+@mediumRem: @baseRem * @mediumFactor;
+@largeRem: @baseRem * @largeFactor;
+
+// default component sizing
 @windowWidth: 100vw;
 @windowHeight: 100vh;
-
-// player
-@playerHeight: 64px;
-@playerTracklistHeight: 50vh;
-@tracklistOffset: 20rem;
-
-// component specific
-@tileHeight: 200px;
-@trackTile: 220px;
+@pageHeight: 670px;
 
 // transitions
 @defaultDuration: 200ms;
+@defaultDelay: 0ms;
 @long: 450ms;
 @easeIn: cubic-bezier(0.23, 1, 0.32, 1);
 @easeInOut: cubic-bezier(0.445, 0.05, 0.55, 0.95);
-
-// breakpoints
-@xs: 540px;
-@sm: 768px;
-@md: 992px;
-@lg: 1200px;
-@xl: 1600px;

@@ -1,52 +1,63 @@
-// require('es6-promise').polyfill();
-
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
+
 var app = express();
 
 var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? 80 : 3000;
+var port = isProduction ? process.env.PORT : 3000;
+
+// var settings = require('./api/config/settings');
+// app.use(settings.forceHttps);
 
 app.use(express.static(__dirname + '/public'));
 
-// deep linking
-app.use(function( req, res, next ) {
-    for(var prop in req.query) {
-        res.redirect('https://www.setmine.com/' + prop);
-        return;
+app.get('*', function(req, res, next) {
+
+    // Prevents an HTML response for API calls
+    if (req.path.indexOf('/api/') != -1) {
+        return next();
     }
-    next();
-});
 
-// setmusic.co 
-app.use(function( req, res, next ) {
-    var prop = req.path; 
-    if(prop.substring(prop.length-1) == '/') {
-        prop = prop.substring(0, prop.length-1);
-        res.redirect('https://www.setmine.com' + prop);
-        return;
-    }
-    next();
-});
-
-app.get('/setrecords', function( req, res ) {
-    res.redirect('https://setrecords.setmine.com');
-});
-
-app.get('*', function( req, res, next ) {
-    // For facebook metatags, HTML is read first then the og url is inserted before sending it as the response
     fs.readFile(__dirname + '/public/index.html', 'utf8', function(err, text) {
-        var ogurl = '<meta property=\"og:url\" content=\"https://api.setmine.com/v/10/metadata/facebook/?path=' + encodeURIComponent(req.path.substring(1)) + '\">';
-        var textWithOGUrl = text.replace('</head>',  ogurl + '</head>');
-        console.log(req.path);
-        console.log(textWithOGUrl);
-
-        res.send(textWithOGUrl);
+        res.send(text);
     });
 });
 
+var cors = require('cors');
 
-app.listen(port, function () {
-    console.log('Server running on port ' + port);
+var whitelist = [
+    'http://localhost:8080',
+    'http://localhost:3000'
+];
+var corsOptions = {
+    origin: function(origin, callback) {
+        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+        callback(null, originIsWhitelisted);
+    },
+    credentials: true,
+    methods: ['GET,PUT,POST,DELETE,OPTIONS'],
+    allowedHeaders: ['Access-Control-Allow-Headers', 'Origin', 'Access-Control-Allow-Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Cache-Control']
+};
+app.use(cors(corsOptions));
+
+// GraphiQL Docs
+var graphqlHTTP = require('express-graphql');
+var apiSchema = require('./api/schema');
+
+app.use('/api/v/:vid/graph', graphqlHTTP(function(req, res) {
+    return {
+        schema: apiSchema,
+        rootValue: {
+            req: req,
+            res: res
+        },
+        pretty: true,
+        graphiql: true
+    };
+}));
+
+
+app.listen(port, function() {
+    console.log('SetLife-ReactWithApi: Server running on port ' + port);
 });
