@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import sampleState from './sampleState';
+import donations from './donations';
 
 export default combineReducers({
-    sampleState,
+    donations,
     routing: routerReducer
 });

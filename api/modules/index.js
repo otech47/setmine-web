@@ -1,5 +1,5 @@
 var apiModules = module.exports = (function() {
     return {
-        sampleModule: require('./sampleModule')
+        stripeModule: require('./stripeModule')
     };
 })();

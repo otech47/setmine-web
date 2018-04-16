@@ -12,24 +12,28 @@ var apiSchema = new g.GraphQLSchema(
             description: 'Endpoints with POST, PUT, and DELETE functionality go here',
 
             fields: {
-                executeRoute: {
+                submitStripeCharge: {
                     args: {
-                        requiredArgument: {
-                            description: 'This argument is required to execute this route',
+                        email: {
+                            description: 'The user\'s email',
                             type: new g.GraphQLNonNull(g.GraphQLString)
                         },
-                        optionalArgument: {
-                            description: 'This argument is not necessary. Be sure to handle null cases.',
-                            type: g.GraphQLString
-                        }
+                        stripeToken: {
+                            description: 'The stripe token for this charge',
+                            type: new g.GraphQLNonNull(g.GraphQLString)
+                        },
+                        amount: {
+                            description: 'The amount for this charge',
+                            type: new g.GraphQLNonNull(g.GraphQLString)
+                        },
                     },
 
-                    description: 'A sample mutation route executed. Whenever possible, name mutation routes as a grammatical combination of action verb and direct object. (ex: confirmOrder, sendInvoice, registerCustomer) ',
+                    description: 'Submits a stripe charge',
 
                     type: g.GraphQLString,
 
                     resolve: function(root, args) {
-                        return apiModules.sampleModule.publicFunction1(args);
+                        return apiModules.stripeModule.submitStripeCharge(args);
                     }
                 }
             }
