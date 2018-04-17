@@ -39,8 +39,24 @@ export function emailEntered(email) {
     };
 }
 
-export function submitStripeDonation(token) {
-    // TODO: Send POST request with donation info to stripe endpoint
+export function submitStripeDonation(email, token, amount) {
+    console.log('Sending graph mutation with params (' + email + ', ' + token + ', ' + amount +')');
+
+    api.graph({
+        query: `mutation{
+            submitStripeCharge(
+                email: "${email}",
+                stripeToken: "${token}",
+                amount: "${amount}",
+            )
+        }`
+    })
+    .then(data => {
+        console.log(data)
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 
 // Index of Action Types

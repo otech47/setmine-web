@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Base from './Base';
 
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
+import { submitStripeDonation } from '../reducers/donations';
+
 class StripeForm extends Base {
     handleSubmit = (ev) => {
-        // We don't want to let default form submission happen here, which would refresh the page.
         ev.preventDefault();
 
         this.props.stripe.createToken().then((result) => {
@@ -14,8 +16,9 @@ class StripeForm extends Base {
                 console.log('Error message: ' + result.error.message);
             } else {
                 console.log('Received Stripe token:', result.token);
+                console.log('Calling submitStripeDonation(' + this.props.email + ', ' + result.token.id + ', ' + this.props.donationAmount +')');
                 
-                submitStripeDonation(token);
+                submitStripeDonation(this.props.email, result.token.id, this.props.donationAmount);
             }
         });
     }
@@ -35,11 +38,17 @@ class StripeForm extends Base {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps (state) {
     return {
-        submitStripeDonation: (token) => dispatch(submitStripeDonation(token)),
+        email: state.donations.email,
+        donationAmount: state.donations.donationAmount,
     };
 }
 
-export default injectStripe(StripeForm);
+function mapDispatchToProps(dispatch) {
+    return {
+        submitStripeDonation: (email, token, amount) => dispatch(submitStripeDonation(email, token, amount)),
+    };
+}
 
+export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(StripeForm));

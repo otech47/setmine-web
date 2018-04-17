@@ -4,26 +4,26 @@ import { connect } from 'react-redux';
 import Base from './Base';
 import Button from './Button'
 
-import {donationAmountSelected} from '../reducers/donations'
+import { donationAmountSelected } from '../reducers/donations'
 
 class DonationAmountSelection extends Base {
     constructor(props) {
         super(props);
-        this.handleSelection = this.handleSelection.bind(this);
+        this.autoBind('handleSelection');
     }
 
     handleSelection(amount) {
         console.log('Amount selected: ' + amount);
-        donationAmountSelected(amount);
+        this.props.donationAmountSelected(amount);
     }
 
     render() {
         return (
             <div className='DonationAmountSelection'>
-                <Button onClick={this.handleSelection.bind(null, 5)}>$5</Button>
-                <Button onClick={this.handleSelection.bind(null, 10)}>$10</Button>
-                <Button onClick={this.handleSelection.bind(null, 20)}>$20</Button>
-                <Button onClick={this.handleSelection.bind(null, 50)}>$50</Button>
+                <Button onClick={this.handleSelection.bind(null, 500)}>$5</Button>
+                <Button onClick={this.handleSelection.bind(null, 1000)}>$10</Button>
+                <Button onClick={this.handleSelection.bind(null, 2000)}>$20</Button>
+                <Button onClick={this.handleSelection.bind(null, 5000)}>$50</Button>
             </div>
         );
     }

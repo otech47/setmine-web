@@ -1,9 +1,8 @@
 const { STRIPE } = require('../config/credentials');
 const { DEFAULT_CURRENCY } = require('../config/constants');
 
-var _ = require('underscore');
 var moment = require('moment');
-var Stripe = require('stripe')(STRIPE.KEY);
+var Stripe = require('stripe')(STRIPE.SECRET);
 
 var stripe = module.exports = {
     chargeCustomer: (params) => {
@@ -12,7 +11,7 @@ var stripe = module.exports = {
             console.log(params);
             Stripe.charges.create({
                 amount: params.amount,
-                currency: DEFAULT_CURRENCY,
+                currency: 'usd',
                 receipt_email: params.customerEmail,
                 source: params.stripeToken,
                 description: 'Charge for ' + params.customerEmail + ': ' + params.chargeDescription

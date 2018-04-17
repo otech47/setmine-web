@@ -33,6 +33,8 @@ var apiSchema = new g.GraphQLSchema(
                     type: g.GraphQLString,
 
                     resolve: function(root, args) {
+                        console.log('Calling stripeModule.submitStripeCharge with(' + args +')');
+
                         return apiModules.stripeModule.submitStripeCharge(args);
                     }
                 }
