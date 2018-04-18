@@ -20,10 +20,10 @@ class DonationAmountSelection extends Base {
     render() {
         return (
             <div className='DonationAmountSelection'>
-                <Button onClick={this.handleSelection.bind(null, 500)}>$5</Button>
-                <Button onClick={this.handleSelection.bind(null, 1000)}>$10</Button>
-                <Button onClick={this.handleSelection.bind(null, 2000)}>$20</Button>
-                <Button onClick={this.handleSelection.bind(null, 5000)}>$50</Button>
+                <Button className={this.props.donationAmount == 500 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 500)}>$5</Button>
+                <Button className={this.props.donationAmount == 1000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 1000)}>$10</Button>
+                <Button className={this.props.donationAmount == 2000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 2000)}>$20</Button>
+                <Button className={this.props.donationAmount == 5000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 5000)}>$50</Button>
             </div>
         );
     }
@@ -31,7 +31,7 @@ class DonationAmountSelection extends Base {
 
 function mapStateToProps(state) {
     return {
-        donationAmount: state.donationAmount,
+        donationAmount: state.donations.donationAmount,
     };
 }
 
