@@ -2,23 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Base from './Base';
+import Button from './Button';
 
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
 import { submitStripeDonation } from '../reducers/donations';
 
 class StripeForm extends Base {
-    handleSubmit = (ev) => {
+    handleSubmit(ev) {
+        const {
+            stripe,
+            email,
+            donationAmount,
+            submitStripeDonation
+        } = this.props
+
         ev.preventDefault();
 
-        this.props.stripe.createToken().then((result) => {
+        stripe.createToken().then((result) => {
             if (result.error) {
                 console.log('Error message: ' + result.error.message);
             } else {
-                console.log('Received Stripe token:', result.token);
-                console.log('Calling submitStripeDonation(' + this.props.email + ', ' + result.token.id + ', ' + this.props.donationAmount +')');
-                
-                submitStripeDonation(this.props.email, result.token.id, this.props.donationAmount);
+                submitStripeDonation(email, result.token.id, donationAmount);
             }
         });
     }
@@ -27,11 +32,11 @@ class StripeForm extends Base {
         return (
             <form id='stripeForm' onSubmit={this.handleSubmit}>
                 <div className='form-row'>
-                    <label> Card Details
-                        <CardElement className='card-element'/>
-                    </label>
+
+                    <p>Card Details</p>
+                    <CardElement className='card-element'/>
                 </div>
-                <button>Confirm order</button>
+                <Button>Confirm order</Button>
             </form>
             
         );

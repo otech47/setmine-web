@@ -13,8 +13,8 @@ class CoinPaymentsCheckout extends Base {
                     <input type='hidden' name='merchant' value='6fb2cdcc838888540ff0d5a702375316'/>
                     <input type='hidden' name='currency' value='USD'/>
                     <input type='hidden' name='amountf' value={this.props.donationAmount/100}/>
-                    <input type='hidden' name='item_name' value='Donation'/>	
-                    <input type='image' src='https://www.coinpayments.net/images/pub/donate-grey.png' alt='Donate with CoinPayments.net'/>
+                    <input type='hidden' name='item_name' value='Donation'/>
+                    <input type='image' src='https://www.coinpayments.net/images/pub/donate-grey.png' alt='Donate with CoinPayments.net' className='image'/>
                 </form>
             </div>
         );
