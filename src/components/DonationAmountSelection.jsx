@@ -9,12 +9,24 @@ import { donationAmountSelected } from '../reducers/donations'
 class DonationAmountSelection extends Base {
     constructor(props) {
         super(props);
-        this.autoBind('handleSelection');
+        this.autoBind('handleSelection', 'handleInput');
+
+        this.state = { customValueSelected: false };
     }
 
     handleSelection(amount) {
         console.log('Amount selected: ' + amount);
+
+        this.setState({ customValueSelected: false });
+
         this.props.donationAmountSelected(amount);
+    }
+
+    handleInput(event) {
+        if (event.target.value) {
+            this.setState({ customValueSelected: true });
+            this.props.donationAmountSelected(event.target.value * 100)
+        }
     }
 
     render() {
@@ -24,6 +36,14 @@ class DonationAmountSelection extends Base {
                 <Button className={this.props.donationAmount == 1000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 1000)}>$10</Button>
                 <Button className={this.props.donationAmount == 2000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 2000)}>$20</Button>
                 <Button className={this.props.donationAmount == 5000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 5000)}>$50</Button>
+                <input 
+                    type='number' 
+                    className={this.state.customValueSelected ? 'Button selected' : 'Button'}
+                    value={this.state.customValueSelected ? this.props.donationAmount / 100 : ''}
+                    placeholder='Custom amount...' 
+                    onChange={this.handleInput} 
+                    onFocus={this.handleInput}
+                />
             </div>
         );
     }

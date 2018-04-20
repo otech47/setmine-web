@@ -1,6 +1,10 @@
 .LandingPage {
     // CSS Rules
-    background-color: @white;
+    img {
+        width: 100px;
+        height: 100px;
+    }
+
     // LESS mixins
     .column;
     .align-center;
@@ -24,5 +28,13 @@
         text-align: center;
         .column;
         .align-center;
+    }
+}
+
+@media screen and (min-width: @sm) {
+    .LandingPage {
+        .sections {
+            .row-nowrap;
+        }
     }
 }

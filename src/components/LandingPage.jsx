@@ -11,11 +11,24 @@ export default class LandingPage extends Base {
     render() {
         return (
             <div className='LandingPage'>
-                <p>Please give us money</p>
+
+                <img src='../images/setmine-logo.png' />
+
+                <p>Choose a donation amount:</p>
 
                 <DonationAmountSelection />
-                <CoinPaymentsCheckout />
-                <StripeCheckout />
+
+                <div className='sections'>
+                    <div className='section'>
+                        <p> Donate with cryptocurrency via CoinPayments! </p>
+                        <CoinPaymentsCheckout />
+                    </div>
+
+                    <div className='section'>
+                        <p> Donate with credit/debit via Stripe! </p>
+                        <StripeCheckout />
+                    </div>
+                </div>
             </div>
         );
     }
