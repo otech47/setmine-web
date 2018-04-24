@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8d276fa143819f58171b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1e0fb764aa29eb6cbfdb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -5392,7 +5392,7 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'Button', onClick: this.props.onClick },
+	                { className: 'Button ' + this.props.className, onClick: this.props.onClick },
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
@@ -5447,7 +5447,7 @@
 	// Reducer
 	var initialState = {
 	    email: '',
-	    donationAmount: 10
+	    donationAmount: 1000
 	};
 	
 	function reducer() {
@@ -5532,7 +5532,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto,Raleway);", ""]);
 	
 	// module
-	exports.push([module.id, ".row{flex-direction:row;flex-flow:row wrap}.row,.row-reverse{display:flex;position:relative;flex-wrap:wrap}.row-reverse{flex-direction:row-reverse;flex-flow:row-reverse wrap}.row-nowrap{flex-direction:row;flex-flow:row nowrap}.row-nowrap,.row-reverse-nowrap{display:flex;position:relative;flex-wrap:nowrap}.row-reverse-nowrap{flex-direction:row-reverse;flex-flow:row-reverse nowrap}.column{flex-direction:column;flex-flow:column nowrap}.column,.column-reverse{display:flex;position:relative;flex-wrap:nowrap}.column-reverse{flex-direction:column-reverse;flex-flow:column-reverse nowrap}.flex{flex:1 1 auto}.flex-self{flex:0 1 auto}.flex-shrink{flex:1 1 0}.flex-center{flex:0 1 auto;margin:auto}.align-start{align-items:flex-start}.align-center{align-items:center}.align-end{align-items:flex-end}.justify-start{text-align:left;justify-content:flex-start}.justify-center{text-align:center;justify-content:center}.justify-end{text-align:right;justify-content:flex-end}.justify-space-around{text-align:justify;justify-content:space-around}.justify-space-between{text-align:justify;justify-content:space-between}@font-face{font-family:AvenirLight;src:url(/fonts/Avenir-Light.ttf)}@font-face{font-family:AvenirRoman;src:url(/fonts/Avenir-Roman.ttf)}@font-face{font-family:AvenirMedium;src:url(/fonts/Avenir-Medium.ttf)}@font-face{font-family:AvenirHeavy;src:url(/fonts/Avenir-Heavy.ttf)}h1,h2,h3,h4,h5,h6,p{margin:0}h1{font-size:2.2rem;line-height:3.2rem}h1,h2{font-family:Roboto,sans-serif;font-weight:100}h2{font-size:1.98rem;line-height:2.88rem}h3{font-size:1.76rem;line-height:2.56rem}h3,h4{font-family:Roboto,sans-serif;font-weight:100}h4{font-size:1.54rem;line-height:2.24rem}h5{font-family:Roboto,sans-serif;font-size:1.32rem;line-height:1.92rem;font-weight:100}h6,p,span{font-size:1.1rem;line-height:1.6rem}.smallFont,h6,p,span{font-family:Roboto,sans-serif;font-weight:100}.smallFont{font-size:.825rem;line-height:1.2rem}.mediumFont{font-size:1.375rem;line-height:2rem}.largeFont,.mediumFont{font-family:Roboto,sans-serif;font-weight:100}.largeFont{font-size:1.65rem;line-height:2.4rem}.fixed{position:absolute;top:0;left:0;z-index:1000;width:100%;height:100%}.hidden{display:none!important}.invisible{opacity:0!important}html{background:#fff;color:#313542;font-size:1.1rem;font-family:Avenir}body{margin:0;padding:0;cursor:default;width:100vw;overflow-x:hidden;overflow-y:hidden;height:100vh}*{box-sizing:border-box}a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer}a:active,a:hover{color:inherit;outline:0}.App{background-color:#fff;font-family:Avenir;-webkit-overflow-scrolling:touch}img{border:0}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input,input:focus,textarea{font-family:Roboto,sans-serif;font-size:.825rem;line-height:1.2rem;font-weight:100;border:none;background:none;outline:0}.Button{display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;margin:.75rem;padding:.75rem 1.5rem;box-shadow:0 10px 20px rgba(37,50,56,.19),0 6px 6px rgba(37,50,56,.23);transition:all .25s ease;transition-duration:.25s;transition-delay:0ms;background-color:#9b59b6;border-radius:6px;cursor:pointer}.Button:hover{box-shadow:0 1px 4px rgba(37,50,56,.12),0 1px 3px rgba(37,50,56,.24)}.Button p{font-family:Roboto,sans-serif;font-size:.825rem;line-height:1.2rem;font-weight:100;flex:0 1 auto;margin:auto;color:#fff;text-align:center}.CoinPaymentsCheckout{margin:.75rem}.CoinPaymentsCheckout .image{width:200px;height:auto}@media screen and (min-width:768px){.DonationAmountSelection{display:flex;position:relative;flex-direction:row;flex-wrap:nowrap;flex-flow:row nowrap}}.Icon{padding:.75rem}.LandingPage{background-color:#fff;display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;align-items:center;margin:1.5rem .75rem}.LandingPage h6{text-decoration:italic;font-size:1.32rem;line-height:1.92rem}.LandingPage h6,.LandingPage span{font-family:Roboto,sans-serif;font-weight:100}.LandingPage span{font-size:.825rem;line-height:1.2rem;margin:.375rem 0}.LandingPage .section{box-shadow:0 1px 4px rgba(37,50,56,.12),0 1px 3px rgba(37,50,56,.24);padding:.75rem;margin:.75rem;background-color:#f4f4f4;border-radius:6px;width:25rem;text-align:center;display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;align-items:center}.StripeCheckout{width:400px}.StripeForm form{width:300px}.StripeForm .card-element{margin:.75rem}", ""]);
+	exports.push([module.id, ".row{flex-direction:row;flex-flow:row wrap}.row,.row-reverse{display:flex;position:relative;flex-wrap:wrap}.row-reverse{flex-direction:row-reverse;flex-flow:row-reverse wrap}.row-nowrap{flex-direction:row;flex-flow:row nowrap}.row-nowrap,.row-reverse-nowrap{display:flex;position:relative;flex-wrap:nowrap}.row-reverse-nowrap{flex-direction:row-reverse;flex-flow:row-reverse nowrap}.column{flex-direction:column;flex-flow:column nowrap}.column,.column-reverse{display:flex;position:relative;flex-wrap:nowrap}.column-reverse{flex-direction:column-reverse;flex-flow:column-reverse nowrap}.flex{flex:1 1 auto}.flex-self{flex:0 1 auto}.flex-shrink{flex:1 1 0}.flex-center{flex:0 1 auto;margin:auto}.align-start{align-items:flex-start}.align-center{align-items:center}.align-end{align-items:flex-end}.justify-start{text-align:left;justify-content:flex-start}.justify-center{text-align:center;justify-content:center}.justify-end{text-align:right;justify-content:flex-end}.justify-space-around{text-align:justify;justify-content:space-around}.justify-space-between{text-align:justify;justify-content:space-between}@font-face{font-family:AvenirLight;src:url(/fonts/Avenir-Light.ttf)}@font-face{font-family:AvenirRoman;src:url(/fonts/Avenir-Roman.ttf)}@font-face{font-family:AvenirMedium;src:url(/fonts/Avenir-Medium.ttf)}@font-face{font-family:AvenirHeavy;src:url(/fonts/Avenir-Heavy.ttf)}h1,h2,h3,h4,h5,h6,p{margin:0}h1{font-size:2.2rem;line-height:3.2rem}h1,h2{font-family:Roboto,sans-serif;font-weight:100}h2{font-size:1.98rem;line-height:2.88rem}h3{font-size:1.76rem;line-height:2.56rem}h3,h4{font-family:Roboto,sans-serif;font-weight:100}h4{font-size:1.54rem;line-height:2.24rem}h5{font-family:Roboto,sans-serif;font-size:1.32rem;line-height:1.92rem;font-weight:100}h6,p,span{font-size:1.1rem;line-height:1.6rem}.smallFont,h6,p,span{font-family:Roboto,sans-serif;font-weight:100}.smallFont{font-size:.825rem;line-height:1.2rem}.mediumFont{font-size:1.375rem;line-height:2rem}.largeFont,.mediumFont{font-family:Roboto,sans-serif;font-weight:100}.largeFont{font-size:1.65rem;line-height:2.4rem}.fixed{position:absolute;top:0;left:0;z-index:1000;width:100%;height:100%}.hidden{display:none!important}.invisible{opacity:0!important}html{background:#fff;color:#313542;font-size:1.1rem;font-family:Avenir}body{margin:0;padding:0;cursor:default;width:100vw;overflow-x:hidden;overflow-y:hidden;height:100vh}*{box-sizing:border-box}a{color:inherit;background-color:transparent;text-decoration:none;cursor:pointer}a:active,a:hover{color:inherit;outline:0}.App{background-color:#fff;font-family:Avenir;-webkit-overflow-scrolling:touch}img{border:0}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input,input:focus,textarea{font-family:Roboto,sans-serif;font-size:.825rem;line-height:1.2rem;font-weight:100;border:none;background:none;outline:0}.Button{display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;margin:.75rem;padding:.75rem 1.5rem;box-shadow:0 10px 20px rgba(37,50,56,.19),0 6px 6px rgba(37,50,56,.23);transition:all .25s ease;transition-duration:.25s;transition-delay:0ms;background-color:#9b59b6;border-radius:6px;cursor:pointer}.Button:hover{box-shadow:0 1px 4px rgba(37,50,56,.12),0 1px 3px rgba(37,50,56,.24)}.Button p{font-family:Roboto,sans-serif;font-size:.825rem;line-height:1.2rem;font-weight:100;flex:0 1 auto;margin:auto;color:#fff;text-align:center}.CoinPaymentsCheckout{margin:.75rem}.CoinPaymentsCheckout .image{width:90%;height:auto}.DonationAmountSelection .selected{background-color:#22a7f0;box-shadow:0 0 0 transparent,0 0 0 transparent}.DonationAmountSelection input{color:#fff}.DonationAmountSelection input:focus{background-color:#22a7f0}.DonationAmountSelection ::placeholder{color:#fff}.DonationAmountSelection :-ms-input-placeholder,.DonationAmountSelection ::-ms-input-placeholder{color:#fff}@media screen and (min-width:768px){.DonationAmountSelection{display:flex;position:relative;flex-direction:row;flex-wrap:nowrap;flex-flow:row nowrap}}.Icon{padding:.75rem}.LandingPage{display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;align-items:center;margin:1.5rem .75rem}.LandingPage img{width:100px;height:100px}.LandingPage h6{text-decoration:italic;font-size:1.32rem;line-height:1.92rem}.LandingPage h6,.LandingPage span{font-family:Roboto,sans-serif;font-weight:100}.LandingPage span{font-size:.825rem;line-height:1.2rem;margin:.375rem 0}.LandingPage .sections{width:80%}.LandingPage .section{box-shadow:0 1px 4px rgba(37,50,56,.12),0 1px 3px rgba(37,50,56,.24);padding:.75rem;margin:.75rem;background-color:#f4f4f4;border-radius:6px;text-align:center;display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;flex-flow:column nowrap;align-items:center}.LandingPage .section>p{padding-bottom:30px}@media screen and (min-width:768px){.LandingPage .sections{display:flex;position:relative;flex-direction:row;flex-wrap:nowrap;flex-flow:row nowrap}.LandingPage .section{width:50%}}.StripeCheckout{width:100%}.StripeForm .form-row{padding:30px}.StripeForm .card-element{margin:.75rem}.StripeForm .donateAgain{background-color:#22a7f0}", ""]);
 	
 	// exports
 
@@ -18658,7 +18658,7 @@
 	                    _react2.default.createElement('input', { type: 'hidden', name: 'currency', value: 'USD' }),
 	                    _react2.default.createElement('input', { type: 'hidden', name: 'amountf', value: this.props.donationAmount / 100 }),
 	                    _react2.default.createElement('input', { type: 'hidden', name: 'item_name', value: 'Donation' }),
-	                    _react2.default.createElement('input', { type: 'image', src: 'https://www.coinpayments.net/images/pub/donate-grey.png', alt: 'Donate with CoinPayments.net', className: 'image' })
+	                    _react2.default.createElement('input', { type: 'image', src: '../images/CoinpaymentsButtonWhiteText.png', alt: 'Donate with CoinPayments.net', className: 'image Button' })
 	                )
 	            );
 	        }
@@ -18736,7 +18736,9 @@
 	
 	        var _this = _possibleConstructorReturn(this, (DonationAmountSelection.__proto__ || Object.getPrototypeOf(DonationAmountSelection)).call(this, props));
 	
-	        _this.autoBind('handleSelection');
+	        _this.autoBind('handleSelection', 'handleInput');
+	
+	        _this.state = { customValueSelected: false };
 	        return _this;
 	    }
 	
@@ -18744,34 +18746,63 @@
 	        key: 'handleSelection',
 	        value: function handleSelection(amount) {
 	            console.log('Amount selected: ' + amount);
+	
+	            this.setState({ customValueSelected: false });
+	
 	            this.props.donationAmountSelected(amount);
+	        }
+	    }, {
+	        key: 'handleInput',
+	        value: function handleInput(event) {
+	            if (event.target.value) {
+	                this.setState({ customValueSelected: true });
+	                this.props.donationAmountSelected(event.target.value * 100);
+	            }
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _this2 = this;
+	
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'DonationAmountSelection' },
 	                _react2.default.createElement(
 	                    _Button2.default,
-	                    { onClick: this.handleSelection.bind(null, 500) },
+	                    { className: this.props.donationAmount == 500 ? 'selected' : '', onClick: function onClick() {
+	                            return _this2.handleSelection(500);
+	                        } },
 	                    '$5'
 	                ),
 	                _react2.default.createElement(
 	                    _Button2.default,
-	                    { onClick: this.handleSelection.bind(null, 1000) },
+	                    { className: this.props.donationAmount == 1000 ? 'selected' : '', onClick: function onClick() {
+	                            return _this2.handleSelection(1000);
+	                        } },
 	                    '$10'
 	                ),
 	                _react2.default.createElement(
 	                    _Button2.default,
-	                    { onClick: this.handleSelection.bind(null, 2000) },
+	                    { className: this.props.donationAmount == 2000 ? 'selected' : '', onClick: function onClick() {
+	                            return _this2.handleSelection(2000);
+	                        } },
 	                    '$20'
 	                ),
 	                _react2.default.createElement(
 	                    _Button2.default,
-	                    { onClick: this.handleSelection.bind(null, 5000) },
+	                    { className: this.props.donationAmount == 5000 ? 'selected' : '', onClick: function onClick() {
+	                            return _this2.handleSelection(5000);
+	                        } },
 	                    '$50'
-	                )
+	                ),
+	                _react2.default.createElement('input', {
+	                    type: 'number',
+	                    className: this.state.customValueSelected ? 'Button selected' : 'Button',
+	                    value: this.state.customValueSelected ? this.props.donationAmount / 100 : '',
+	                    placeholder: 'Custom amount...',
+	                    onChange: this.handleInput,
+	                    onFocus: this.handleInput
+	                })
 	            );
 	        }
 	    }]);
@@ -18781,7 +18812,7 @@
 	
 	function mapStateToProps(state) {
 	    return {
-	        donationAmount: state.donationAmount
+	        donationAmount: state.donations.donationAmount
 	    };
 	}
 	
@@ -18959,14 +18990,37 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'LandingPage' },
+	                _react2.default.createElement('img', { src: '../images/setmine-logo.png' }),
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
-	                    'Please give us money'
+	                    'Choose a donation amount:'
 	                ),
 	                _react2.default.createElement(_DonationAmountSelection2.default, null),
-	                _react2.default.createElement(_CoinPaymentsCheckout2.default, null),
-	                _react2.default.createElement(_StripeCheckout2.default, null)
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'sections' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'section' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            ' Donate with cryptocurrency via CoinPayments! '
+	                        ),
+	                        _react2.default.createElement(_CoinPaymentsCheckout2.default, null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'section' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            ' Donate with credit/debit via Stripe! '
+	                        ),
+	                        _react2.default.createElement(_StripeCheckout2.default, null)
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -19006,6 +19060,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactStripeElements = __webpack_require__(126);
+	
 	var _credentials = __webpack_require__(138);
 	
 	var _credentials2 = _interopRequireDefault(_credentials);
@@ -19017,8 +19073,6 @@
 	var _StripeForm = __webpack_require__(147);
 	
 	var _StripeForm2 = _interopRequireDefault(_StripeForm);
-	
-	var _reactStripeElements = __webpack_require__(126);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -19045,7 +19099,7 @@
 	                { className: 'StripeCheckout' },
 	                _react2.default.createElement(
 	                    _reactStripeElements.StripeProvider,
-	                    { apiKey: 'pk_test_Ng3t8WNIUCAcPbxdbMyWHf00' },
+	                    { apiKey: _credentials2.default.KEY },
 	                    _react2.default.createElement(
 	                        _reactStripeElements.Elements,
 	                        null,
@@ -19093,6 +19147,8 @@
 	
 	var _reactRedux = __webpack_require__(43);
 	
+	var _reactStripeElements = __webpack_require__(126);
+	
 	var _Base2 = __webpack_require__(16);
 	
 	var _Base3 = _interopRequireDefault(_Base2);
@@ -19100,8 +19156,6 @@
 	var _Button = __webpack_require__(45);
 	
 	var _Button2 = _interopRequireDefault(_Button);
-	
-	var _reactStripeElements = __webpack_require__(126);
 	
 	var _donations = __webpack_require__(46);
 	
@@ -19116,15 +19170,24 @@
 	var StripeForm = function (_Base) {
 	    _inherits(StripeForm, _Base);
 	
-	    function StripeForm() {
+	    function StripeForm(props) {
 	        _classCallCheck(this, StripeForm);
 	
-	        return _possibleConstructorReturn(this, (StripeForm.__proto__ || Object.getPrototypeOf(StripeForm)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (StripeForm.__proto__ || Object.getPrototypeOf(StripeForm)).call(this, props));
+	
+	        _this.state = {
+	            donationSubmitted: false
+	        };
+	
+	        _this.autoBind('handleSubmit', 'handleDonateAgain');
+	        return _this;
 	    }
 	
 	    _createClass(StripeForm, [{
 	        key: 'handleSubmit',
 	        value: function handleSubmit(ev) {
+	            var _this2 = this;
+	
 	            var _props = this.props,
 	                stripe = _props.stripe,
 	                email = _props.email,
@@ -19138,30 +19201,36 @@
 	                if (result.error) {
 	                    console.log('Error message: ' + result.error.message);
 	                } else {
-	                    submitStripeDonation(email, result.token.id, donationAmount);
+	                    _this2.setState({ donationSubmitted: true });
+	
+	                    _this2.props.submitStripeDonation(email, result.token.id, donationAmount);
 	                }
 	            });
+	        }
+	    }, {
+	        key: 'handleDonateAgain',
+	        value: function handleDonateAgain(ev) {
+	            this.setState({ donationSubmitted: false });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'form',
-	                { id: 'stripeForm', onSubmit: this.handleSubmit },
+	                { className: 'StripeForm', onSubmit: this.handleSubmit },
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'form-row' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        'Card Details'
-	                    ),
 	                    _react2.default.createElement(_reactStripeElements.CardElement, { className: 'card-element' })
 	                ),
-	                _react2.default.createElement(
+	                this.state.donationSubmitted ? _react2.default.createElement(
 	                    _Button2.default,
-	                    null,
-	                    'Confirm order'
+	                    { className: 'donateAgain', onClick: this.handleDonateAgain },
+	                    'Donation Sent! Donate again?'
+	                ) : _react2.default.createElement(
+	                    _Button2.default,
+	                    { onClick: this.handleSubmit },
+	                    'Confirm Donation'
 	                )
 	            );
 	        }
