@@ -1,14 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { CardElement, injectStripe } from 'react-stripe-elements';
 
 import Base from './Base';
 import Button from './Button';
 
-import { CardElement, injectStripe } from 'react-stripe-elements';
-
 import { submitStripeDonation } from '../reducers/donations';
 
 class StripeForm extends Base {
+    constructor(props) {
+        super(props);
+        this.state = {
+            donationSubmitted: false,
+        }
+
+        this.autoBind('handleSubmit', 'handleDonateAgain');
+    }
+
     handleSubmit(ev) {
         const {
             stripe,
@@ -23,20 +31,28 @@ class StripeForm extends Base {
             if (result.error) {
                 console.log('Error message: ' + result.error.message);
             } else {
-                submitStripeDonation(email, result.token.id, donationAmount);
+                this.setState({ donationSubmitted: true });
+
+                this.props.submitStripeDonation(email, result.token.id, donationAmount);
             }
         });
     }
 
+    handleDonateAgain(ev) {
+        this.setState({ donationSubmitted: false });
+    }
+
     render() {
         return (
-            <form id='stripeForm' onSubmit={this.handleSubmit}>
+            <form className='StripeForm' onSubmit={this.handleSubmit}>
                 <div className='form-row'>
-
-                    <p>Card Details</p>
                     <CardElement className='card-element'/>
                 </div>
-                <Button>Confirm order</Button>
+                {this.state.donationSubmitted ?
+                    <Button className='donateAgain' onClick={this.handleDonateAgain}>Donation Sent! Donate again?</Button>
+                    :
+                    <Button onClick={this.handleSubmit}>Confirm Donation</Button>
+                }
             </form>
             
         );

@@ -18,16 +18,22 @@
         .smallFont;
         .sizeMargin(0.5, 0);
     }
+    .sections {
+        width: 80%
+    }
     .section {
         .card();
         .sizePadding();
         .sizeMargin();
         background-color: @dark-white;
         border-radius: 6px;
-        width: 25rem;
         text-align: center;
         .column;
         .align-center;
+
+        >p {
+            padding-bottom: 30px;
+        }
     }
 }
 
@@ -35,6 +41,9 @@
     .LandingPage {
         .sections {
             .row-nowrap;
+        }
+        .section {
+            width: 50%;
         }
     }
 }

@@ -32,10 +32,10 @@ class DonationAmountSelection extends Base {
     render() {
         return (
             <div className='DonationAmountSelection'>
-                <Button className={this.props.donationAmount == 500 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 500)}>$5</Button>
-                <Button className={this.props.donationAmount == 1000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 1000)}>$10</Button>
-                <Button className={this.props.donationAmount == 2000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 2000)}>$20</Button>
-                <Button className={this.props.donationAmount == 5000 ? 'selected' : ''} onClick={this.handleSelection.bind(null, 5000)}>$50</Button>
+                <Button className={this.props.donationAmount == 500 ? 'selected' : ''} onClick={() => this.handleSelection(500)}>$5</Button>
+                <Button className={this.props.donationAmount == 1000 ? 'selected' : ''} onClick={() => this.handleSelection(1000)}>$10</Button>
+                <Button className={this.props.donationAmount == 2000 ? 'selected' : ''} onClick={() => this.handleSelection(2000)}>$20</Button>
+                <Button className={this.props.donationAmount == 5000 ? 'selected' : ''} onClick={() => this.handleSelection(5000)}>$50</Button>
                 <input 
                     type='number' 
                     className={this.state.customValueSelected ? 'Button selected' : 'Button'}

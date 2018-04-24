@@ -3,7 +3,7 @@ import api from '../scripts/api';
 // Reducer
 const initialState = {
     email: '',
-    donationAmount: 10
+    donationAmount: 1000
 };
 
 export default function reducer(state = initialState, action) {

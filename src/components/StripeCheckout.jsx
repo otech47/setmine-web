@@ -1,16 +1,16 @@
 import React from 'react';
+import { StripeProvider, Elements } from 'react-stripe-elements';
+
 import STRIPE from '../../api/config/credentials';
 
 import Base from './Base';
 import StripeForm from './StripeForm'
 
-import { StripeProvider, Elements } from 'react-stripe-elements';
-
 export default class StripeCheckout extends Base {
     render() {
         return (
             <div className='StripeCheckout'>
-                <StripeProvider apiKey='pk_test_Ng3t8WNIUCAcPbxdbMyWHf00'>
+                <StripeProvider apiKey={STRIPE.KEY}>
                     <Elements>
                         <StripeForm />
                     </Elements>
