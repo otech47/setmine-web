@@ -15,8 +15,6 @@ class DonationAmountSelection extends Base {
     }
 
     handleSelection(amount) {
-        console.log('Amount selected: ' + amount);
-
         this.setState({ customValueSelected: false });
 
         this.props.donationAmountSelected(amount);

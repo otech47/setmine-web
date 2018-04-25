@@ -14,7 +14,7 @@ var apiSchema = new g.GraphQLSchema(
             fields: {
                 submitStripeCharge: {
                     args: {
-                        email: {
+                        customerEmail: {
                             description: 'The user\'s email',
                             type: new g.GraphQLNonNull(g.GraphQLString)
                         },
@@ -33,8 +33,6 @@ var apiSchema = new g.GraphQLSchema(
                     type: g.GraphQLString,
 
                     resolve: function(root, args) {
-                        console.log('Calling stripeModule.submitStripeCharge with(' + args +')');
-
                         return apiModules.stripeModule.submitStripeCharge(args);
                     }
                 }

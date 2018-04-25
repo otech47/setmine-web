@@ -1,13 +1,26 @@
 .StripeForm {
     .form-row {
-        padding: 30px;
+        input{
+            width: 100%;
+        }
+        .sizeMargin();
     }
     .card-element {
-        .sizeMargin();
+        padding-bottom: 30px;
     }
 
     .donateAgain {
         background-color: @blue;
+    }
+
+    .donateFailed {
+        background-color: @red;
+    }
+
+    >p {
+        color: @white;
+        font-size: 0.825rem;
+        line-height: 1.2rem;
     }
 }
 
