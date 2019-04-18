@@ -9,6 +9,10 @@
     "type": "private",
     "url": "https://github.com/otech47/setmine-web"
   },
+  "engines": {
+    "node": "8.11.2",
+    "npm": "6.4.1"
+  },
   "scripts": {
     "start": "node server.js",
     "build": "webpack -p --config webpack.config.production.js",
