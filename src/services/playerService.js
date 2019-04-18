@@ -117,7 +117,7 @@ export function playSet(setId, push, starttime = '00:00') {
 		var set = res.sets_id
 		var tracks = set.tracks
 
-		var setName = (set.episode.episode && set.episode.episode.length > 0) ? `${set.event.event} - ${set.episode.episode}` : set.event.event
+		var setName = (set.episode && set.episode.episode && set.episode.episode.length > 0) ? `${set.event.event} - ${set.episode.episode}` : set.event.event
 
 		// format artists for multiple artists
 		var artist = R.pluck('artist', set.artists).toString().split(',').join(', ')
